@@ -2,9 +2,10 @@
 Some codes in javascript using <a href="http://p5js.org" target="_parent">p5js</a> and <a href="http://ability.nyu.edu/p5.js-speech/" target="_parent">p5.speech</a> for rapid protyping with speech recognition, speech synthesis and variable fonts.
 
 ## p5.speech documentation
-p5.Speech
-• constructor
-default_voice: optional argument to set the default synthesizer voice by number (see listVoices()) or by name. 
+**p5.Speech**
+*constructor*
+
+- default_voice: optional argument to set the default synthesizer voice by number (see listVoices()) or by name. 
     methods
     
 - cancel(): silently cancels the current utterance and clears any queued utterances.
@@ -29,7 +30,7 @@ default_voice: optional argument to set the default synthesizer voice by number 
 
 - stop(): stops the current utterance. The onEnd() callback will fire. 
     
- • properties
+*properties*
  
 - interrupt: boolean to set whether the speak() method will interrupt (true) or queue after (false = default) existing speech currently being synthesized.
 
@@ -44,22 +45,27 @@ default_voice: optional argument to set the default synthesizer voice by number 
 - onStart: function sets callback to fire when synthesis is begun. 
 
 ## p5.speechRec documentation
-p5.SpeechRec
-    constructor
-        default_language: optional argument to set the default BCP-47 language / region to for the speech recognition system. 
+**p5.SpeechRec**
+    *constructor*
+    
+- default_language: optional argument to set the default BCP-47 language / region to for the speech recognition system. 
     methods
-        start(): instructs the speech recognition system to begin listening. use continuous mode rather than multiple calls to start() for multiple recognition tokens within the same site. 
-    properties
-        continuous: boolean to set whether the speech recognition engine will give results continuously (true) or just once (false = default).
-        interimResults: boolean to set whether the speech recognition engine will give faster, partial results (true) or wait for the speaker to pause (false = default).
-        onEnd: function sets callback to fire when speech recognition ends.
-        onError: function sets callback to fire when an error occurs on the client side in recording and transmitting the speech.
-        onResult: function sets callback to fire when synthesis engine has reported a result.
-        onStart: function sets callback to fire when speech recognition has begun.
-        resultConfidence: float value (0.0-1.0) representing the confidence level of the speech synthesizer that resultString is what was actually spoken by the user.
-        resultJSON: JSON object containing a full set of data returned by the speech recognition system.
-        resultString: String containing the most recently detected speech.
-        resultValue: boolean value containing a status flag reported by the server (true = speech successfully recognized). 
+    
+- start(): instructs the speech recognition system to begin listening. use continuous mode rather than multiple calls to start() for multiple recognition tokens within the same site. 
+
+*properties*
+
+- continuous: boolean to set whether the speech recognition engine will give results continuously (true) or just once (false = default).
+
+- interimResults: boolean to set whether the speech recognition engine will give faster, partial results (true) or wait for the speaker to pause (false = default).
+- onEnd: function sets callback to fire when speech recognition ends.
+- onError: function sets callback to fire when an error occurs on the client side in recording and transmitting the speech.
+- onResult: function sets callback to fire when synthesis engine has reported a result.
+-  onStart: function sets callback to fire when speech recognition has begun.
+- resultConfidence: float value (0.0-1.0) representing the confidence level of the speech synthesizer that resultString is what was actually spoken by the user.
+- resultJSON: JSON object containing a full set of data returned by the speech recognition system.
+- resultString: String containing the most recently detected speech.
+- resultValue: boolean value containing a status flag reported by the server (true = speech successfully recognized). 
 
 
 ## Use MAMP + Google Chrome
@@ -72,3 +78,4 @@ Create your own chatbot in Go, Java, JavaScript, Perl or Python.
 RiveScript has a handful of simple rules that can be combined in powerful ways to build an impressive chatbot personality. Write triggers in a simplified regular expression format to match complex sets of word patterns in one go. 
 
 https://www.rivescript.com/docs/tutorial
+
