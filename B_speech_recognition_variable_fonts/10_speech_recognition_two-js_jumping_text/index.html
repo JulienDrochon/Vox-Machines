@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- <html lang="fr"> -->
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="content-language" content="fr"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Title</title>
+
+  <link rel="stylesheet" type="text/css" href="assets/style.css" />
+  <link rel="stylesheet" type="text/css" href="assets/font-face.css" />
+
+
+  <script src="libraries/url.js"></script>
+  <script src="libraries/jquery.js"></script>
+  <script src="libraries/two.js"></script>
+  <script src="libraries/has.js"></script>
+
+  <!-- <script src="libraries/jquery-3.3.1.min.js" type="application/javascript"></script> -->
+  <!-- <script src="libraries/jquery.blast.min.js" type="text/javascript"></script> -->
+  <!-- <script src="libraries/typewriter.js" type="text/javascript"></script> -->
+
+  <script src="libraries/p5.min.js"></script>
+  <script src="libraries/p5.sound.js"></script>
+  <script src="libraries/p5.dom.min.js"></script>
+  <script src="libraries/p5.speech.js"></script>
+  <script src="sketch.js"></script>
+
+</head>
+
+<body style="background: rgb(239, 239, 239) none repeat scroll 0% 0%; overflow: hidden; margin: 0px; padding: 0px; top: 0px; left: 0px; right: 0px; bottom: 0px; position: fixed;">
+  <!-- <p class="sample XL XXL XXXL all-caps" id="speech"></p> -->
+  <!-- <p id="speech"></p>
+  <p id="test"></p> -->
+  <script>
+  var character;
+
+  // Create a Speech Recognition object with callback
+  var speechRec = new p5.SpeechRec('fr', gotSpeech);
+
+  // "Continuous recognition" (as opposed to one time only)
+  var continuous = true;
+  // If you want to try partial recognition (faster, less accurate)
+  var interimResults = false;
+  // This must come after setting the properties
+  speechRec.start(continuous, interimResults);
+
+
+  function gotSpeech() {
+    if (speechRec.resultValue) {
+      character = speechRec.resultString ;
+    }
+      var type = /(svg|webgl)/.test(url.type) ? url.type : 'canvas';
+      var two = new Two({
+        type: Two.Types[type],
+        fullscreen: true,
+        autostart: true
+      }).appendTo(document.body);
+
+      var characters = [];
+      var gravity = new Two.Vector(0, 0.66);
+
+      var styles = {
+        family: 'proxima-nova, sans-serif',
+        size: 50,
+        leading: 50,
+        weight: 900
+      };
+
+      var directions = two.makeText(has.mobile ? 'Tap Me' : 'Start Speaking', two.width / 2, two.height / 2, styles);
+      directions.fill = 'white';
+
+      for (var i = 0; i < character.length; i++) {
+        console.log(character.charAt(i));
+        add(character.charAt(i));
+      }
+
+
+      two
+      .bind('resize', function() {
+        directions.translation.set(two.width / 2, two.height / 2);
+      })
+      .bind('update', function() {
+
+        for (var i = 0; i < characters.length; i++) {
+
+          var text = characters[i];
+          text.translation.addSelf(text.velocity);
+          text.rotation += text.velocity.r;
+
+          text.velocity.addSelf(gravity);
+          if (text.velocity.y > 0 && text.translation.y > two.height)  {
+            two.scene.remove(text);
+            characters.splice(i, 1);
+          }
+        }
+      });
+
+      function add(msg) {
+
+        var x = Math.random() * two.width / 2 + two.width / 4;
+        var y = two.height * 1.25;
+
+        var text = two.makeText(msg, x, y, styles);
+        text.size *= 2;
+        text.fill = '#333';
+
+        text.velocity = new Two.Vector();
+        text.velocity.x = 10 * (Math.random() - 0.5);
+        text.velocity.y = - (20 * Math.random() + 13);
+        text.velocity.r = Math.random() * Math.PI / 8;
+
+        characters.push(text);
+      }
+  }
+
+
+
+  </script>
+
+  <canvas style="display: block; top: 0px; left: 0px; right: 0px; bottom: 0px; position: fixed; width: 926px; height: 677px;" width="926" height="677"></canvas>
+
+</body>
+
+
+</html>

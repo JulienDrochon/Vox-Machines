@@ -1,0 +1,43 @@
+@font-face {
+	src: url('fonts/ZeitungProBeta.woff2');
+	font-family:'Zeitung Variable';
+	font-style: normal;
+}
+@font-face {
+	src: url('fonts/Zycon.woff2');
+	font-family:'Zycon';
+	font-style: normal;
+}
+
+html,body{
+	width:100%;
+	height:100%;
+}
+
+#speech{
+	/* font-size: 10em; */
+	/* font-variation-settings: 'yest' 500,'gvty' 1000; */
+	/* width:1000px;
+	height:500px; */
+
+
+
+  background-image:  url(https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  color:  #FFFFFF;
+  padding-top: 20px;
+  font-size: 170px;
+  	font-family: Cheee Variable;
+  animation: filling 3s ease forwards;
+
+
+}
+@keyframes filling {
+  from{
+    background-position: center 25%;
+  }
+  to {
+    background-position: center 50%;
+  }
+}
