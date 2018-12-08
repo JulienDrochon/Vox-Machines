@@ -1,10 +1,15 @@
 var video = document.getElementById("video"), track;
+var file;
+
+function preload() {
+  file = loadStrings("assets/french.vtt");
+}
 
 function setup() {
   noCanvas();
 
   video.addEventListener("loadedmetadata", function() {
-    track = this.addTextTrack("captions", "Sppech comment", "en");
+    track = this.addTextTrack("captions", "fr");
     track.mode = "showing";
   });
 
@@ -17,26 +22,17 @@ function setup() {
   // This must come after setting the properties
   speechRec.start(continuous, interimResults);
 
-  // DOM element to display results
-  //let output = select('#speech');
-
-  // Speech recognized event
   function gotSpeech() {
-    // Something is there
-    // Get it as a string, you can also get JSON with more info
     console.log(speechRec);
     if (speechRec.resultValue) {
       let said = speechRec.resultString;
-      // Show user
-    //  track.addCue(new VTTCue(0, 12, said));
-      //  output.html(said);
-      var textTrack = video.textTracks[0];
 
-      // When cue value changes run your code
-      textTrack.oncuechange = function(e) {
-        var cue = this.activeCues[0];
-        if(cue){
-          console.log(textTrack);
+      for(var i=0; i<file.length; i++){
+        if(file[i].includes(said) && i>0){
+          var time = file[i-1].split(" ");
+          var timeseconds = time[0].split(":")[0]*3600+time[0].split(":")[1]*60+time[0].split(":")[2].split(".")[0];
+          video.currentTime = timeseconds;
+          video.play();
         }
       }
     }
