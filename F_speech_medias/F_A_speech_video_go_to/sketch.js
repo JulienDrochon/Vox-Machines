@@ -28,8 +28,17 @@ function setup() {
     if (speechRec.resultValue) {
       let said = speechRec.resultString;
       // Show user
-      track.addCue(new VTTCue(0, 12, said));
+    //  track.addCue(new VTTCue(0, 12, said));
       //  output.html(said);
+      var textTrack = video.textTracks[0];
+
+      // When cue value changes run your code
+      textTrack.oncuechange = function(e) {
+        var cue = this.activeCues[0];
+        if(cue){
+          console.log(textTrack);
+        }
+      }
     }
   }
 }
