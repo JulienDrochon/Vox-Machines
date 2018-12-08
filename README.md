@@ -1,6 +1,9 @@
 # Vox-Machines
 Some codes in javascript using <a href="http://p5js.org" target="_parent">p5js</a> and <a href="http://ability.nyu.edu/p5.js-speech/" target="_parent">p5.speech</a> for rapid protyping with speech recognition, speech synthesis and variable fonts.
 
+## Speech recognition, brower compatibility
+https://caniuse.com/#search=speech
+
 ## p5.speech documentation
 **p5.Speech**
 *constructor*
