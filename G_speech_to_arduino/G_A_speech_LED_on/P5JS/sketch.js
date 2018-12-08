@@ -33,7 +33,7 @@ function serialError(err) {
 }
 
 function ArduinoEvent() {
-  if(said=="I went there") {
+  if(said=="Light") {
     outByte = 1;
   }else{
     outByte = 0;
