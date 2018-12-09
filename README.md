@@ -94,3 +94,17 @@ RiveScript has a handful of simple rules that can be combined in powerful ways t
 
 https://www.rivescript.com/docs/tutorial
 
+## Video Tutorials
+### Web Speech
+Speech Recognition with p5.Speech - Programming with Text
+https://www.youtube.com/watch?v=q_bXBcmfTJM
+
+### Rivescript
+Chatbots with Rivescript
+https://www.youtube.com/watch?v=wf8w1BJb9Xc
+
+### Regex - Regular expression
+https://www.youtube.com/watch?v=7DG3kCDx53c&list=PLRqwX-V7Uu6YEypLuls7iidwHMdCM6o2w
+
+
+
