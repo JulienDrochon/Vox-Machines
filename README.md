@@ -4,9 +4,19 @@ Some codes in javascript using <a href="http://p5js.org" target="_parent">p5js</
 ## Speech recognition, browser compatibility
 https://caniuse.com/#search=speech
 
-2018-12-09 : Use <a href="https://www.google.com/chrome/">Google Chrome</a>
+### Use MAMP + Google Chrome
+For working examples, use  <a href="https://www.mamp.info" target="_parent">MAMP</a> as local server for launching webpages in <a href="https://www.google.com/chrome/" target="_parent">Chrome web browser</a>.
+
+## Web speech API
+### About
+https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API
+
 
 ## p5.speech documentation
+### About
+http://ability.nyu.edu/p5.js-speech/
+
+### p5.Speech
 **p5.Speech**
 *constructor*
 
@@ -49,7 +59,7 @@ https://caniuse.com/#search=speech
 
 - onStart: function sets callback to fire when synthesis is begun. 
 
-## p5.speechRec documentation
+### p5.speechRec
 **p5.SpeechRec**
     *constructor*
     
@@ -72,9 +82,6 @@ https://caniuse.com/#search=speech
 - resultString: String containing the most recently detected speech.
 - resultValue: boolean value containing a status flag reported by the server (true = speech successfully recognized). 
 
-
-## Use MAMP + Google Chrome
-For working examples, use  <a href="https://www.mamp.info" target="_parent">MAMP</a> as local server for launching webpages in <a href="https://www.google.com/chrome/" target="_parent">Chrome web browser</a>.
 
 ## Rivescript : build brain for chatbot
 RiveScript is a simple scripting language for chatbots with a friendly, easy to learn syntax.
