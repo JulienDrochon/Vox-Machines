@@ -1,0 +1,13 @@
+// Chatbot's brain
+// https://github.com/aichaos/aiden
+
+! version = 2.0
+
++ [*] bonjour [*]
+- <span style='color:red;'>Vous êtes dans une pièce. Vous pouvez en sortir par une porte ou une fenêtre. Que choisissez-vous ?<span>
+
++ [*] porte [*]
+- <img src='assets/door.gif' /><a href="http://esapyrenees.fr">Lien</a>
+
++ [*] fenêtre [*]
+- <img src='assets/window.gif' /><audio src='assets/open_window.mp3' controls></audio>
