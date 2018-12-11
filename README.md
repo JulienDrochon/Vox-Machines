@@ -10,6 +10,8 @@ https://caniuse.com/#search=speech
 ### Use MAMP + Google Chrome
 For working examples, use  <a href="https://www.mamp.info" target="_parent">MAMP</a> as local server for launching webpages in <a href="https://www.google.com/chrome/" target="_parent">Chrome web browser</a>.
 
+In Chrome, type *chrome://flags* in address bar.
+
 ## Web speech API
 ### About
 https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API
