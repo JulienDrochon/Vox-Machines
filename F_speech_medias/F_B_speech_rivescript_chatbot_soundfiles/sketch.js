@@ -39,7 +39,7 @@ function setup() {
     if (speechRec.resultValue) {
       let input = speechRec.resultString;
       console.log(input);
-      console.log(soundList[2]);
+
       bot.reply("local-user", input).then(function(reply) {
         console.log("The bot says: " + reply);
         for (var i = 0; i < soundList.length; i++){
