@@ -112,7 +112,7 @@ https://www.youtube.com/watch?v=7DG3kCDx53c&list=PLRqwX-V7Uu6YEypLuls7iidwHMdCM6
 https://vimeo.com/305182131
 
 ## How to
-### Download 1 folder or 1 file of thisd repository
+### Download 1 folder or 1 file of this repository
 https://minhaskamal.github.io/DownGit/#/home
 
 
