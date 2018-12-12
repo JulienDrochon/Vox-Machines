@@ -1,40 +1,97 @@
+
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <title></title>
-</head>
-<body>
+<script src='js/three-min.js'></script>
+<script src='js/threex.text.js'></script>
+<script src="fonts/droid_serif_bold.typeface.js"></script>
 
-  <script src="js/three.min.js"></script>
-  <script src="js/GeometryUtils.js"></script>
+<script src="js/p5.js"></script>
+<script src="js/p5.dom.js"></script>
+<script src="js/p5.speech.js"></script>
 
-  <script src="js/WebGL.js"></script>
-  <script src="js/stats.min.js"></script>
-
-		<!-- <script src="../build/three.js"></script>
-		<script src="js/utils/GeometryUtils.js"></script>
-
-		<script src="js/WebGL.js"></script>
-		<script src="js/libs/stats.min.js"></script> -->
-
+<body style='margin: 0px; background-color: #bbbbbb; overflow: hidden;'>
 
   <script>
-    var loader = new THREE.FontLoader();
+    var renderer	= new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
 
-    loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+    var onRenderFcts= [];
+    var scene	= new THREE.Scene();
+    var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000);
+    camera.position.z = 3;
 
-      var geometry = new THREE.TextGeometry( 'Hello three.js!', {
-        font: font,
-        size: 80,
-        height: 5,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 10,
-        bevelSize: 8,
-        bevelSegments: 5
-      } );
-    } );
-  </script>
+
+
+  let speechRec;
+  let said="dites bonjour";
+
+    speechRec = new p5.SpeechRec('fr', gotSpeech);
+    // "Continuous recognition" (as opposed to one time only)
+    let continuous = true;
+    // If you want to try partial recognition (faster, less accurate)
+    let interimResults = false;
+    // This must come after setting the properties
+    speechRec.start(continuous, interimResults);
+
+    // DOM element to display results
+    //let output = select('#speech');
+
+    // Speech recognized event
+    function gotSpeech() {
+      // Something is there
+      // Get it as a string, you can also get JSON with more info
+      console.log(speechRec);
+      if (speechRec.resultValue) {
+        said = speechRec.resultString;
+        console.log(said);
+        while(scene.children.length > 0){
+            scene.remove(scene.children[0]);
+        }
+      var mesh	= new THREEx.Text(said)
+      mesh.scale.multiplyScalar(1/2)
+      mesh.position.y	= +0.6
+      scene.add(mesh)
+      }
+    }
+
+
+  //////////////////////////////////////////////////////////////////////////////////
+  //		Camera Controls							//
+  //////////////////////////////////////////////////////////////////////////////////
+  var mouse	= {x : 0, y : 0}
+  document.addEventListener('mousemove', function(event){
+    mouse.x	= (event.clientX / window.innerWidth ) - 0.5
+    mouse.y	= (event.clientY / window.innerHeight) - 0.5
+  }, false)
+  onRenderFcts.push(function(delta, now){
+    camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
+    camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
+    camera.lookAt( scene.position )
+  })
+
+
+  //////////////////////////////////////////////////////////////////////////////////
+  //		render the scene						//
+  //////////////////////////////////////////////////////////////////////////////////
+  onRenderFcts.push(function(){
+    renderer.render( scene, camera );
+  })
+
+  //////////////////////////////////////////////////////////////////////////////////
+  //		loop runner							//
+  //////////////////////////////////////////////////////////////////////////////////
+  var lastTimeMsec= null
+  requestAnimationFrame(function animate(nowMsec){
+    // keep looping
+    requestAnimationFrame( animate );
+    // measure time
+    lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
+    var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
+    lastTimeMsec	= nowMsec
+    // call each update function
+    onRenderFcts.forEach(function(onRenderFct){
+      onRenderFct(deltaMsec/1000, nowMsec/1000)
+    })
+  })
+</script>
 </body>
-</html>
