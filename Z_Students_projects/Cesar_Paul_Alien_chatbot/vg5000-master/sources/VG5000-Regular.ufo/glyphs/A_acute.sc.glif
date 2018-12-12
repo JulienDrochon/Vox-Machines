@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="Aacute.sc" format="1">
+  <advance width="500"/>
+  <outline>
+    <contour>
+      <point x="300" y="700" type="line"/>
+      <point x="300" y="600" type="line"/>
+      <point x="400" y="600" type="line"/>
+      <point x="400" y="700" type="line"/>
+    </contour>
+    <contour>
+      <point x="100" y="600" type="line"/>
+      <point x="100" y="500" type="line"/>
+      <point x="300" y="500" type="line"/>
+      <point x="300" y="600" type="line"/>
+    </contour>
+    <contour>
+      <point x="300" y="400" type="line"/>
+      <point x="200" y="400" type="line"/>
+      <point x="25" y="0" type="line"/>
+      <point x="125" y="0" type="line"/>
+      <point x="200" y="175" type="line"/>
+      <point x="200" y="300" type="line"/>
+      <point x="300" y="300" type="line"/>
+      <point x="300" y="175" type="line"/>
+      <point x="375" y="0" type="line"/>
+      <point x="475" y="0" type="line"/>
+    </contour>
+    <contour>
+      <point x="125" y="100" type="line"/>
+      <point x="375" y="100" type="line"/>
+      <point x="375" y="175" type="line"/>
+      <point x="125" y="175" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-04-09 20:03:12 +0000</string>
+    </dict>
+  </lib>
+</glyph>

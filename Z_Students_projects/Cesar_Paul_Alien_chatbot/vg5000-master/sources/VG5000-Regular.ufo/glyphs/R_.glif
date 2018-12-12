@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="R" format="1">
+  <advance width="550"/>
+  <unicode hex="0052"/>
+  <outline>
+    <contour>
+      <point x="300" y="300" type="line"/>
+      <point x="450" y="300"/>
+      <point x="525" y="375"/>
+      <point x="525" y="500" type="curve"/>
+      <point x="525" y="625"/>
+      <point x="450" y="700"/>
+      <point x="300" y="700" type="curve"/>
+      <point x="150" y="700" type="line"/>
+      <point x="150" y="600" type="line"/>
+      <point x="300" y="600" type="line"/>
+      <point x="375" y="600"/>
+      <point x="425" y="575"/>
+      <point x="425" y="500" type="curve"/>
+      <point x="425" y="425"/>
+      <point x="375" y="400"/>
+      <point x="300" y="400" type="curve"/>
+      <point x="150" y="400" type="line"/>
+      <point x="150" y="300" type="line"/>
+    </contour>
+    <contour>
+      <point x="150" y="0" type="line"/>
+      <point x="150" y="700" type="line"/>
+      <point x="50" y="700" type="line"/>
+      <point x="50" y="0" type="line"/>
+    </contour>
+    <contour>
+      <point x="525" y="0" type="line"/>
+      <point x="275" y="375" type="line"/>
+      <point x="250" y="375" type="line"/>
+      <point x="250" y="225" type="line"/>
+      <point x="400" y="0" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-11 00:37:42 +0000</string>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="t" format="1">
+  <advance width="450"/>
+  <unicode hex="0074"/>
+  <outline>
+    <contour>
+      <point x="150" y="700" type="line"/>
+      <point x="150" y="150" type="line"/>
+      <point x="150" y="50"/>
+      <point x="200" y="0"/>
+      <point x="300" y="0" type="curve"/>
+      <point x="400" y="0" type="line"/>
+      <point x="400" y="100" type="line"/>
+      <point x="250" y="100" type="line"/>
+      <point x="250" y="700" type="line"/>
+    </contour>
+    <contour>
+      <point x="50" y="400" type="line"/>
+      <point x="400" y="400" type="line"/>
+      <point x="400" y="500" type="line"/>
+      <point x="50" y="500" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-15 23:08:30 +0000</string>
+    </dict>
+  </lib>
+</glyph>

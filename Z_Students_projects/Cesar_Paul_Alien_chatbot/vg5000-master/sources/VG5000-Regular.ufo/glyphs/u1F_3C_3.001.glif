@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1F3C3.001" format="1">
+  <advance width="800"/>
+  <outline>
+    <contour>
+      <point x="450" y="700" type="line"/>
+      <point x="650" y="700" type="line"/>
+      <point x="650" y="800" type="line"/>
+      <point x="450" y="800" type="line"/>
+    </contour>
+    <contour>
+      <point x="250" y="0" type="line"/>
+      <point x="550" y="0" type="line"/>
+      <point x="550" y="100" type="line"/>
+      <point x="250" y="100" type="line"/>
+    </contour>
+    <contour>
+      <point x="250" y="0" type="line"/>
+      <point x="350" y="0" type="line"/>
+      <point x="350" y="300" type="line"/>
+      <point x="250" y="300" type="line"/>
+    </contour>
+    <contour>
+      <point x="450" y="0" type="line"/>
+      <point x="550" y="0" type="line"/>
+      <point x="550" y="300" type="line"/>
+      <point x="450" y="300" type="line"/>
+    </contour>
+    <contour>
+      <point x="250" y="200" type="line"/>
+      <point x="550" y="200" type="line"/>
+      <point x="550" y="300" type="line"/>
+      <point x="250" y="300" type="line"/>
+    </contour>
+    <contour>
+      <point x="150" y="-100" type="line"/>
+      <point x="250" y="-100" type="line"/>
+      <point x="250" y="0" type="line"/>
+      <point x="150" y="0" type="line"/>
+    </contour>
+    <contour>
+      <point x="50" y="-200" type="line"/>
+      <point x="150" y="-200" type="line"/>
+      <point x="150" y="-100" type="line"/>
+      <point x="50" y="-100" type="line"/>
+    </contour>
+    <contour>
+      <point x="350" y="300" type="line"/>
+      <point x="750" y="300" type="line"/>
+      <point x="750" y="400" type="line"/>
+      <point x="350" y="400" type="line"/>
+    </contour>
+    <contour>
+      <point x="150" y="300" type="line"/>
+      <point x="250" y="300" type="line"/>
+      <point x="250" y="400" type="line"/>
+      <point x="150" y="400" type="line"/>
+    </contour>
+    <contour>
+      <point x="250" y="400" type="line"/>
+      <point x="350" y="400" type="line"/>
+      <point x="350" y="500" type="line"/>
+      <point x="250" y="500" type="line"/>
+    </contour>
+    <contour>
+      <point x="350" y="300" type="line"/>
+      <point x="550" y="300" type="line"/>
+      <point x="550" y="600" type="line"/>
+      <point x="350" y="600" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-03 13:35:11 +0000</string>
+    </dict>
+  </lib>
+</glyph>

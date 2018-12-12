@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+
+  <script src="js/three.min.js"></script>
+  <script src="js/GeometryUtils.js"></script>
+
+  <script src="js/WebGL.js"></script>
+  <script src="js/stats.min.js"></script>
+
+		<!-- <script src="../build/three.js"></script>
+		<script src="js/utils/GeometryUtils.js"></script>
+
+		<script src="js/WebGL.js"></script>
+		<script src="js/libs/stats.min.js"></script> -->
+
+
+  <script>
+    var loader = new THREE.FontLoader();
+
+    loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+
+      var geometry = new THREE.TextGeometry( 'Hello three.js!', {
+        font: font,
+        size: 80,
+        height: 5,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 10,
+        bevelSize: 8,
+        bevelSegments: 5
+      } );
+    } );
+  </script>
+</body>
+</html>

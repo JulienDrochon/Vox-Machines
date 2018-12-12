@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni1D6B" format="1">
+  <advance width="500"/>
+  <unicode hex="1D6B"/>
+  <outline>
+    <contour>
+      <point x="250" y="0" type="line"/>
+      <point x="300" y="0" type="line"/>
+      <point x="300" y="250" type="line"/>
+      <point x="250" y="250" type="line"/>
+    </contour>
+    <contour>
+      <point x="250" y="200" type="line"/>
+      <point x="450" y="200" type="line"/>
+      <point x="450" y="250" type="line"/>
+      <point x="250" y="250" type="line"/>
+    </contour>
+    <contour>
+      <point x="250" y="100" type="line"/>
+      <point x="450" y="100" type="line"/>
+      <point x="450" y="150" type="line"/>
+      <point x="250" y="150" type="line"/>
+    </contour>
+    <contour>
+      <point x="250" y="0" type="line"/>
+      <point x="450" y="0" type="line"/>
+      <point x="450" y="50" type="line"/>
+      <point x="250" y="50" type="line"/>
+    </contour>
+    <contour>
+      <point x="250" y="0" type="line"/>
+      <point x="250" y="100" type="line"/>
+      <point x="150" y="100" type="line"/>
+      <point x="150" y="500" type="line"/>
+      <point x="50" y="500" type="line"/>
+      <point x="50" y="150" type="line" smooth="yes"/>
+      <point x="50" y="50"/>
+      <point x="125" y="0"/>
+      <point x="200" y="0" type="curve"/>
+    </contour>
+    <contour>
+      <point x="350" y="250" type="line"/>
+      <point x="450" y="250" type="line"/>
+      <point x="450" y="500" type="line"/>
+      <point x="350" y="500" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-14 21:39:37 +0000</string>
+    </dict>
+  </lib>
+</glyph>

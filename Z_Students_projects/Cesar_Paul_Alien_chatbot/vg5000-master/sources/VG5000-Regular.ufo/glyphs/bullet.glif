@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="bullet" format="1">
+  <advance width="600"/>
+  <unicode hex="2022"/>
+  <outline>
+    <contour>
+      <point x="150" y="100" type="line"/>
+      <point x="450" y="100" type="line"/>
+      <point x="450" y="400" type="line"/>
+      <point x="150" y="400" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-16 15:53:12 +0000</string>
+    </dict>
+  </lib>
+</glyph>

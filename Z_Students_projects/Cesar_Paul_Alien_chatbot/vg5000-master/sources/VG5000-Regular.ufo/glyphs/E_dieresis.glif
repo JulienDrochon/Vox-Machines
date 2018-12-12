@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="Edieresis" format="1">
+  <advance width="550"/>
+  <unicode hex="00CB"/>
+  <outline>
+    <contour>
+      <point x="100" y="500" type="line"/>
+      <point x="100" y="0" type="line"/>
+      <point x="200" y="0" type="line"/>
+      <point x="200" y="500" type="line"/>
+    </contour>
+    <contour>
+      <point x="200" y="100" type="line"/>
+      <point x="200" y="0" type="line"/>
+      <point x="500" y="0" type="line"/>
+      <point x="500" y="100" type="line"/>
+    </contour>
+    <contour>
+      <point x="200" y="300" type="line"/>
+      <point x="200" y="200" type="line"/>
+      <point x="300" y="200" type="line"/>
+      <point x="300" y="300" type="line"/>
+    </contour>
+    <contour>
+      <point x="200" y="500" type="line"/>
+      <point x="200" y="400" type="line"/>
+      <point x="500" y="400" type="line"/>
+      <point x="500" y="500" type="line"/>
+    </contour>
+    <component base="dieresis" xOffset="50"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-04-09 20:03:12 +0000</string>
+    </dict>
+  </lib>
+</glyph>

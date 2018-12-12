@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="Eth" format="1">
+  <advance width="650"/>
+  <unicode hex="00D0"/>
+  <outline>
+    <contour>
+      <point x="250" y="700" type="line"/>
+      <point x="250" y="600" type="line"/>
+      <point x="275" y="600" type="line"/>
+      <point x="400" y="600"/>
+      <point x="525" y="525"/>
+      <point x="525" y="350" type="curve"/>
+      <point x="525" y="175"/>
+      <point x="400" y="100"/>
+      <point x="275" y="100" type="curve"/>
+      <point x="250" y="100" type="line"/>
+      <point x="250" y="0" type="line"/>
+      <point x="275" y="0" type="line"/>
+      <point x="475" y="0"/>
+      <point x="625" y="150"/>
+      <point x="625" y="350" type="curve"/>
+      <point x="625" y="550"/>
+      <point x="475" y="700"/>
+      <point x="275" y="700" type="curve"/>
+    </contour>
+    <contour>
+      <point x="150" y="700" type="line"/>
+      <point x="150" y="0" type="line"/>
+      <point x="250" y="0" type="line"/>
+      <point x="250" y="700" type="line"/>
+    </contour>
+    <component base="hyphen" yOffset="100"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-04-09 20:03:12 +0000</string>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="a.ss01" format="1">
+  <advance width="500"/>
+  <outline>
+    <contour>
+      <point x="450" y="300" type="line"/>
+      <point x="450" y="425"/>
+      <point x="375" y="500"/>
+      <point x="250" y="500" type="curve"/>
+      <point x="100" y="500" type="line"/>
+      <point x="100" y="400" type="line"/>
+      <point x="350" y="400" type="line"/>
+      <point x="350" y="0" type="line"/>
+      <point x="450" y="0" type="line"/>
+    </contour>
+    <contour>
+      <point x="75" y="300"/>
+      <point x="25" y="250"/>
+      <point x="25" y="150" type="curve"/>
+      <point x="25" y="50"/>
+      <point x="75" y="0"/>
+      <point x="175" y="0" type="curve"/>
+      <point x="350" y="0" type="line"/>
+      <point x="350" y="100" type="line"/>
+      <point x="125" y="100" type="line"/>
+      <point x="125" y="200" type="line"/>
+      <point x="350" y="200" type="line"/>
+      <point x="350" y="300" type="line"/>
+      <point x="175" y="300" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-04-09 20:03:12 +0000</string>
+    </dict>
+  </lib>
+</glyph>

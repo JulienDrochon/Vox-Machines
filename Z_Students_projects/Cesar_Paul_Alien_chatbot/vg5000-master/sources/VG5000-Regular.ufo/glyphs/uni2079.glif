@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni2079" format="1">
+  <advance width="350"/>
+  <unicode hex="2079"/>
+  <outline>
+    <component base="nine" xOffset="25" yOffset="350" xScale="0.5" yScale="0.5"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-03 18:04:09 +0000</string>
+      <key>com.schriftgestaltung.Glyphs.leftMetricsKey</key>
+      <string>nine</string>
+      <key>com.schriftgestaltung.Glyphs.rightMetricsKey</key>
+      <string>nine</string>
+    </dict>
+  </lib>
+</glyph>

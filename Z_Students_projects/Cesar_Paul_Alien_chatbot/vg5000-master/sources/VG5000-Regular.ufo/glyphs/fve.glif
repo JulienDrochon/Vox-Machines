@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="fve" format="1">
+  <advance width="450"/>
+  <outline>
+    <contour>
+      <point x="250" y="600" type="line"/>
+      <point x="400" y="600" type="line"/>
+      <point x="400" y="700" type="line"/>
+      <point x="350" y="700" type="line"/>
+      <point x="225" y="700"/>
+      <point x="150" y="625"/>
+      <point x="150" y="500" type="curve"/>
+      <point x="150" y="350" type="line"/>
+      <point x="250" y="350" type="line"/>
+    </contour>
+    <contour>
+      <point x="400" y="300" type="line"/>
+      <point x="400" y="400" type="line"/>
+      <point x="50" y="400" type="line"/>
+      <point x="50" y="300" type="line"/>
+    </contour>
+    <contour>
+      <point x="200" y="0" type="line"/>
+      <point x="400" y="0" type="line"/>
+      <point x="400" y="50" type="line"/>
+      <point x="200" y="50" type="line"/>
+    </contour>
+    <contour>
+      <point x="150" y="0" type="line"/>
+      <point x="200" y="0" type="line"/>
+      <point x="100" y="250" type="line"/>
+      <point x="50" y="250" type="line"/>
+    </contour>
+    <contour>
+      <point x="200" y="0" type="line"/>
+      <point x="250" y="0" type="line"/>
+      <point x="250" y="250" type="line"/>
+      <point x="200" y="250" type="line"/>
+    </contour>
+    <contour>
+      <point x="200" y="100" type="line"/>
+      <point x="400" y="100" type="line"/>
+      <point x="400" y="150" type="line"/>
+      <point x="200" y="150" type="line"/>
+    </contour>
+    <contour>
+      <point x="200" y="200" type="line"/>
+      <point x="400" y="200" type="line"/>
+      <point x="400" y="250" type="line"/>
+      <point x="200" y="250" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-14 21:39:30 +0000</string>
+    </dict>
+  </lib>
+</glyph>

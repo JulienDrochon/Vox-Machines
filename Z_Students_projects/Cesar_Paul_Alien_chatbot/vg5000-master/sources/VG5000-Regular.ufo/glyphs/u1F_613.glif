@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1F613" format="1">
+  <advance width="1100"/>
+  <unicode hex="1F613"/>
+  <outline>
+    <contour>
+      <point x="50" y="0" type="line"/>
+      <point x="650" y="0" type="line"/>
+      <point x="650" y="100" type="line"/>
+      <point x="50" y="100" type="line"/>
+    </contour>
+    <contour>
+      <point x="750" y="100" type="line"/>
+      <point x="850" y="100" type="line"/>
+      <point x="850" y="400" type="line"/>
+      <point x="750" y="400" type="line"/>
+    </contour>
+    <contour>
+      <point x="850" y="0" type="line"/>
+      <point x="950" y="0" type="line"/>
+      <point x="950" y="100" type="line"/>
+      <point x="850" y="100" type="line"/>
+    </contour>
+    <contour>
+      <point x="950" y="100" type="line"/>
+      <point x="1050" y="100" type="line"/>
+      <point x="1050" y="400" type="line"/>
+      <point x="950" y="400" type="line"/>
+    </contour>
+    <contour>
+      <point x="850" y="400" type="line"/>
+      <point x="950" y="400" type="line"/>
+      <point x="950" y="600" type="line"/>
+      <point x="850" y="600" type="line"/>
+    </contour>
+    <contour>
+      <point x="550" y="400" type="line"/>
+      <point x="650" y="400" type="line"/>
+      <point x="650" y="600" type="line"/>
+      <point x="550" y="600" type="line"/>
+    </contour>
+    <contour>
+      <point x="50" y="400" type="line"/>
+      <point x="150" y="400" type="line"/>
+      <point x="150" y="600" type="line"/>
+      <point x="50" y="600" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-03 16:35:38 +0000</string>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="D" format="1">
+  <advance width="550"/>
+  <unicode hex="0044"/>
+  <outline>
+    <contour>
+      <point x="150" y="700" type="line"/>
+      <point x="150" y="600" type="line"/>
+      <point x="175" y="600" type="line"/>
+      <point x="300" y="600"/>
+      <point x="425" y="525"/>
+      <point x="425" y="350" type="curve"/>
+      <point x="425" y="175"/>
+      <point x="300" y="100"/>
+      <point x="175" y="100" type="curve"/>
+      <point x="150" y="100" type="line"/>
+      <point x="150" y="0" type="line"/>
+      <point x="175" y="0" type="line"/>
+      <point x="375" y="0"/>
+      <point x="525" y="150"/>
+      <point x="525" y="350" type="curve"/>
+      <point x="525" y="550"/>
+      <point x="375" y="700"/>
+      <point x="175" y="700" type="curve"/>
+    </contour>
+    <contour>
+      <point x="50" y="700" type="line"/>
+      <point x="50" y="0" type="line"/>
+      <point x="150" y="0" type="line"/>
+      <point x="150" y="700" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-04-09 20:03:12 +0000</string>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,182 @@
+# automatic
+@Uppercase = [ A Aacute Acircumflex Adieresis Agrave Aring Atilde AE B C Ccedilla D Eth E Eacute Ecircumflex Edieresis Egrave F G H I IJ Iacute Icircumflex Idieresis Igrave J K L Ldot Lslash M N Ntilde O Oacute Ocircumflex Odieresis Ograve Oslash Otilde OE P Thorn Q R S T U Uacute Ucircumflex Udieresis Ugrave V W X Y Yacute Ycircumflex Ydieresis Ygrave Z uni0394 uni03A9 u1D413 u1D413.001 ];
+
+# Prefix: Languagesystems
+# automatic
+languagesystem DFLT dflt;
+languagesystem latn dflt;
+languagesystem latn CAT;
+
+feature aalt {
+# automatic
+feature locl;
+feature sups;
+feature frac;
+feature ordn;
+feature c2sc;
+feature salt;
+feature ss01;
+feature ss02;
+feature ss03;
+} aalt;
+
+feature locl {
+# automatic
+script latn;
+language CAT;
+sub  l' periodcentered' l by ldot;
+sub  L' periodcentered' L by Ldot;
+} locl;
+
+feature sups {
+# automatic
+sub zero by uni2070;
+sub one by uni00B9;
+sub two by uni00B2;
+sub three by uni00B3;
+sub four by uni2074;
+sub five by uni2075;
+sub six by uni2076;
+sub seven by uni2077;
+sub eight by uni2078;
+sub nine by uni2079;
+} sups;
+
+feature frac {
+# automatic
+sub one slash four by onequarter;
+sub one slash two by onehalf;
+sub three slash four by threequarters;
+} frac;
+
+feature ordn {
+# automatic
+sub [zero one two three four five six seven eight nine] [A a]' by ordfeminine;
+sub [zero one two three four five six seven eight nine] [O o]' by ordmasculine;
+} ordn;
+
+feature liga {
+sub f f by f_f;
+sub f i by fi;
+sub f l by fl;
+sub f f i by f_f_i;
+sub f f l by f_f_l;
+} liga;
+
+feature c2sc {
+# automatic
+sub A by A.sc;
+sub Aacute by Aacute.sc;
+sub Acircumflex by Acircumflex.sc;
+sub Adieresis by Adieresis.sc;
+sub Agrave by Agrave.sc;
+sub Aring by Aring.sc;
+sub Atilde by Atilde.sc;
+sub AE by AE.sc;
+sub B by B.sc;
+sub C by C.sc;
+sub Ccedilla by Ccedilla.sc;
+sub D by D.sc;
+sub E by E.sc;
+sub Eacute by Eacute.sc;
+sub Ecircumflex by Ecircumflex.sc;
+sub Edieresis by Edieresis.sc;
+sub Egrave by Egrave.sc;
+sub F by F.sc;
+sub G by G.sc;
+sub H by H.sc;
+sub I by I.sc;
+sub IJ by IJ.sc;
+sub Iacute by Iacute.sc;
+sub Icircumflex by Icircumflex.sc;
+sub Idieresis by Idieresis.sc;
+sub Igrave by Igrave.sc;
+sub J by J.sc;
+sub K by K.sc;
+sub L by L.sc;
+sub M by M.sc;
+sub N by N.sc;
+sub Ntilde by Ntilde.sc;
+sub O by O.sc;
+sub Oacute by Oacute.sc;
+sub Ocircumflex by Ocircumflex.sc;
+sub Odieresis by Odieresis.sc;
+sub Ograve by Ograve.sc;
+sub Otilde by Otilde.sc;
+sub OE by OE.sc;
+sub P by P.sc;
+sub Q by Q.sc;
+sub R by R.sc;
+sub S by S.sc;
+sub T by T.sc;
+sub U by U.sc;
+sub Uacute by Uacute.sc;
+sub Ucircumflex by Ucircumflex.sc;
+sub Udieresis by Udieresis.sc;
+sub Ugrave by Ugrave.sc;
+sub V by V.sc;
+sub W by W.sc;
+sub X by X.sc;
+sub Y by Y.sc;
+sub Yacute by Yacute.sc;
+sub Ycircumflex by Ycircumflex.sc;
+sub Ydieresis by Ydieresis.sc;
+sub Ygrave by Ygrave.sc;
+sub Z by Z.sc;
+} c2sc;
+
+feature dlig {
+# automatic
+sub s u r slash by s_u_r_slash;
+sub V T F by V_T_F;
+sub periodcentered e periodcentered by periodcentered_e_periodcentered;
+sub c t by c_t;
+sub periodcentered e by periodcentered_e;
+sub t t by t_t;
+} dlig;
+
+feature salt {
+# automatic
+sub a by a.ss01;
+sub i by i.ss01;
+sub l by l.ss01;
+sub bullet by bullet.ss01;
+sub asterisk by asterisk.ss01;
+} salt;
+
+feature ss01 {
+# automatic
+sub a by a.ss01;
+sub i by i.ss01;
+sub l by l.ss01;
+sub bullet by bullet.ss01;
+sub asterisk by asterisk.ss01;
+} ss01;
+
+feature ss02 {
+# automatic
+sub zero by zero.ss02;
+sub one by one.ss02;
+sub two by two.ss02;
+sub three by three.ss02;
+sub four by four.ss02;
+sub five by five.ss02;
+sub six by six.ss02;
+sub seven by seven.ss02;
+sub eight by eight.ss02;
+sub nine by nine.ss02;
+sub u1F464 by u1F464.ss02;
+sub u1F5E3 by u1F5E3.ss02;
+sub u1F5D3 by u1F5D3.ss02;
+} ss02;
+
+feature ss03 {
+# automatic
+sub zero by zero.ss03;
+} ss03;
+
+feature cpsp {
+# automatic
+pos @Uppercase <5 0 10 0>;
+} cpsp;
+

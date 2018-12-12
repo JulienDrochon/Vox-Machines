@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="odieresis" format="1">
+  <advance width="500"/>
+  <unicode hex="00F6"/>
+  <outline>
+    <contour>
+      <point x="100" y="500"/>
+      <point x="25" y="400"/>
+      <point x="25" y="250" type="curve"/>
+      <point x="25" y="100"/>
+      <point x="100" y="0"/>
+      <point x="250" y="0" type="curve"/>
+      <point x="400" y="0"/>
+      <point x="475" y="100"/>
+      <point x="475" y="250" type="curve"/>
+      <point x="475" y="400"/>
+      <point x="400" y="500"/>
+      <point x="250" y="500" type="curve"/>
+    </contour>
+    <contour>
+      <point x="325" y="400"/>
+      <point x="375" y="350"/>
+      <point x="375" y="250" type="curve"/>
+      <point x="375" y="150"/>
+      <point x="325" y="100"/>
+      <point x="250" y="100" type="curve"/>
+      <point x="175" y="100"/>
+      <point x="125" y="150"/>
+      <point x="125" y="250" type="curve"/>
+      <point x="125" y="350"/>
+      <point x="175" y="400"/>
+      <point x="250" y="400" type="curve"/>
+    </contour>
+    <component base="dieresis" xOffset="50"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-04-09 20:03:12 +0000</string>
+    </dict>
+  </lib>
+</glyph>

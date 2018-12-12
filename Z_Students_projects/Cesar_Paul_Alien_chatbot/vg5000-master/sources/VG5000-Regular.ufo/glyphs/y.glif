@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="y" format="1">
+  <advance width="550"/>
+  <unicode hex="0079"/>
+  <outline>
+    <contour>
+      <point x="325" y="50"/>
+      <point x="400" y="125"/>
+      <point x="400" y="250" type="curve"/>
+      <point x="400" y="300" type="line"/>
+      <point x="400" y="200"/>
+      <point x="350" y="150"/>
+      <point x="275" y="150" type="curve" smooth="yes"/>
+      <point x="200" y="150"/>
+      <point x="150" y="200"/>
+      <point x="150" y="300" type="curve" smooth="yes"/>
+      <point x="150" y="500" type="line"/>
+      <point x="50" y="500" type="line"/>
+      <point x="50" y="250" type="line" smooth="yes"/>
+      <point x="50" y="125"/>
+      <point x="125" y="50"/>
+      <point x="225" y="50" type="curve" smooth="yes"/>
+    </contour>
+    <contour>
+      <point x="400" y="500" type="line"/>
+      <point x="400" y="50" type="line"/>
+      <point x="400" y="-50"/>
+      <point x="350" y="-100"/>
+      <point x="250" y="-100" type="curve"/>
+      <point x="125" y="-100"/>
+      <point x="50" y="0"/>
+      <point x="50" y="0" type="curve"/>
+      <point x="50" y="-125" type="line"/>
+      <point x="50" y="-125"/>
+      <point x="100" y="-200"/>
+      <point x="250" y="-200" type="curve"/>
+      <point x="400" y="-200"/>
+      <point x="500" y="-125"/>
+      <point x="500" y="50" type="curve"/>
+      <point x="500" y="500" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-09 00:11:36 +0000</string>
+    </dict>
+  </lib>
+</glyph>

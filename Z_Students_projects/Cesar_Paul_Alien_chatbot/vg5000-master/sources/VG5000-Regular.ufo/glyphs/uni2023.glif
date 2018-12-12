@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni2023" format="1">
+  <advance width="600"/>
+  <unicode hex="2023"/>
+  <outline>
+    <contour>
+      <point x="250" y="200" type="line"/>
+      <point x="350" y="200" type="line"/>
+      <point x="350" y="500" type="line"/>
+      <point x="250" y="500" type="line"/>
+    </contour>
+    <contour>
+      <point x="350" y="300" type="line"/>
+      <point x="450" y="300" type="line"/>
+      <point x="450" y="400" type="line"/>
+      <point x="350" y="400" type="line"/>
+    </contour>
+    <contour>
+      <point x="150" y="100" type="line"/>
+      <point x="250" y="100" type="line"/>
+      <point x="250" y="600" type="line"/>
+      <point x="150" y="600" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-16 15:54:13 +0000</string>
+    </dict>
+  </lib>
+</glyph>

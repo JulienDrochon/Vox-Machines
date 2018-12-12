@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="Otilde.sc" format="1">
+  <advance width="600"/>
+  <outline>
+    <contour>
+      <point x="125" y="400"/>
+      <point x="25" y="325"/>
+      <point x="25" y="200" type="curve"/>
+      <point x="25" y="75"/>
+      <point x="125" y="0"/>
+      <point x="300" y="0" type="curve"/>
+      <point x="475" y="0"/>
+      <point x="575" y="75"/>
+      <point x="575" y="200" type="curve"/>
+      <point x="575" y="325"/>
+      <point x="475" y="400"/>
+      <point x="300" y="400" type="curve"/>
+    </contour>
+    <contour>
+      <point x="400" y="300"/>
+      <point x="475" y="275"/>
+      <point x="475" y="200" type="curve"/>
+      <point x="475" y="125"/>
+      <point x="400" y="100"/>
+      <point x="300" y="100" type="curve"/>
+      <point x="200" y="100"/>
+      <point x="125" y="125"/>
+      <point x="125" y="200" type="curve"/>
+      <point x="125" y="275"/>
+      <point x="200" y="300"/>
+      <point x="300" y="300" type="curve"/>
+    </contour>
+    <component base="tilde"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-04-09 20:03:12 +0000</string>
+    </dict>
+  </lib>
+</glyph>

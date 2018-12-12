@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="te" format="1">
+  <advance width="450"/>
+  <outline>
+    <contour>
+      <point x="150" y="700" type="line"/>
+      <point x="150" y="250" type="line"/>
+      <point x="250" y="250" type="line"/>
+      <point x="250" y="700" type="line"/>
+    </contour>
+    <contour>
+      <point x="50" y="400" type="line"/>
+      <point x="400" y="400" type="line"/>
+      <point x="400" y="500" type="line"/>
+      <point x="50" y="500" type="line"/>
+    </contour>
+    <contour>
+      <point x="400" y="0" type="line"/>
+      <point x="400" y="50" type="line"/>
+      <point x="150" y="50" type="line"/>
+      <point x="150" y="0" type="line"/>
+    </contour>
+    <contour>
+      <point x="400" y="100" type="line"/>
+      <point x="400" y="150" type="line"/>
+      <point x="150" y="150" type="line"/>
+      <point x="150" y="100" type="line"/>
+    </contour>
+    <contour>
+      <point x="400" y="200" type="line"/>
+      <point x="400" y="250" type="line"/>
+      <point x="150" y="250" type="line"/>
+      <point x="150" y="200" type="line"/>
+    </contour>
+    <contour>
+      <point x="150" y="0" type="line"/>
+      <point x="200" y="0" type="line"/>
+      <point x="200" y="250" type="line"/>
+      <point x="150" y="250" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-14 21:39:43 +0000</string>
+    </dict>
+  </lib>
+</glyph>

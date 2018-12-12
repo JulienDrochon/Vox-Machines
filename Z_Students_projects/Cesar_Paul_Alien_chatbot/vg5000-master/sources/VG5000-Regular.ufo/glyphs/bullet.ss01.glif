@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="bullet.ss01" format="1">
+  <advance width="600"/>
+  <outline>
+    <contour>
+      <point x="50" y="500" type="line"/>
+      <point x="50" y="200" type="line"/>
+      <point x="550" y="200" type="line"/>
+      <point x="550" y="500" type="line"/>
+    </contour>
+    <contour>
+      <point x="150" y="200" type="line"/>
+      <point x="150" y="100" type="line"/>
+      <point x="450" y="100" type="line"/>
+      <point x="450" y="200" type="line"/>
+    </contour>
+    <contour>
+      <point x="150" y="600" type="line"/>
+      <point x="150" y="500" type="line"/>
+      <point x="450" y="500" type="line"/>
+      <point x="450" y="600" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-09 10:51:12 +0000</string>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="infinity" format="1">
+  <advance width="800"/>
+  <unicode hex="221E"/>
+  <outline>
+    <contour>
+      <point x="450" y="500" type="line"/>
+      <point x="450" y="400" type="line"/>
+      <point x="650" y="400" type="line"/>
+      <point x="650" y="500" type="line"/>
+    </contour>
+    <contour>
+      <point x="50" y="400" type="line"/>
+      <point x="50" y="300" type="line"/>
+      <point x="150" y="300" type="line"/>
+      <point x="150" y="400" type="line"/>
+    </contour>
+    <contour>
+      <point x="150" y="300" type="line"/>
+      <point x="150" y="200" type="line"/>
+      <point x="350" y="200" type="line"/>
+      <point x="350" y="300" type="line"/>
+    </contour>
+    <contour>
+      <point x="150" y="500" type="line"/>
+      <point x="150" y="400" type="line"/>
+      <point x="350" y="400" type="line"/>
+      <point x="350" y="500" type="line"/>
+    </contour>
+    <contour>
+      <point x="350" y="400" type="line"/>
+      <point x="350" y="300" type="line"/>
+      <point x="450" y="300" type="line"/>
+      <point x="450" y="400" type="line"/>
+    </contour>
+    <contour>
+      <point x="450" y="300" type="line"/>
+      <point x="450" y="200" type="line"/>
+      <point x="650" y="200" type="line"/>
+      <point x="650" y="300" type="line"/>
+    </contour>
+    <contour>
+      <point x="650" y="400" type="line"/>
+      <point x="650" y="300" type="line"/>
+      <point x="750" y="300" type="line"/>
+      <point x="750" y="400" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2018-05-05 22:34:52 +0000</string>
+    </dict>
+  </lib>
+</glyph>

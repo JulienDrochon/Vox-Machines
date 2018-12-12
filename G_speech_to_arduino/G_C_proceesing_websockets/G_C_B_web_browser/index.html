@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+
+<html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+
+
+</head>
+
+<body>
+  <div id = "sse">
+    <!-- <a href = "javascript:WebSocketTest()">Run WebSocket</a> -->
+  </div>
+
+  <script type = "text/javascript">
+  window.onload = function() {
+    if ("WebSocket" in window) {
+      console.log("WebSocket is supported by your Browser!");
+      // Let us open a web socket
+      var ws = new WebSocket("ws://localhost:8025/john");
+       setInterval( WebSocketTest, 15);
+
+      ws.onopen = function() {
+        // Web Socket is connected, send data using send()
+        ws.send("open");
+        console.log("Message is sent...");
+      };
+      ws.onclose = function() {
+        ws.send("close");
+        // websocket is closed.
+        console.log("Connection is closed...");
+      };
+    } else {
+      // The browser doesn't support WebSocket
+      console.log("WebSocket NOT supported by your Browser!");
+    }
+    function WebSocketTest() {
+
+      ws.onmessage = function (evt) {
+        var received_msg = evt.data;
+        console.log("Message is received : " + evt.data);
+      };
+    }
+
+  }
+
+
+  </script>
+</body>
+</html>
