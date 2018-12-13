@@ -11,48 +11,42 @@
 <body style='margin: 0px; background-color: #bbbbbb; overflow: hidden;'>
 
   <script>
-    var renderer	= new THREE.WebGLRenderer();
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    document.body.appendChild( renderer.domElement );
+  var renderer	= new THREE.WebGLRenderer();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+  document.body.appendChild( renderer.domElement );
 
-    var onRenderFcts= [];
-    var scene	= new THREE.Scene();
-    var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000);
-    camera.position.z = 3;
+  var onRenderFcts= [];
+  var scene	= new THREE.Scene();
+  var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000);
+  camera.position.z = 3;
 
 
 
   let speechRec;
   let said="dites bonjour";
 
-    speechRec = new p5.SpeechRec('fr', gotSpeech);
-    // "Continuous recognition" (as opposed to one time only)
-    let continuous = true;
-    // If you want to try partial recognition (faster, less accurate)
-    let interimResults = false;
-    // This must come after setting the properties
-    speechRec.start(continuous, interimResults);
+  speechRec = new p5.SpeechRec('fr', gotSpeech);
+  // "Continuous recognition" (as opposed to one time only)
+  let continuous = true;
+  // If you want to try partial recognition (faster, less accurate)
+  let interimResults = false;
+  // This must come after setting the properties
+  speechRec.start(continuous, interimResults);
 
-    // DOM element to display results
-    //let output = select('#speech');
+  // DOM element to display results
+  //let output = select('#speech');
 
-    // Speech recognized event
-    function gotSpeech() {
-      // Something is there
-      // Get it as a string, you can also get JSON with more info
-      console.log(speechRec);
-      if (speechRec.resultValue) {
-        said = speechRec.resultString;
-        console.log(said);
-        while(scene.children.length > 0){
-            scene.remove(scene.children[0]);
-        }
-      var mesh	= new THREEx.Text(said)
-      mesh.scale.multiplyScalar(1/2)
-      mesh.position.y	= +0.6
-      scene.add(mesh)
-      }
+  // Speech recognized event
+  function gotSpeech() {
+    // Something is there
+    // Get it as a string, you can also get JSON with more info
+    console.log(speechRec);
+    if (speechRec.resultValue) {
+      said = speechRec.resultString;
+      console.log(said);
+      draw3Dtype(said);
     }
+  }
 
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -93,5 +87,15 @@
       onRenderFct(deltaMsec/1000, nowMsec/1000)
     })
   })
+
+  function draw3Dtype(text){
+    while(scene.children.length > 0){
+      scene.remove(scene.children[0]);
+    }
+    var mesh	= new THREEx.Text(said)
+    mesh.scale.multiplyScalar(1/2)
+    mesh.position.y	= +0.6
+    scene.add(mesh)
+  }
 </script>
 </body>

@@ -1,6 +1,3 @@
-
-let speech;
-
 function setup() {
   noCanvas();
   // Create a Speech Recognition object with callback
