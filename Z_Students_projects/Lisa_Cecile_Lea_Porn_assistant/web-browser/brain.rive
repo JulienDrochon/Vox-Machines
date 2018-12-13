@@ -1,0 +1,19 @@
+// Chatbot's brain
+// https://github.com/aichaos/aiden
+
+! version = 2.0
+
++ [*] oreille [*]
+- 1
+
++ [*] l'oreille [*]
+- 1
+
++ [*] langue [*]
+- 2
+
++ [*] stop [*]
+- 100
+
++ [*] allume [*]
+- 200
