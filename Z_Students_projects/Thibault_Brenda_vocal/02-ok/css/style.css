@@ -1,0 +1,15 @@
+body {
+  font-family: Coquette, Rockwell, Verdana;
+  max-width: 50%;
+  font-weight: 400;
+  margin: 2em auto;
+  background: rgb(234, 235, 235);
+  color: #555;
+  font-size: 1.5em;
+}
+.test{
+  font-size:50px;
+}
+.blast {
+  
+}

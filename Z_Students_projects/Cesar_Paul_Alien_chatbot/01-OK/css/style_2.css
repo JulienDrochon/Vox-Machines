@@ -1,0 +1,271 @@
+
+@font-face {
+    font-family: 'VG5000';
+    src:    url('VG/VG5000-Regular_web.eot');
+    src:    url('VG/VG5000-Regular_web.eot?#iefix') format('embedded-opentype'),
+            url('VG/VG5000-Regular_web.woff') format('woff'),
+            url('VG/VG5000-Regular_web.woff2') format('woff2'),
+            url('VG/VG5000-Regular_web.ttf') format('truetype'),
+            url('VG/VG5000-Regular_web.svg#svgFontName') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anonymous';
+    src: url('anonymous/Anonymous Pro Minus B.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+
+	background-color: rgba(255,42,90);
+	margin: 10px;
+	height: 100%;
+
+	-webkit-animation:fadein 4s;	
+	-moz-animation: fadein 4s;	
+}
+
+* {
+	box-sizing: border-box !important;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+h1{
+	font-family: 'VG5000';
+	font-weight: normal;
+}
+
+h2{
+	font-family: 'VG5000';
+	font-weight: normal;
+}
+
+p{
+	font-family: 'Anonymous';
+	font-weight: normal;
+	word-break: normal;
+}
+
+.titre{
+	font-size: calc(4vw + 1em);
+}
+
+.icon{
+	font-size: calc(1vw + 1em);
+}
+
+.container{
+	height: 100%;
+	display: flex;
+}
+
+.container-left{
+	float: left;
+	width: 45%;
+	display: grid;
+	grid-template-columns: 1.5fr 1fr 1fr 1fr;
+	grid-template-rows: 2fr 1fr 1fr 1fr;
+}
+
+.container-right{
+	float: right;
+	width: 55%;
+}
+
+.container-left > div {
+    display: flex;
+}
+
+.gros-titre{
+	/*height: 80%;*/
+	opacity;
+	grid-column:  2;
+    grid-row: 2 ;
+    line-height: 1.1;
+
+    -moz-animation: fadein 2s linear 2s infinite;
+
+    /*animation-duration: 3s;
+    animation-delay: 4s;*/
+}
+
+.gros-titre h1{
+	padding-top: 0;
+	margin-top: 0;
+}
+
+.gros-titre h2{
+	align-items: end;
+	padding-bottom: : 0;
+	margin-bottom: 0;
+}
+
+.gros-titre-2{
+	justify-content: end;
+	align-items: start;
+	grid-column:2;
+    grid-row: 2 ;
+
+    -webkit-animation: fadein 2s linear 2s infinite;
+    -moz-animation: fadein 2s linear 2s infinite;
+}
+
+.gros-titre-2 h2{
+	padding-bottom: 10%;
+	margin-bottom: 0;
+	text-align: center;
+}
+
+.text-pres{
+	grid-column: 1/4;
+    grid-row: 3 ;
+
+}
+
+.commencer{
+	align-items: end;
+	grid-column: 2;
+    grid-row: 4;
+}
+
+
+#grid{
+  margin-top: 10vh;
+  margin-left: 0;
+  margin-right: auto; 
+  color: black;
+  width:50%;
+  height: 80%;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 0;
+}
+
+#grid > div {
+  /*border:0.1px solid black;*/
+}
+
+.active{
+  background-color: rgba(28,48,126,0.8);
+}
+
+/*-------ANIMATIONS--------*/
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+ }
+
+ /*-------RESPONSIVE--------*/
+
+@media screen and (max-width:1024px) {
+/* Entre 768px et 1024px */
+	/* iPad portrait & landscape */
+	/* iPhone6+ paysage = 960px */
+
+	.titre{
+		font-size: calc(6vw + 1em);
+	}
+
+	.icon{
+		font-size: calc(3vw + 1em);
+	}
+
+	.container-right{
+
+	}
+}
+
+@media screen and (max-width:768px) {
+/* Entre 667px et 768px */
+	/* iPad portrait = 768px */
+	
+	.titre{
+		font-size: calc(6vw + 1em);
+	}
+
+	.icon{
+		font-size: calc(3vw + 1em);
+	}
+
+	.container-right{
+
+	}
+}
+
+@media screen and (max-width:425px) {
+/* Entre 0px et 375px */
+/* Mobiles portrait */
+/* iPhone6+ portrait = 540px */
+/* iPhone6 portrait = 375px */
+/* iPhone4 & iPhone5 portrait = 320px */
+html,body { 
+	/*background:yellow; */
+}
+
+.container{
+	display: block;
+}
+
+.container-left{
+	float: left;
+	width: 100%;
+	height: 20%;
+	display: grid;
+	grid-template-columns: 1.5fr 1fr 1fr 1fr;
+	grid-template-rows: 2fr 1fr 1fr 1fr;
+}
+
+.container-right{
+	width: 100%;
+	height: 80%;
+}
+
+#grid{
+  margin-top: 5vh;
+  margin-left: auto;
+  margin-right: auto; 
+  color: black;
+  width:80%;
+  height: 80%;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 0;
+}
+
+.titre{
+	font-size: calc(10vw + 1em);
+}
+
+.icon{
+	font-size: calc(5vw + 1em);
+}
+
+.gros-titre-2{
+	grid-column:1;
+    grid-row: 1 ;
+    margin-left: 28%;
+    margin-top: 22%;
+}
+
+.gros-titre-2 h2{
+	padding-bottom: 3%;
+	margin-bottom: 0;
+}
+}	
