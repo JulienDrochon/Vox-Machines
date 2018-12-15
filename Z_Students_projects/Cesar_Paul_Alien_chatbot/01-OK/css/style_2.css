@@ -26,8 +26,8 @@ html, body {
 	margin: 10px;
 	height: 100%;
 
-	-webkit-animation:fadein 4s;	
-	-moz-animation: fadein 4s;	
+	-webkit-animation:fadein 4s;
+	-moz-animation: fadein 4s;
 }
 
 * {
@@ -57,10 +57,6 @@ p{
 
 .titre{
 	font-size: calc(4vw + 1em);
-}
-
-.icon{
-	font-size: calc(1vw + 1em);
 }
 
 .container{
@@ -141,7 +137,7 @@ p{
 #grid{
   margin-top: 10vh;
   margin-left: 0;
-  margin-right: auto; 
+  margin-right: auto;
   color: black;
   width:50%;
   height: 80%;
@@ -194,7 +190,7 @@ p{
 @media screen and (max-width:768px) {
 /* Entre 667px et 768px */
 	/* iPad portrait = 768px */
-	
+
 	.titre{
 		font-size: calc(6vw + 1em);
 	}
@@ -214,7 +210,7 @@ p{
 /* iPhone6+ portrait = 540px */
 /* iPhone6 portrait = 375px */
 /* iPhone4 & iPhone5 portrait = 320px */
-html,body { 
+html,body {
 	/*background:yellow; */
 }
 
@@ -239,7 +235,7 @@ html,body {
 #grid{
   margin-top: 5vh;
   margin-left: auto;
-  margin-right: auto; 
+  margin-right: auto;
   color: black;
   width:80%;
   height: 80%;
@@ -268,4 +264,10 @@ html,body {
 	padding-bottom: 3%;
 	margin-bottom: 0;
 }
-}	
+}
+
+h2.icon{
+	font-size: 1em;
+  text-align: left;
+  cursor: pointer;
+}

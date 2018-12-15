@@ -17,37 +17,50 @@ function preload(){
 
 }
 
+var clickSpeech;
+
 function setup() {
   noCanvas();
+  clickSpeech = select(".icon");
+  clickSpeech.mousePressed(speechClicked);
   // Speech recognition settings
-  let speechRec = new p5.SpeechRec('fr', gotSpeech);
-  let continuous = true;
-  let interim = false;
-  speechRec.start(continuous, interim);
+
   // Choosing class for each grid item
   for (var i=1; i < 29; i++){
     arrayclass[i]=select("."+nf(i, 2, 0));
   }
-  // when speech recognition fires up …
-  function gotSpeech() {
-    console.log(speechRec);
-    if (speechRec.resultValue) {
-      //input : variable for storing recognized text
-      let input = speechRec.resultString;
-      //  console.log(input); // for debug
-      // arraychars : variable for storing splitted word
-      let arraychars = split(input, '');
-      console.log(arraychars); //for debug
 
-      var i = 0;
-      setInterval(function(){
-        drawLetters(arraychars[i], 1000);
-        if(i<arraychars.length){
-          i++;
-        }
-      }, 1000);
+}
+
+function speechClicked() {
+    for (var i=1; i < 29; i++){
+      arrayclass[i].removeClass('active');
     }
-  }
+
+    let speechRec = new p5.SpeechRec('fr', gotSpeech);
+    let continuous = true;
+    let interim = false;
+    speechRec.start(continuous, interim);
+    // when speech recognition fires up …
+    function gotSpeech() {
+      console.log(speechRec);
+      if (speechRec.resultValue) {
+        //input : variable for storing recognized text
+        let input = speechRec.resultString;
+        //  console.log(input); // for debug
+        // arraychars : variable for storing splitted word
+        let arraychars = split(input, '');
+        console.log(arraychars); //for debug
+
+        var i = 0;
+        setInterval(function(){
+          drawLetters(arraychars[i], 1000);
+          if(i<arraychars.length){
+            i++;
+          }
+        }, 1000);
+      }
+    }
 }
 
 // function for drawing blocks inside CSS grid
