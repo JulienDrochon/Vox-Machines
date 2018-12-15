@@ -10,7 +10,7 @@ function preload(){
   for(var i=0;i<26;i++){
     console.log("ENTER");
     var soundfile;
-    soundfile = loadSound("assets/lettres/"+nf(i,2,0)+".mp3");
+    soundfile = loadSound("assets/"+nf(i,2,0)+".mp3");
     console.log(soundfile);
     soundList.push(soundfile);
   }
@@ -195,6 +195,5 @@ function timer(time) {
         arrayclass[i]=select("."+nf(i, 2, 0));
         //arrayclass[i].removeClass("active");
       }
-      
     }, time);
 }
