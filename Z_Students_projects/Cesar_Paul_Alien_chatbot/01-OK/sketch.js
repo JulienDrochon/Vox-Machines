@@ -20,6 +20,12 @@ function preload(){
 var clickSpeech;
 
 function setup() {
+    if('webkitSpeechRecognition' in window) {
+
+    }
+    else {
+      alert("SpeechRecognition not supported in this browser.\nPlease use Chrome Desktop 25+ or Chrome for Android 70+");
+    }
   noCanvas();
   clickSpeech = select(".icon");
   clickSpeech.mousePressed(speechClicked);
