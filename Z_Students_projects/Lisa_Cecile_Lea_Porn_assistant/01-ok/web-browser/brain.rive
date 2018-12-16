@@ -1,0 +1,29 @@
+// Chatbot's brain
+// https://github.com/aichaos/aiden
+
+! version = 2.0
+
++ [*] ambiance [*]
+- 1
+
++ [*] gay [*]
+- 2
+
++ [*] cuni [*]
+- 3
+
++ [*] orgasme [*]
+- 4
+
++ [*] bonjour [*]
+- 10
+
++ [*] saucisse [*]
+- 20
+
++ [*] merci [*]
+- 30
+
++ [*] fini [*]
+- 40
+
