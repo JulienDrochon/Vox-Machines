@@ -1,7 +1,14 @@
 let speechRec;
+var clickSpeech;
 
-function setup() {// Create a Speech Recognition object with callback
-  speechRec = new p5.SpeechRec('fr', gotSpeech);
+function setup() {
+  clickSpeech = select(".click");
+  clickSpeech.mousePressed(speechClicked);
+}
+
+function speechClicked() {
+  // Create a Speech Recognition object with callback
+  speechRec = new p5.SpeechRec('es', gotSpeech);
   // "Continuous recognition" (as opposed to one time only)
   let continuous = true;
   // If you want to try partial recognition (faster, less accurate)
@@ -34,51 +41,48 @@ $('#speech').on('classChange', function() {
 function foo() {
   $('#speech').removeClass('active');
 
-var eacute = {"é": true};
-var eagrave = {"è": true};
+  //á, é, í, ó, ú
+  var eacute = {"é": true};
+  var iacute = {"í": true};
+  var oacute = {"ó": true};
+  var uacute = {"ú": true};
+  var aacute = {"á": true};
 
-$('#speech').each(function (i, elem) {
+  $('#speech').each(function (i, elem) {
     var self = $(elem),
-        textNodes = self.text().split(''),
-        i = 0;
+    textNodes = self.text().split(''),
+    i = 0;
     for (i = 0; i < textNodes.length; i += 1) {
-        if (eacute[textNodes[i]]) {
-            textNodes[i] = '<span class="eacute">' + textNodes[i] + '</span>';
-        }
-          if (eagrave[textNodes[i]]) {
-              textNodes[i] = '<span class="eagrave">' + textNodes[i] + '</span>';
-          }
+      if (eacute[textNodes[i]]) {
+        textNodes[i] = '<span class="eacute">' + textNodes[i] + '</span>';
+      }
+      if (iacute[textNodes[i]]) {
+        textNodes[i] = '<span class="iacute">' + textNodes[i] + '</span>';
+      }
+      if (oacute[textNodes[i]]) {
+        textNodes[i] = '<span class="oacute">' + textNodes[i] + '</span>';
+      }
+      if (uacute[textNodes[i]]) {
+        textNodes[i] = '<span class="uacute">' + textNodes[i] + '</span>';
+      }
+      if (aacute[textNodes[i]]) {
+        textNodes[i] = '<span class="aacute">' + textNodes[i] + '</span>';
+      }
     }
     self.html(textNodes.join(''));
-});
+  });
 
   $("#speech").text3d({
     depth: 200,
     angle: 135,
-    color: "#ff0000",
-    lighten: -0.1,
+    color: "#FFFF00",
+    lighten: -.9,
     shadowDepth: 0,
-    shadowAngle: 45,
-    shadowOpacity: 0.2
+    shadowAngle: 180,
+    shadowOpacity: 0.9
   });
 
-$('.eacute').each(function(i) {
-  // initialize position
-  $(this).css({
-    position: 'relative',
-    left: 0,
-    color:'#fff'
-  })
-
-  // Delay: we don't want to animate
-  // characters simultaneously
-  .delay(i * 45)
-
-  // Animate to the right
-  .animate({ left: '20px', top:'-20px', color: '#00ffff' }, 3000);
-});
-
-  $('.eagrave').each(function(i) {
+  $('.eacute, .aacute, .iacute, .uacute, .oacute').each(function(i) {
     // initialize position
     $(this).css({
       position: 'relative',
@@ -93,67 +97,4 @@ $('.eacute').each(function(i) {
     // Animate to the right
     .animate({ left: '20px', top:'-20px', color: '#00ffff' }, 3000);
   });
-  //
-  // chars0.each(function(i) {
-  //   // initialize position
-  //   $(this).css({
-  //     position: 'relative',
-  //     left: 0
-  //   })
-  //
-  //   // Delay: we don't want to animate
-  //   // characters simultaneously
-  //   .delay(i * 45)
-  //
-  //   // Animate to the right
-  //   .animate({ left: '50px', top:'-50px'}, 3000);
-  // });
-
-  // chars1.each(function(i) {
-  //   // initialize position
-  //   $(this).css({
-  //     position: 'relative',
-  //     left: 0
-  //   })
-  //
-  //   // Delay: we don't want to animate
-  //   // characters simultaneously
-  //   .delay(i * 45)
-  //
-  //   // Animate to the right
-  //   .animate({ left: '50px', top:'-50px' }, 3000);
-  // });
-  //
-  // chars2.each(function(i) {
-  //   // initialize position
-  //   $(this).css({
-  //     position: 'relative',
-  //     left: 0
-  //   })
-  //
-  //   // Delay: we don't want to animate
-  //   // characters simultaneously
-  //   .delay(i * 45)
-  //
-  //   // Animate to the right
-  //   .animate({ left: '50px', top:'-50px' }, 3000);
-  // });
-  //
-  // $(".blast").text3d({
-  //   depth: 100,
-  //   angle: 135,
-  //   color: "#ff0000",
-  //   lighten: -0.1,
-  //   shadowDepth: 0,
-  //   shadowAngle: 45,
-  //   shadowOpacity: 0.2
-  // }).each(function(i) {
-  //   $(this).css({
-  //     position: 'relative',
-  //     left: 0
-  //   })
-  //   .animate({ left: '50px', top:'-50px' }, 3000);
-  // });
-
-  // });
 }

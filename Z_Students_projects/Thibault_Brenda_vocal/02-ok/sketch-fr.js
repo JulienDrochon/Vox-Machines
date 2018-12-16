@@ -1,6 +1,12 @@
 let speechRec;
 
-function setup() {// Create a Speech Recognition object with callback
+function setup() {
+  clickSpeech = select(".click");
+  clickSpeech.mousePressed(speechClicked);
+}
+
+function speechClicked() {
+  // Create a Speech Recognition object with callback
   speechRec = new p5.SpeechRec('fr', gotSpeech);
   // "Continuous recognition" (as opposed to one time only)
   let continuous = true;
@@ -34,23 +40,68 @@ $('#speech').on('classChange', function() {
 function foo() {
   $('#speech').removeClass('active');
 
-var eacute = {"é": true};
-var eagrave = {"è": true};
+  //
+  var eacute = {"é": true};
+  var eagrave = {"è": true};
+  var ecirc = {"ê": true};
+  var aagrave = {"à": true};
+  var uagrave = {"ù": true};
+  var itrem = {"ï": true};
+  var acirc = {"â": true};
+  var icirc = {"î": true};
+  var ccedi = {"ç": true};
+  var ocirc = {"ô": true};
+  var ucirc = {"û": true};
+  var etrem = {"ë": true};
+  var utrem = {"ü": true};
 
-$('#speech').each(function (i, elem) {
+  $('#speech').each(function (i, elem) {
     var self = $(elem),
-        textNodes = self.text().split(''),
-        i = 0;
+    textNodes = self.text().split(''),
+    i = 0;
     for (i = 0; i < textNodes.length; i += 1) {
-        if (eacute[textNodes[i]]) {
-            textNodes[i] = '<span class="eacute">' + textNodes[i] + '</span>';
-        }
-          if (eagrave[textNodes[i]]) {
-              textNodes[i] = '<span class="eagrave">' + textNodes[i] + '</span>';
-          }
+      if (eacute[textNodes[i]]) {
+        textNodes[i] = '<span class="eacute">' + textNodes[i] + '</span>';
+      }
+      if (eagrave[textNodes[i]]) {
+        textNodes[i] = '<span class="eagrave">' + textNodes[i] + '</span>';
+      }
+      if (ecirc[textNodes[i]]) {
+        textNodes[i] = '<span class="ecirc">' + textNodes[i] + '</span>';
+      }
+      if (aagrave[textNodes[i]]) {
+        textNodes[i] = '<span class="aagrave">' + textNodes[i] + '</span>';
+      }
+      if (uagrave[textNodes[i]]) {
+        textNodes[i] = '<span class="uagrave">' + textNodes[i] + '</span>';
+      }
+      if (itrem[textNodes[i]]) {
+        textNodes[i] = '<span class="itrem">' + textNodes[i] + '</span>';
+      }
+      if (acirc[textNodes[i]]) {
+        textNodes[i] = '<span class="acirc">' + textNodes[i] + '</span>';
+      }
+      if (icirc[textNodes[i]]) {
+        textNodes[i] = '<span class="icirc">' + textNodes[i] + '</span>';
+      }
+      if ( ccedi[textNodes[i]]) {
+        textNodes[i] = '<span class="ccedi">' + textNodes[i] + '</span>';
+      }
+      if ( ocirc[textNodes[i]]) {
+        textNodes[i] = '<span class="ocirc">' + textNodes[i] + '</span>';
+      }
+      if ( ucirc[textNodes[i]]) {
+        textNodes[i] = '<span class="ucirc">' + textNodes[i] + '</span>';
+      }
+      if ( etrem[textNodes[i]]) {
+        textNodes[i] = '<span class="etrem">' + textNodes[i] + '</span>';
+      }
+      if ( utrem[textNodes[i]]) {
+        textNodes[i] = '<span class="utrem">' + textNodes[i] + '</span>';
+      }
     }
     self.html(textNodes.join(''));
-});
+  });
 
   $("#speech").text3d({
     depth: 200,
@@ -62,98 +113,17 @@ $('#speech').each(function (i, elem) {
     shadowOpacity: 0.9
   });
 
-$('.eacute').each(function(i) {
-  // initialize position
-  $(this).css({
-    position: 'relative',
-    left: 0,
-    color:'#ffffff'
-  })
-
-  // Delay: we don't want to animate
-  // characters simultaneously
-  .delay(i * 45)
-
-  // Animate to the right
-  .animate({ left: '20px', top:'-20px', color: '#ffffff' }, 3000);
-});
-
-  $('.eagrave').each(function(i) {
+  $('.eacute, .eagrave, .ecirc, .aagrave, .uagrave, .itrem, .acirc, .icirc, .ccedi, .ocirc, .ucirc, .etrem, .utrem').each(function(i) {
     // initialize position
     $(this).css({
       position: 'relative',
       left: 0,
-      color:'#fff'
+      color:'#ffffff'
     })
-
     // Delay: we don't want to animate
     // characters simultaneously
     .delay(i * 45)
-
     // Animate to the right
-    .animate({ left: '20px', top:'-20px', color: '##00BFFF' }, 3000);
+    .animate({ left: '20px', top:'-20px', color: '#ffffff' }, 1500);
   });
-  //
-  // chars0.each(function(i) {
-  //   // initialize position
-  //   $(this).css({
-  //     position: 'relative',
-  //     left: 0
-  //   })
-  //
-  //   // Delay: we don't want to animate
-  //   // characters simultaneously
-  //   .delay(i * 45)
-  //
-  //   // Animate to the right
-  //   .animate({ left: '50px', top:'-50px'}, 3000);
-  // });
-
-  // chars1.each(function(i) {
-  //   // initialize position
-  //   $(this).css({
-  //     position: 'relative',
-  //     left: 0
-  //   })
-  //
-  //   // Delay: we don't want to animate
-  //   // characters simultaneously
-  //   .delay(i * 45)
-  //
-  //   // Animate to the right
-  //   .animate({ left: '50px', top:'-50px' }, 3000);
-  // });
-  //
-  // chars2.each(function(i) {
-  //   // initialize position
-  //   $(this).css({
-  //     position: 'relative',
-  //     left: 0
-  //   })
-  //
-  //   // Delay: we don't want to animate
-  //   // characters simultaneously
-  //   .delay(i * 45)
-  //
-  //   // Animate to the right
-  //   .animate({ left: '50px', top:'-50px' }, 3000);
-  // });
-  //
-  // $(".blast").text3d({
-  //   depth: 100,
-  //   angle: 135,
-  //   color: "#ff0000",
-  //   lighten: -0.1,
-  //   shadowDepth: 0,
-  //   shadowAngle: 45,
-  //   shadowOpacity: 0.2
-  // }).each(function(i) {
-  //   $(this).css({
-  //     position: 'relative',
-  //     left: 0
-  //   })
-  //   .animate({ left: '50px', top:'-50px' }, 3000);
-  // });
-
-  // });
 }

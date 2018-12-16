@@ -134,6 +134,9 @@ font-size:5rem
   margin:0;
 }
 
+.speak .click {
+  font-size: 1rem;
+}
 /*button */
 
 .button{
@@ -185,21 +188,6 @@ img{
   top:-60px
 
 }
-/*faire trois class diff pour les ico
-integrer drapeau et logo
-*/
-/*///////////////////////////////////////////////////////////////////////////////////////
-.shadow {
-   margin-right: 50px;
-   color: white;
-   font: bold 10rem Helvetica, Arial, Sans-Serif;
-   text-shadow: 1px 1px #000,
-                2px 2px #000,
-                3px 3px #000;
-   -webkit-transition: all 0.12s ease-out;
-   -moz-transition:    all 0.12s ease-out;
-   -ms-transition:     all 0.12s ease-out;
-   -o-transition:      all 0.12s ease-out;
+#speech{
+  cursor: pointer;
 }
-
-*/
