@@ -1,7 +1,8 @@
 let output, speechRec, button, svg, page2;
 
-let sonAlsacien, sonCharente, sonChti, sonCorse, sonAzur, sonMidi, sonAlpes;
-let nord, aquitaine, paca, alsace, bretagne, midi, paris, centre;
+var sonAlsacien, sonCharente, sonChti, sonCorse, sonAzur, sonMidi, sonAlpes;
+var nord, aquitaine, paca, alsace, bretagne, midi, paris, centre;
+
 function preload(){
   sonAlsacien = loadSound("assets/Alsacien.mp3");
   sonCharente = loadSound("assets/Charente.mp3");
@@ -69,7 +70,7 @@ function listen() {
 }
 
 function nordfonction() {
-sonChti.play();
+//sonChti.play();
 }
 
 function aquitainefonction() {
