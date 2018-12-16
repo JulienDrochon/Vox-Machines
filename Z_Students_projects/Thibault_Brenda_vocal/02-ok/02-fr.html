@@ -24,5 +24,14 @@
   <script src="js/jquery.text3d.js"></script>
   <script src="sketch-fr.js"></script>
 
+  <script>
+      if('webkitSpeechRecognition' in window) {
+
+      }
+      else {
+        alert("SpeechRecognition not supported in this browser.\nPlease use Chrome Desktop 25+ or Chrome for Android 70+");
+      }
+  </script>
+
 </body>
 </html>
