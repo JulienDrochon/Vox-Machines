@@ -6,7 +6,7 @@ function setup()
 
   myVoice.setLang('fr_FR');
 
-  myVoice.speak('yeah, baby!!!');
+  myVoice.speak('Bonjour, bébé!!!');
 
   myVoice.listVoices();
 
