@@ -12,6 +12,7 @@ For working examples, use  <a href="https://www.mamp.info" target="_parent">MAMP
 
 In Chrome, type *chrome://flags* in address bar, then enable 'Enable experimental Web Platform features'.
 
-
+# More informations
+See <a href="https://github.com/JulienDrochon/Vox-Machines/wiki">Wiki</a>
 
 
