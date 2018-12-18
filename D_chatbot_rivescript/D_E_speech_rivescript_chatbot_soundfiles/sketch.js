@@ -1,12 +1,13 @@
 let speech;
 
 let bot = new RiveScript({utf8: true});
-let soundfile1, soundfile2, soundfile3, soundfile4, soundfile5, soundfile6, soundfile7;
+let soundfile0, soundfile2, soundfile3, soundfile4, soundfile5, soundfile6, soundfile7;
 
 var soundList= [];
 
 function preload(){
   bot.loadFile("brain.rive").then(brainReady).catch(brainError);
+  soundfile0 = loadSound('assets/00.mp3');
   soundfile1 = loadSound('assets/01.mp3');
   soundfile2 = loadSound('assets/02.mp3');
   soundfile3 = loadSound('assets/03.mp3');
@@ -14,7 +15,7 @@ function preload(){
   soundfile5 = loadSound('assets/05.mp3');
   soundfile6 = loadSound('assets/06.mp3');
   soundfile7 = loadSound('assets/07.mp3');
-  soundList = [soundfile1, soundfile2, soundfile3, soundfile4, soundfile5, soundfile6, soundfile7];
+  soundList = [soundfile0, soundfile1, soundfile2, soundfile3, soundfile4, soundfile5, soundfile6, soundfile7];
 }
 
 
@@ -27,19 +28,11 @@ function setup() {
   let interim = false;
   speechRec.start(continuous, interim);
 
-
-  function speechLoaded()
-  {
-    // say cheers:
-    //  speech.speak("yeah, baby!!!");
-  }
-
   function gotSpeech() {
     console.log(speechRec);
     if (speechRec.resultValue) {
       let input = speechRec.resultString;
-      console.log(input);
-      console.log(soundList[2]);
+
       bot.reply("local-user", input).then(function(reply) {
         console.log("The bot says: " + reply);
         for (var i = 0; i < soundList.length; i++){
@@ -51,7 +44,6 @@ function setup() {
       });
     }
   }
-
 
 }
 
