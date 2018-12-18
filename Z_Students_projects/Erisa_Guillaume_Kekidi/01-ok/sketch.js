@@ -1,7 +1,7 @@
 let output, speechRec, button, svg, page2;
 
 var sonAlsacien, sonCharente, sonChti, sonCorse, sonAzur, sonMidi, sonAlpes;
-var nord, aquitaine, paca, alsace, bretagne, midi, paris, centre;
+var nord, corse, poitou, paca, alsace, midi;
 
 function preload(){
   sonAlsacien = loadSound("assets/Alsacien.mp3");
@@ -20,14 +20,15 @@ function setup() {
   output = select('.carte');
   button = selectAll('.btn');
   page2 = selectAll('.page2');
+
   nord = select('.nord');
-  aquitaine = select('.aquitaine');
+  poitou = select('.poitou');
   paca = select('.PACA');
   alsace = select('.alsace');
-  bretagne = select('.bretagne');
   midi = select('.midipyrenees');
-  paris = select('.idf');
   centre = select('.centre');
+  corse = select('.corse');
+  alpes = select('.alpes');
 }
 
 
@@ -49,7 +50,7 @@ function listen() {
       let said = speechRec.resultString;
       // Show user
       output.html(said);
-      if(said == "au revoir" || said == "Au revoir"){
+      if(said == "quarantaine" || said == "Quarantaine"){
         for (var i=0; i<button.length; i++) {
           button[i].hide();
         }
@@ -60,43 +61,38 @@ function listen() {
     }
   }
   nord.mousePressed(nordfonction);
-  aquitaine.mousePressed(aquitainefonction);
+  poitou.mousePressed(poitoufonction);
   paca.mousePressed(pacafonction);
   alsace.mousePressed(alsacefonction);
-  bretagne.mousePressed(bretagnefonction);
   midi.mousePressed(midifonction);
-  paris.mousePressed(parisfonction);
-  centre.mousePressed(centrefonction);
+  corse.mousePressed(corsefonction);
+  alpes.mousePressed(alpesfonction);
 }
 
 function nordfonction() {
-//sonChti.play();
+sonChti.play();
 }
 
-function aquitainefonction() {
-  alert('aquitaine');
+function poitoufonction() {
+sonCharente.play();
 }
 
 function pacafonction() {
-  alert('paca');
+  sonAzur.play();
 }
 
 function alsacefonction() {
-  alert('alsace');
-}
-
-function bretagnefonction() {
-  alert('bretagne');
+  sonAlsacien.play();
 }
 
 function midifonction() {
-  alert('midi');
+  sonMidi.play();
 }
 
-function parisfonction() {
-  alert('paris');
+function corsefonction() {
+  sonCorse.play();
 }
 
-function centrefonction() {
-  alert('centre');
+function alpesfonction() {
+  sonAlpes.play();
 }

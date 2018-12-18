@@ -38,6 +38,16 @@
     display: none;
   }
 
-  .nord:hover, .idf:hover, .centre:hover, .alsace:hover, .corse:hover, .aquitaine:hover, .PACA:hover, .auvergne:hover, .midipyrenees:hover, .bretagne:hover, .bourgogne:hover{
+  .nord:hover, .alsace:hover, .corse:hover, .poitou:hover, .PACA:hover, .alpes:hover, .midipyrenees:hover, .bretagne:hover{
     fill:white;
   }
+
+    .aquitaine:hover, .idf:hover, .centre:hover, .bourgogne:hover, .bretagne:hover {
+    fill:#333;
+  }
+
+  p {
+    text-align: center;
+  }
+  
+  button:focus {outline:0;}
