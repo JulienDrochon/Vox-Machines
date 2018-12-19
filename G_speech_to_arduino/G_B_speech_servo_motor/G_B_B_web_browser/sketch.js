@@ -1,5 +1,5 @@
 var serial;          // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodemFA131'; // fill in your serial port name here
+var portName = '/dev/cu.wchusbserialfd120'; // fill in your serial port name here
 var inData;                            // for incoming serial data
 var outByte = 0;                       // for outgoing data
 
@@ -21,24 +21,16 @@ function draw() {
   // text("incoming value: " + inData, 30, 30);
 }
 
-// function serialEvent() {
-//  // read a byte from the serial port:
-//  var inByte = serial.read();
-//  // store it in a global variable:
-//  inData = inByte;
-// }
-
 function serialError(err) {
   // console.log('Something went wrong with the serial port. ' + err);
 }
 
 function ArduinoEvent() {
-  if(said=="Light") {
+  if(said=="gauche" || said=="Gauche") {
     outByte = 1;
-  }else{
+  }else if(said=="droite" || said=="Droite"){
     outByte = 0;
   }
-  // map the mouseY to a range from 0 to 255:
 
   // send it out the serial port:
   serial.write(outByte);
@@ -50,7 +42,7 @@ var said;
 
 function speechSetup() {
   // Create a Speech Recognition object with callback
-  speechRec = new p5.SpeechRec('en-US', gotSpeech);
+  speechRec = new p5.SpeechRec('fr-FR', gotSpeech);
   // "Continuous recognition" (as opposed to one time only)
   let continuous = true;
   // If you want to try partial recognition (faster, less accurate)
@@ -71,7 +63,7 @@ function speechSetup() {
       // Show user
       //  output.html(said);
       console.log(said);
-      ArduinoEvent()
+      ArduinoEvent();
     }
   }
 }
