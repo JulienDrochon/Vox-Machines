@@ -6,24 +6,21 @@ import websockets.*;
 WebsocketServer ws;
 int now;
 
+String receivedMsg="";
 
 void setup(){
   size(200,200);
   ws= new WebsocketServer(this,8025,"/john");
   now=millis();
 }
-String test="";
+
 void draw(){
   background(0);
   
-  if(millis()>now+15){
-    test = str(mouseX);
-    ws.sendMessage(test);
-    now=millis();
-  }
+text(receivedMsg, 30, 30);
 }
 
 void webSocketServerEvent(String msg){
  println("A message from webbrowser : " + msg);
- 
+ receivedMsg = msg;
 }
