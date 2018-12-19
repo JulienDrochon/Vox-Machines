@@ -10,10 +10,10 @@ void setup() {
 void loop() {
 if (Serial.available() > 0) {   // see if there's incoming serial data
    incomingByte = Serial.read(); // read it
-   if (incomingByte == 1) {    // if it's a capital H (ASCII 72),
+   if (incomingByte == 1) {    // if it's a 1 (ASCII 72),
      digitalWrite(13, HIGH); // turn on the LED
    }
-  if (incomingByte == 0) {    // if it's an L (ASCII 76)
+  if (incomingByte == 0) {    // if it's a 0
      digitalWrite(13, LOW);  // turn off the LED
    }
  }
