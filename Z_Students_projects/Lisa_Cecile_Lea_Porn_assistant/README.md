@@ -1,3 +1,5 @@
+<img src="https://github.com/JulienDrochon/Vox-Machines/blob/master/Z_Students_projects/Lisa_Cecile_Lea_Porn_assistant/apercu.jpg" />
+
 ## Hardware
 * Arduino Board
 * 1 dc motor
