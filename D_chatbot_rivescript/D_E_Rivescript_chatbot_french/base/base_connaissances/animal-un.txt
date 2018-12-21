@@ -1,0 +1,19 @@
+batracien
+cervidé
+félin
+herbivore
+homo sapiens
+insecte
+invertébré
+mammifere
+mammifère
+marsupial
+mollusque
+oiseau
+poisson
+primate
+reptile
+rongeur
+ruminant
+vertébré
+
