@@ -11,3 +11,6 @@
 
 + [*] fenêtre [*]
 - <img src='assets/window.gif' /><audio src='assets/open_window.mp3' controls></audio>
+
++ [*] test [*]
+- <script>alert('what ?');</script>

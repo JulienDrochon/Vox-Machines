@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+  <script>
+  var voice;
+  voice = window.speechSynthesis;
+  var utterThis = new SpeechSynthesisUtterance("test");
+
+  utterThis.pitch = 1;
+  utterThis.rate = 1;
+  voice.speak(utterThis);
+  </script>
+</body>
+
+</html>
