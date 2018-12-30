@@ -48,16 +48,4 @@ function setup() {
   function errorLoading(error) {
     console.log("Error when loading rivescript files: " + error);
   }
-
-  // var button = select('#submit');
-  // var input = select('#textinput');
-
-  //
-  // button.mousePressed(chat);
-
-  function chat() {
-    //var txt = input.value();
-    // var reply = bot.reply("local-user", txt);
-    // output.html(reply);
-  }
 }
