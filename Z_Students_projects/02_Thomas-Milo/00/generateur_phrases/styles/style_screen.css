@@ -13,6 +13,13 @@ body {
    font: 10pt "Courier New", "Lucida Console", monospace;
 }
 
+#options{
+  display: none;
+}
+#sujet_2, #sujet_3, #sujet_4, #encart_1, #encart_2, #encart_3, #encart_4, #encart_5, #colonne, .texte-base, #talon, #titreOptions, #checkOptions, #preClipboard{
+  display: none;
+}
+/*
 div#navigation {
    margin-top: 40px;
    float:left;
@@ -265,4 +272,4 @@ p#date-maj{
    float: left;
    width: 660px;
    margin-bottom: 20px;
-}
+} */
