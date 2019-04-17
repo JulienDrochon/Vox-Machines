@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta name="Author" lang="fr" content="Romain VALERI" />
+      <meta name="Reply-to" content="romain.valeri@laposte.net (Romain VALERI)" />
+      <meta name="Description" content="Générateur de phrases aléatoires en français. Plus de (10 puissance 80) phrases différentes et grammaticalement correctes. Générateur de sondages (API Google Chart)" />
+      <meta name="Identifier-URL" content="http://romainvaleri.online.fr/" />
+      <meta name="Generator" content="Notepad++, SublimeText, Firefox, FileZilla, Git, et mes doigts" />
+      <meta name="Robots" content="Index, Follow">
+      <meta name="Revisit-after" content="10" />
+      <meta http-equiv="Pragma" content="no-cache" />
+      
+      <title lang="fr">Générateur de phrases</title>
+      
+      <link href="./styles/style_screen.css" rel="stylesheet" type="text/css" media="screen" />
+   
+      <script type="text/javascript" src="./javascript/data.js"></script>
+      <script type="text/javascript" src="./javascript/fonctions.js"></script>
+   </head>
+   
+   <body lang="fr">
+      <div id="indicePressePapier">>>> Phrase copiée vers le presse-papier <<<</div>
+      <p id="date-maj">(dernière mise à jour : 23/02/2019)</p>
+      <div id="choixLangue">
+         <img src="images/flag_en.png" />
+         <a href="index_en.html">English version (interface)</a>
+      </div>
+      <div id="navigation">
+         <ul id="menu">
+            <li>
+               <button id="nav_1" class="sujet">Générateur<br/>de phrases</button>
+            </li>
+            <li>
+               <button id="nav_2" class="sujet">Générateur<br/>de sondages</button>
+            </li>
+            <hr/>
+            <li>
+               <button id="nav_3" class="sujet">Comment ça marche ?</button>
+            </li>
+         </ul>
+      </div><!-- fin "navigation" -->
+      
+      <div id="article">
+      
+         <div id="sujet_1">
+            <h1 class="inl">Générateur de phrases</h1>&nbsp;(version BETA 2018) 
+            <p class="texte-base">
+               Ceci est un générateur de phrases aléatoires, respectueux des règles syntaxiques du français. Pour ce faire,
+               il s'appuie sur la vieille méthode des surréalistes, le "cadavre exquis". Mais s'il est capable de générer
+               des phrases grammaticalement correctes, il n'a en revanche pas plus de bon sens que ma chaise, et sa frénésie
+               de combinaisons le fait fréquemment <span id="sesame">errer</span> sur les sentiers de l'incongru et du mystique.
+               De nombreux générateurs de texte sont spécifiques à un thème donné (générateurs de citations, générateurs de
+               poèmes ou de haikus, générateurs de phrases scientifiques ou médicales, générateurs d'insultes, de mots d'amour
+               ou d'excuses ou autre "pipotron"), mais celui-ci est universel et produit de tout. Amateurs de fatrasies,
+               d'humour absurde, de poésie conceptuelle, cerbères de la Grammaire, linguistes anarchistes, philologues échevelés,
+               plus ou moins déjà adeptes de la génération de phrases et de textes, ceci est pour vous !
+            </p>
+            <p class="texte-base">
+               (cliquez sur une phrase pour la copier dans le presse-papier)
+            </p>
+            <form id="form_generer" action="" onsubmit="return false;">
+               <br/>
+               <button id="b_generer">Générer une nouvelle phrase</button>
+               <button id="b_vider">Tout effacer</button>
+               <br/>
+               <div id="liste_phrases"></div>
+               <input type="checkbox" id="checkOptions"/>
+               <span id="titreOptions"><<< afficher/masquer les options</span>
+               <br/>
+               <input type="text" id="preClipboard"/>
+               <div id="options">
+                  <input type="checkbox" id="checkST"/>
+                  <div id="txtST">Conserver cette structure ?</div>
+                  <br/><br/>
+                  <div id="concepteur">
+                     <input type="checkbox" id="checkChoixStr"/>
+                     <label for="checkChoixStr" id="labChoixStr">Ecrire une structure</label>
+                     <span id="choixStr">
+                        <span>&nbsp;:</span>
+                        <input type="text" id = "txtChoixStr" maxlength="56"/>
+                     </span>
+                  </div>
+                  <hr/>
+                  <input type="checkbox" id="checkQuestions">
+                  <label for="checkQuestions">Générer des questions ?</label>
+                  <br/>
+                  <div id="divQuestionsOnly">
+                     <input type="checkbox" id="checkAllQuestions">
+                     <label for="checkAllQuestions">Ne générer QUE des questions ?</label>
+                     <br/>
+                  </div>
+                  <hr/>
+                  <input type="checkbox" id="checkLg"/>
+                  <label for="checkLg">Limiter la longueur</label>
+                  <div id="choixLg">
+                     <br/>
+                     <label for="txtLgMin">&nbsp;Minimum :&nbsp;</label>
+                     <input type="text" id="txtLgMin" maxLength="3"/>
+                     <br/>
+                     <label for="txtLgMax">&nbsp;Maximum :&nbsp;</label>
+                     <input type="text" id="txtLgMax" maxLength="3"/>
+                  </div>
+                  <hr/>
+                  <input type="checkbox" id="checkPronoms"/>
+                  <label for="checkPronoms">Pas de pronoms personnels (je, tu, ...)</label>
+                  <br/>
+                  <input type="checkbox" id="checkSujet"/>
+                  <label for="checkSujet">Choisir le sujet (grammatical) de la phrase</label>
+                  <div id="choixSujet">
+                     <textarea id="txtSujet" cols="36" rows="1"></textarea>
+                     <br/>
+                     <label for="comboPersonne">Ce sujet doit être conjugué à la : </label>
+                     <select id="selectPersonne">
+                        <option value="1" selected="selected">1ère personne</option>
+                        <option value="2">2ème personne</option>
+                        <option value="3">3ème personne</option>
+                        <option value="4">4ème personne</option>
+                        <option value="5">5ème personne</option>
+                        <option value="6">6ème personne</option>
+                     </select>
+                  </div>
+                  <hr/>
+                  <input type="checkbox" id="checkAudio"/>
+                  <label for="checkAudio">Prononcer chaque phrase</label>
+               </div><!-- fin div "options" -->
+            </form>
+         </div><!-- fin "sujet_1" -->
+         
+         <div id="sujet_2" class="texte-base">
+            <h1 class="inl">Générateur de sondages</h1>&nbsp;(BETA version)
+            <p>
+               Le bouton ci-dessous permet de générer un sondage "minute".
+            </p>
+            <p>
+               Le graphique est généré via l'API Google Chart, et la génération des contenus textuels
+               fait appel aux ressources du générateur de phrases.
+            </p>
+            <p>
+               ( Les accents sont volontairement omis dans les légendes des sondages )
+            </p>
+            <br/>
+            <button id="b_sondage">Générer un sondage</button>
+            <br/>            
+            <p id="pQuestion">
+            </p>
+            <img id="imgLoader" src="images/calcul.gif" alt="calcul en cours..." />
+            <div id="divGraph">
+            </div>
+         </div><!-- fin "sujet_2" -->
+         
+         <div id="sujet_3" class="texte-base">
+            <h1 class="inl">Comment ça marche ?</h1>
+            <h2>Le cadavre exquis</h2>
+            <p>
+               Les règles du cadavre exquis sont simples, on se met à plusieurs pour écrire mot par mot
+               une phrase dont la structure est fixée par avance, sans voir ce qu'écrivent les autres.
+            </p>
+            <p>
+               Etrange cadeau des surréalistes à la postérité, le cadavre exquis est un jeu collaboratif
+               dont la version linguistique est celle qui est restée la plus populaire (voir
+               <a href="https://fr.wikipedia.org/wiki/Cadavre_exquis_(jeu)" target="_blank">Wikipedia</a>
+               pour plus de détails). L'un des intérêts de ce jeu consiste à produire une phrase sans la
+               vue englobante et la volonté significatrice d'un sujet unique. Le résultat final échappant
+               essentiellement à chacun des participants, ce procédé est donc le moyen de générer des
+               constructions inattendues et potentiellement intéressantes. Le moyen original d'arriver à
+               cet objectif, simple et efficace, était la collaboration de sujets ne communiquant pas entre eux.
+            </p>
+            <p>
+               Le présent générateur se propose d'automatiser ce procédé et de lui donner un peu de la puissance
+               des systèmes d'information. Voyons comment. 
+            </p>
+            <h2>Générer une structure</h2>
+            <p>
+               Chaque phrase a sa structure gramaticale. Une des plus classiques, souvent entendue dans la vie de
+               tous les jours, est "sujet verbe complément". Avec un modèle un peu plus compliqué, qui différencie
+               plusieurs types d'actions (de verbes) et de compléments (objets, agents, temps, lieu, etc.), on peut
+               imaginer un grand nombre de structures possibles pour une phrase.
+            </p>
+            <p>
+               Et c'est la première étape, le programme génère une structure, qui à ce stade correspond simplement
+               à une série de boites vides, par exemple :
+            </p>
+            <div class="wrapper-structure">
+               <div class="boite-structure">SUJET</div>
+               <div class="boite-structure">VERBE TRANSITIF</div>
+               <div class="boite-structure">OBJET DE L'ACTION</div>
+               <div class="boite-structure">COMPLEMENT DE LIEU</div>
+            </div>
+            <p>
+               Pour avoir un aperçu de cette étape en générant une phrase, dépliez le panneau d'options !
+            </p>
+            <h2>Puiser dans les dictionnaires</h2>
+            <p>
+               "Dictionnaire" est un mot bien ronflant pour les listes qui sont à l'oeuvre ici, mais l'idée sous-jacente
+               est la suivante. Pour chaque boite, le générateur va "puiser" aléatoirement dans la liste correspondante
+               (qui peut être une liste de noms, de lieux, d'actions, etc.) et fait la substitution.
+            </p>
+            <a href="./javascript/data.js" target="_blank">Dictionnaire</a> (code brut) OU&nbsp;
+            <button id="b_dump">Listes (triées)</button>
+            <div id="listes"></div>
+            <p>
+               Si vous avez jeté un oeil aux listes brutes, vous avez peut-être remarqué que les mots étaient assez souvent
+               accompagné de symboles, de chiffres, ou autres éléments étrangers ( "aimer#1" ). Ce sont les "métadonnées" qui permettent
+               au programme de connaître certaines informations arbitraires sur les mots. Ce nom commun est-il du genre féminin ?
+               Ce verbe se conjugue-t-il régulièrement ? Aucune logique ne permet de déterminer les réponses à ces questions,
+               c'est pourquoi les méta-données se chargent de stocker ce type d'information.
+            </p>
+            <h2>Assembler la phrase</h2>
+            <p>
+               Voilà, c'est fini, alors ?<br/>
+               Non. On a tous les mots de la phrase, et dans l'ordre, oui, mais il manque une étape de finition cruciale où l'on termine
+               d'habiller la princesse :
+            </p>
+            <ul>
+               <li>On détermine le temps de la phrase<br/>
+                  (selon certains éléments déterminants le cas échéant, sinon aléatoirement)</li>
+               <li>On conjugue le verbe au temps indiqué</li>
+               <li>On fait les accords et liaisons<br/>
+                  ( "de le" = "du" , "je [mot commençant par une voyelle]" = "j'" et bien d'autres )</li>
+               <li>On met une majuscule à la première lettre et on ponctue la phrase</li>
+            </ul>
+            <h2>En savoir plus ?</h2>
+            <p>
+               Deux solutions :
+            </p>
+            <p>
+               1) Jetez un oeil dans les sources directement ! Tout est librement accessible dans le Javascript de la page pour ceux qui
+               s'intéressent à ce genre de choses ( <a href="./javascript/fonctions.js" target="_blank">fonctions</a> ).
+            </p>
+            <p>
+               2) Demandez à Romain >>> <a href="mailto:romain.valeri@laposte.net">romain.valeri@laposte.net</a>
+            </p>
+         </div><!-- fin "sujet_3" -->
+      </div><!-- fin "article" -->
+      
+      <div id="colonne" title="Autres sujets d'intérêt">
+      
+         <div id="encart_1" title="Contact">
+            <br/>
+            <hr/>
+            <p>
+               Rapports de bugs, <strong>suggestions de mots</strong> ou de fonctionnalités à ajouter, commentaires ou questions :
+            </p>
+            <a href="mailto:romain.valeri@laposte.net">romain.valeri@laposte.net</a>
+         </div><!-- fin "encart_1" -->
+
+         <div id="encart_2" title="Git">
+            <br/>
+            <hr/>
+            <p>
+               <strong>Sources</strong> sur BitBucket :
+            </p>
+            >>> <a href="https://bitbucket.org/romainvaleri/fr_sentence_gen" target="_blank">fr_sentence_gen</a>
+         </div><!-- fin "encart_2" -->
+
+         <div id="encart_3" title="Stack Exchange">
+            <br/>
+            <hr/>
+            <p>
+               <strong>Contact</strong> via Stack Exchange - French Language :
+            </p>
+            >>> <a href="https://french.stackexchange.com/users/1186/romain-valeri" target="_blank">Profil SE</a>
+        </div><!-- fin "encart_3" -->
+
+         <div id="encart_4" title="Statistiques">
+            <br/>
+            <hr/>
+            <p>
+               <strong>« Fun fact »</strong>
+            </p>
+            <p>
+               Le nombre d'atomes dans l'univers est inférieur au nombre de phrases différentes que ce programme
+               est capable de générer.
+            </p>
+        </div><!-- fin "encart_4" -->
+
+         <div id="encart_5" title="Options">
+            <br/>
+            <hr/>
+            <p>
+               <strong>Options</strong>
+            </p>
+            <p>
+               Vous voulez contrôler la taille des phrases ? Vous voulez choisir le sujet ?
+            </p>
+            <p>
+               >>> Cliquez sur la case en dessous du générateur pour déplier le panneau d'options.
+            </p>
+        </div><!-- fin "encart_5" -->
+        <hr/>
+        <!-- Voice RSS informer code -->
+        <a href="http://www.voicerss.org" target="_blank">
+           <img src="http://www.voicerss.org/images/info_white.gif" width="88px" height="31" style="border: 0" alt="Voice RSS - Free online text-to-speech service" />
+        </a>
+      </div><!-- fin "colonne" -->
+      
+      <div id="pied" class="centre" title="Informations générales">
+         <span id="talon">
+            - site conçu, réalisé et décoré en collaboration avec&nbsp;
+         </span>
+      </div><!-- fin "pied" (donc les orteils ^^) -->
+      
+   </body>
+</html>
+
