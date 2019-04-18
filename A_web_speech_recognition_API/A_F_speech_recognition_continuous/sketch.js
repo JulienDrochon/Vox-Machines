@@ -1,4 +1,4 @@
-let output, speechRec, button, svg, speechRecStatus;
+let output, speechRec, button, svg;
 let continuous, interimResults;
 
 
@@ -7,11 +7,9 @@ function setup() {
 
   output = select("#speech");
   svg = select('.svgstyle');
-  speechRecStatus=false;
 }
 
 function listen() {
-  speechRecStatus=true;
 
   speechRec = new p5.SpeechRec('fr', gotSpeech);
 
@@ -41,11 +39,10 @@ function listen() {
 function ok() {
   // alert('Let\'s start');
   svg.style('fill', 'rgb(0,255,0)');
-  speechRecStatus=true;
 }
 
 function theEnd() {
   console.log('end');
   svg.style('fill', 'rgb(255,0,0)');
-    speechRec.start(continuous, interimResults);
+  speechRec.start(continuous, interimResults);
 }
