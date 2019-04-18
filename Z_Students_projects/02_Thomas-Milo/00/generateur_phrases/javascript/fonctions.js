@@ -7,7 +7,7 @@ function INITIALISATION() {
   voirSujet(1);
 
   window.langueInterface = document.head.getElementsByTagName("TITLE")[0].lang;
-  
+
   // liens de la barre de navigation + particularités IE (affichage)
   for (var i = 1; i <= nbSujets; ++i) {
     var bouton = el("nav_" + i);
@@ -22,7 +22,7 @@ function INITIALISATION() {
     el("pied").style.position = "relative";
     el("pied").style.top = "20px";
   }
-  
+
   // boutons des générateurs
   declencheur(el("b_generer"), "click", ecouteur_generer);
   declencheur(el("b_vider"), "click", ecouteur_vider);
@@ -34,21 +34,21 @@ function INITIALISATION() {
   declencheur(el("checkPronoms"), "click", ecouteur_pronoms);
   declencheur(el("checkChoixStr"), "click", ecouteur_choisir_structure);
   declencheur(el("checkST"), "click", function() { el("checkChoixStr").checked = false; el("choixStr").style.display = "none"; el("b_generer").focus() });
-  declencheur(el("b_sondage"), "click", ecouteur_sondage);
+  // declencheur(el("b_sondage"), "click", ecouteur_sondage);
   declencheur(el("b_dump"), "click", ecouteur_dump);
   //declencheur(el("bandeauTitre"), "click", function() { window.location.href = window.location.href; });
   declencheur(el("sesame"), "click", function() { el("concepteur").style.display = ""; alert("mode concepteur activé\n(écriture des structures)"); });
   declencheur(el("checkOptions"), "click", function() { onOff(el("options")); });
-  
+
   // cacher le loader
   onOff(el("imgLoader"));
-  
+
   // nous v'là beaux ^^
   declencheur(el("pied"), "click", orteilBeau);
   el("pied").style.cursor = "pointer";
   orteilBeau();
-  
-  // textboxes des options du générateur >>> cachée par défaut (sujet) OU apparente avec valeur par défaut (taille)  
+
+  // textboxes des options du générateur >>> cachée par défaut (sujet) OU apparente avec valeur par défaut (taille)
   el("indicePressePapier").style.display = "none";
   el("choixSujet").style.display = "none";
   el("choixStr").style.display = "none";
@@ -74,13 +74,13 @@ function INITIALISATION() {
   el("checkPronoms").checked = false;
   el("checkOptions").checked = false;
   el("selectPersonne").selectedIndex = 0;
-  
+
   // désactivation temporaire de l'option "même structure", étant donné qu'il n'y a pas encore de structure précédente
   el("checkST").disabled = true;
   el("txtST").style.color = "#999";
-  
+
   //afficherStats();
-  
+
   //testMot();
 }
 
@@ -88,9 +88,9 @@ function INITIALISATION() {
 // ------ OBJETS DU GENERATEUR DE PHRASES (Phrase, Grimoire et Generateur) --------
 
 function Phrase(options) {
-  
+
   this.lire = function() { return this.corps; };
-  
+
   this.assembler = function() {
     var resultat = this.mots.join(" ");
     resultat = resultat.replace(/ \,/g, ",");
@@ -122,11 +122,11 @@ function Phrase(options) {
     this.corps = this.corps.substr(0, 1).toUpperCase() + this.corps.substr(1);
     this.corps += probaSwitch(Grimoire.recupererListe("PF"), probaPoint);
   }
-  
+
   options || (options = {});
   this.PROBA_POINT_FINAL = [8, 1, 1, 0];
   this.PROBA_POINT_FINAL_QUESTIONS = [0, 0, 0, 1];
-  
+
   if (options["memeStr"]) this.structure = Generateur.Memoire.precedenteStructure.cloner() || Grimoire.genererStructure();
   else this.structure = Grimoire.genererStructure();
   this.structureInitiale = this.structure.cloner();
@@ -165,7 +165,7 @@ function Phrase(options) {
   var particules = [];
 
   var preAdverbeCheck = (this.structure.indexOf("AP") > -1);
-  
+
   /* --- BOUCLE SUR LES BLOCS DE LA STRUCTURE --- */
   for (var i = 0, iMax = this.structure.length; i < iMax; ++i) {
     if (this.structure[i].substr(0, 1) == "§") {
@@ -229,7 +229,7 @@ function Phrase(options) {
         }
       }
       while(preAdverbeCheck && chercheParticule && (particules = []));
-      
+
       var posPersonne = mot.indexOf("@");
       if (posPersonne > -1) {
         personne = (personne > 0) ? personne : parseInt(mot.substr(posPersonne + 1), 10);
@@ -259,7 +259,7 @@ function Phrase(options) {
     if (this.structure[i] == "§que") {
       posQue = i;
     }
-    
+
     if (this.structure[i] == "CT") {
       var posTemps = this.mots[i].indexOf("¤");
       if (posTemps > -1) {
@@ -287,11 +287,11 @@ function Phrase(options) {
         this.mots[i] = this.mots[i].replace(/\$/, nom);
       }
       this.mots[i] = this.mots[i].replace(/ de ([aeiouyhéèâœ])/gi, " d'$1");
-      
+
       while (this.mots[i].indexOf("+") > -1) {
         var posPlus = this.mots[i].indexOf("+");
         var fem = this.mots[i].charAt(posPlus + 1) == "F";
-        
+
         var nom, ok;
         do {
           ok = true;
@@ -315,7 +315,7 @@ function Phrase(options) {
         while ((!ok) || (nom === undefined));
         nom = Generateur.accordPluriel(nom, false);
         this.mots[i] = this.mots[i].replace(/\+[FH]/, nom);
-      }      
+      }
       this.mots[i] = this.mots[i].replace(/ de ([aeiouyhéèâœ])/gi, " d'$1");
     }
 
@@ -338,7 +338,7 @@ function Phrase(options) {
       posPR = i;
     }
   } /* --- FIN DE LA BOUCLE SUR LES BLOCS DE LA STRUCTURE --- */
-  
+
   if (temps == -1) {
     temps = (de(2) > 1) ? 2 : de(3);
   }
@@ -347,7 +347,7 @@ function Phrase(options) {
     this.questionInv = false;
     this.questionSimple = true;
   }
-  
+
   if (posQue > -1) {
     this.mots[posQue] = (this.mots[posQue + 1].voyelle()) ? "qu'" : "que";
   }
@@ -364,7 +364,7 @@ function Phrase(options) {
     }
     this.mots[posPR] = "en " + neg1 + Grimoire.conjuguer(this.mots[posPR], 4, tPers, false, this.genreSujet) + neg2;
   }
-  
+
   if (posModal > -1) {
     var baseVerbe = Grimoire.conjuguer(this.mots[posModal], temps, personne, this.questionInv, this.genreSujet);
     if (!flagNoNeg && !advPost && (de(13) > 12)) {
@@ -373,7 +373,7 @@ function Phrase(options) {
       baseVerbe = ((voyelle) ? "n'" : "ne ") + baseVerbe + " " + neg;
     }
     this.mots[posModal] = baseVerbe;
-      
+
     if (this.mots[posVerbe].indexOf("#") > -1) {
       this.mots[posVerbe] = this.mots[posVerbe].split("#")[0];
     }
@@ -465,7 +465,7 @@ var Grimoire = {
   genererStructure: function () {
     var str = [];
     var flagModal = false, flagCT = false, flagCL = false, flagAP = false;
-    
+
     if (de(100) < 7) {
       if (de(100) < 50) {
         str.push("CT");
@@ -476,9 +476,9 @@ var Grimoire = {
       }
       str.push("VG");
     }
-    
+
     str.push("GN");
-    
+
     if (de(100) < 26) {
       var tirageModal = de(100);
       if (tirageModal < 37) {
@@ -491,13 +491,13 @@ var Grimoire = {
         str.push("§à");
       }
       flagModal = true;
-      
+
       if (de(100) < 4) {
         str.push("AP");
         flagAP = true;
       }
     }
-    
+
     var verbesNonMod = ["VT", "VN", "VOA", "VOD", "VOI", "VTL", "VAV", "VET", "VOS"];
     var probasVerbes = [5,5,3,3,2,2,1,1,2];
     var verbe;
@@ -506,13 +506,13 @@ var Grimoire = {
     }
     while ((flagCL) && (verbe == "VTL"));
     str.push(verbe);
-    
+
     var seuilAP = (flagAP) ? 2: 5;
     if (de(100) < seuilAP) {
       str.push("AP");
       flagAP = true;
     }
-    
+
     switch (verbe) {
       case "VT":
         str.push((de(4) > 1) ? "CO": "GN");
@@ -549,7 +549,7 @@ var Grimoire = {
         str.push((de(5) > 1) ? "CO": "GN");
         break;
     }
-    
+
     if (de(100) < 20) {
       var tirageVerbeSuite = de(100);
       if (tirageVerbeSuite < 25) {
@@ -574,13 +574,13 @@ var Grimoire = {
         }
         while ((flagCL) && (verbe == "VTL"));
         str.push(verbe);
-        
+
         seuilAP = (flagAP) ? 2: 5;
         if (de(100) < seuilAP) {
           str.push("AP");
           flagAP = true;
         }
-        
+
         switch (verbe) {
           case "VT":
             str.push((de(4) > 1) ? "CO": "GN");
@@ -619,7 +619,7 @@ var Grimoire = {
         }
       }
     }
-    
+
     if (de(100) < 12) {
       var optionsFin = ["CT", "CL", "AF"];
       var probasFin = [3,3,5];
@@ -630,7 +630,7 @@ var Grimoire = {
       while (((flagCT) && (fin == "CT")) || ((flagCL) && (fin == "CL")));
       str.push(fin);
     }
-    
+
     for (var i = 0, iMax = str.length; i < iMax; ++i) {
       if (str[i] == "AP") {
         if (str[i - 1].substr(0, 1) == "§") {
@@ -639,14 +639,14 @@ var Grimoire = {
         }
       }
     }
-      
+
     return str;
   },
-  
+
   listerStructures: function() {
     var liste = [];
     var proto;
-    
+
     for (var i = 0, iMax = 3; i < iMax; ++i) {// 3 cas : [CT, VG, GN] ou [CL, VG, GN] ou [GN]
       proto = [];
       switch(i) {
@@ -655,10 +655,10 @@ var Grimoire = {
         case 1:
           proto.push("CL"); proto.push("VG"); break;
       }
-      proto.push("GN");         
+      proto.push("GN");
       liste.push(proto);
     }
-    
+
     var memListe = liste.cloner();
     liste = [];
     // 1 cas par verbe modal possible (ou absence de modal)(+ 3 pour les éventuels AP)(total : 7)
@@ -676,7 +676,7 @@ var Grimoire = {
         liste.push(proto[j]);
       }
     }
-    
+
     memListe = liste.cloner();
     liste = [];
     // 1 cas par verbe principal possible (44 actuellement)
@@ -731,8 +731,8 @@ var Grimoire = {
       for (var j = 0, jMax = proto.length; j < jMax; ++j) {
         liste.push(proto[j]);
       }
-    }      
-    
+    }
+
     memListe = liste.cloner();
     liste = [];
     // 1 cas par type de proposition finale (rien / §sans / §pour / PR_T ... / PR_N) (total : 8 (+ N sous-cas dans §sans/pour))
@@ -750,11 +750,11 @@ var Grimoire = {
         liste.push(proto[j]);
       }
     }
-    
+
     var idx = 0;
     while (++idx <= 2) {
       // "repasser" dans la boucle des verbes principaux (+ AP) (+ objets)
-      // 1 cas par verbe principal possible (44 actuellement) 
+      // 1 cas par verbe principal possible (44 actuellement)
       for (var k = 0, kMax = 44; k < kMax; ++k) {
         proto = memListe.cloner();
         proto.pushEach(((idx % 2) == 0) ? "§sans": "§pour");
@@ -809,7 +809,7 @@ var Grimoire = {
         }
       }
     }
-    
+
     memListe = liste.cloner();
     liste = [];
     // 1 cas par fin possible (ou absence de fin)(total : 4)
@@ -838,10 +838,10 @@ var Grimoire = {
         liste.push(proto[j]);
       }
     }
-    
+
     return liste;
   },
-  
+
   decoderStructure: function(code) {
     if (code.indexOf("-") > -1) {
       code = code.split("-")[0];
@@ -879,7 +879,7 @@ var Grimoire = {
     }
     return traduction;
   },
-   
+
   lireStructure: function(saisie) {
     var format = /((GN|CO|CL|CT|VG|AP|AF|VT|VN|VOA|VOD|VOI|VTL|VAV|VET|VOS|VM|VA|VD|PR_N|PR_T|\§(c'est|à|de|sur|et|avec|sans|pour|que))(,|$)){2,}/;
     if (!format.test(saisie) || !(/GN/).test(saisie)) {
@@ -888,9 +888,9 @@ var Grimoire = {
     }
     return saisie.split(",");
   },
-  
+
   _LISTES_DU_GRIMOIRE_: function(bidon) { /* pour structurer la liste des functions dans NotePad++ */ },
-  
+
   sujets: PseudoBDD.Grimoire.sujets,
   verbes: {
     transitifs: PseudoBDD.Grimoire.verbes.transitifs,
@@ -936,7 +936,7 @@ var Grimoire = {
   PROBA_ADJECTIFS_INTERROGATIFS_TEMPS: [10, 2, 1],
   PROBA_ADJECTIFS_INTERROGATIFS_MANIERE: [10, 2, 2],
   pronomsReflexifs: ["me", "te", "se", "nous", "vous", "se"],
-  
+
   // --- METHODES "PUBLIQUES" ---
   recupererMot: function(code) {
     if ((code == "CT") && (de(6) > 5)) return ((de(3) > 1) ? Generateur.date() : Generateur.annee());
@@ -972,7 +972,7 @@ var Grimoire = {
       case "NG": return Grimoire.negations;
     }
   },
-  
+
   conjuguer: function(verbe, temps, pers, questionInv, genreSujet) {
     var formes = [];
     var prefixe = "";
@@ -980,15 +980,15 @@ var Grimoire = {
     if (pronominal) {
       verbe = verbe.replace(/^s(\'|e )(.*)/, "$2");
     }
-    
+
     var personne = pers;
-    
+
     var persParticipe = 0;
     if (type(personne) == "array") {
       persParticipe = personne[1];
       personne = personne[0];
     }
-    
+
     var posGroupe = verbe.indexOf("#");
     if (posGroupe > -1) { // groupes réguliers
       var groupe = parseInt(verbe.substr(posGroupe + 1), 10);
@@ -1206,7 +1206,7 @@ var Grimoire = {
           ];
           break;
       }
-      
+
       var ligne, terminaison;
       for (var t = 0; t < 4; ++t) {
         ligne = [];
@@ -1447,7 +1447,7 @@ var Grimoire = {
           break;
       }
     }
-    
+
     var retour = formes[temps - 1][personne - 1];
     var abbrev = false;
     if (pronominal) {
@@ -1475,7 +1475,7 @@ var Grimoire = {
 
 function _GENERATEUR_() { /* pour structurer la liste des functions dans NotePad++ */ }
 var Generateur = {
-  
+
   Memoire: {
     modeInterrogatif: "libre",
     generations: 0,
@@ -1488,7 +1488,7 @@ var Generateur = {
     sansPronoms: false,
     genListes: false // chargement des listes seulement sur ouverture de la div
   },
-  
+
   Articles: {
     articlesDef: ["le*_la*", "les"],
     articlesIndef: ["un_une", "des"],
@@ -1499,7 +1499,7 @@ var Generateur = {
     quantifieurs: PseudoBDD.Generateur.Articles.quantifieurs,
     PROBA_QUANTIFIEURS: [4,4,3,5,6,6,7,6,5,4,4,3,3,4,4,3,3,2,3,2,2,2,4,2,3,2,1,1,1,2,1,1,1]
   },
-  
+
   GN: {
     PROBA_PRONOMS_PERS: [2,2,1,2,2,1],
     nomsCommuns: PseudoBDD.Generateur.GN.nomsCommuns,
@@ -1508,14 +1508,14 @@ var Generateur = {
     nomsPropres: PseudoBDD.Generateur.GN.nomsPropres,
     variantesNP: PseudoBDD.Generateur.GN.variantesNP,
     compter: function() {
-      var resultat = 0;         
+      var resultat = 0;
       var NOMBRE = 2;
-      
+
       var articles = 3;// définis, indéfinis et démonstratifs : une seule possibilité pour chaque (cause règles accord)
       var nombres = 1090;// nombres de nombres possibles comme article (tous ceux de 2 à 1000, puis de 100 en 100 jusqu'à 10000)
       var quantifieurs = Generateur.Articles.quantifieurs.length + 99;// pour le cas du pourcentage (%%)
       articles += nombres + quantifieurs;
-      
+
       var complements = Generateur.GN.complementNomPost.length + 1;
       var jokersC = 0;
       for (var i = 0, iMax = Generateur.GN.complementNomPost.length; i < iMax; ++i) {
@@ -1527,22 +1527,22 @@ var Generateur = {
         }
       }
       complements += (jokersC * 100);
-      
+
       // noms communs
-      for (var i = 0, iMax = Generateur.GN.nomsCommuns.length; i < iMax; ++i) {           
+      for (var i = 0, iMax = Generateur.GN.nomsCommuns.length; i < iMax; ++i) {
         var nom = Generateur.GN.nomsCommuns[i];
         var genre = ((/[%N]/).test(nom)) ? 2 : 1;
-        
+
         resultat += (genre * NOMBRE * articles * complements);
       }
-      
+
       // pronoms personnels
       resultat += 6;
-      
+
       // noms propres simples
       var totalNP = Generateur.GN.nomsPropres.length;
       resultat += totalNP;
-      
+
       // variantes des noms propres
       var jokers = 0;
       for (var i = 0, iMax = Generateur.GN.variantesNP.length; i < iMax; ++i) {
@@ -1554,11 +1554,11 @@ var Generateur = {
         }
       }
       resultat += (jokers * totalNP);
-      
+
       return resultat;
     }
   },
-  
+
   groupeNominal: function(estObjet) {
     if (de(5) > 4) {
       if (de(2) > 1) {
@@ -1630,12 +1630,12 @@ var Generateur = {
     if ((nom[1] == "N") && (de(2) > 1)) {
       nom[1] = "F";
     }
-    
+
     var feminin = (nom[1] == "F");
     nom = nom[0];
     var pluriel = (de(2) == 1);
     var voyelle = nom.voyelle();
-    
+
     var article, jetArticle = de(100);
     if (jetArticle < 38 ) { // définis
       article = Generateur.Articles.articlesDef[(pluriel) ? 1 : 0];
@@ -1657,15 +1657,15 @@ var Generateur = {
       }
       pluriel = true;
     }
-    
+
     if (article.indexOf("_") > -1) {
       article = article.split("_")[(feminin) ? 1 : 0];
     }
-    
+
     var plurielNom = (article.indexOf("µ") > -1) ? true: pluriel;
     article = article.replace(/µ/, "");
     nom = Generateur.accordPluriel(nom, plurielNom);
-    
+
     var complement = "";
     if (de(4) > 3) {
       complement = Generateur.GN.complementNomPost.puiser();
@@ -1686,7 +1686,7 @@ var Generateur = {
         complement = complement.replace(/&/, nombre);
       }
     }
-    
+
     var groupeN = article + " " + nom + complement;
     if (voyelle) {
       groupeN = groupeN.replace(/.\* /, "'").replace(/¤/, "t");
@@ -1698,7 +1698,7 @@ var Generateur = {
     }
     return groupeN + codePers + (feminin ? "__F": "");
   },
-  
+
   CO: {
     nomsCommuns: PseudoBDD.Generateur.CO.nomsCommuns,
     adjectifsPost: PseudoBDD.Generateur.CO.adjectifsPost,
@@ -1707,14 +1707,14 @@ var Generateur = {
     // piste : indice en premier caractère genre * et remplacement par un aléatoire de temps en temps
     // >>> uniquement les adjectifs qui se prêtent à une gradation : ex: "très beau" > OK ; "très premier" > NOT OK
     compter: function() {
-      var resultat = 0;         
+      var resultat = 0;
       var NOMBRE = 2;
       var articles = 3;// définis, indéfinis et démonstratifs : une seule possibilité pour chaque (cause règles accord)
       articles += 5;// 1 possessif par personne, -1 cas rejeté
       var nombres = 1090;// nombres de nombres possibles comme article (tous ceux de 2 à 1000, puis de 100 en 100 jusqu'à 10000)
-      var quantifieurs = Generateur.Articles.quantifieurs.length + 99;// pour le cas du pourcentage (%%) 
+      var quantifieurs = Generateur.Articles.quantifieurs.length + 99;// pour le cas du pourcentage (%%)
       articles += nombres + quantifieurs;
-      
+
       var adjPost = Generateur.CO.adjectifsPost.length;
       var jokers = 0;
       for (var i = 0, iMax = adjPost; i < iMax; ++i) {
@@ -1726,21 +1726,21 @@ var Generateur = {
         }
       }
       adjPost += (jokers * nombres);
-      
+
       var adjPre = Generateur.CO.adjectifsPre.length;
       var adjectifs = (adjPost + adjPre + 1);// +1 pour l'absence d'adjectif
-         
-      for (var i = 0, iMax = Generateur.CO.nomsCommuns.length; i < iMax; ++i) {           
+
+      for (var i = 0, iMax = Generateur.CO.nomsCommuns.length; i < iMax; ++i) {
         var nom = Generateur.CO.nomsCommuns[i];
         var genre = (/[%N]/).test(nom) ? 2 : 1;
-        
+
         resultat += (genre * NOMBRE * articles * adjectifs);
       }
-      
+
       return resultat;
     }
   },
-  
+
   complementObjet: function(personneSujet) {
     var cObj, nom = Generateur.CO.nomsCommuns.puiser();
     var indef = false;
@@ -1748,12 +1748,12 @@ var Generateur = {
     if ((nom[1] == "N") && (de(2) > 1)) {
       nom[1] = "F";
     }
-    
+
     var feminin = nom[1] == "F";
     nom = nom[0];
     var pluriel = de(2) == 1;
     var voyelle = nom.voyelle();
-    
+
     var adjectif = "";
     var prePose = false;
     var jetAdj = de(100);
@@ -1764,13 +1764,13 @@ var Generateur = {
       prePose = true;
     }
     var noAdj = adjectif.length == 0;
-    
+
     while (adjectif.indexOf("&") > -1) {
       var nombre = deProgressif_1();
       nombre = nombre.enLettres();
       adjectif = adjectif.replace(/&/, nombre);
     }
-    
+
     if (!noAdj && (adjectif.indexOf("%") > -1)) {
       adjectif = adjectif.split("%");
       if (adjectif[1].length == 1) {
@@ -1778,12 +1778,12 @@ var Generateur = {
       }
       adjectif = adjectif[(feminin) ? 1 : 0];
     }
-    
+
     var voyelleAdj = false;
     if (!noAdj) {
       voyelleAdj = adjectif.voyelle();
     }
-    
+
     var article, jetArticle = de(100);
     if (jetArticle < 35 ) { // définis
       article = Generateur.Articles.articlesDef[(pluriel) ? 1 : 0];
@@ -1815,7 +1815,7 @@ var Generateur = {
         }
       }
       article = (pluriel) ? Generateur.Articles.articlesPossP[personne - 1] : Generateur.Articles.articlesPossS[personne - 1];
-      if (article.indexOf("_") > -1) {         
+      if (article.indexOf("_") > -1) {
         var articleFeminin = feminin;
         if ((voyelle && articleFeminin) || (prePose && voyelleAdj)) {
           if (noAdj || (!noAdj && !prePose) || (prePose && voyelleAdj)) {
@@ -1828,22 +1828,22 @@ var Generateur = {
     if (article.indexOf("_") > -1) {
       article = article.split("_")[(feminin) ? 1 : 0];
     }
-    
-    nom = Generateur.accordPluriel(nom, pluriel);      
+
+    nom = Generateur.accordPluriel(nom, pluriel);
     adjectif = Generateur.accordPluriel(adjectif, pluriel);
-    
+
     if (prePose && (adjectif.indexOf("°") > -1)) {
       adjectif = adjectif.split("°")[(voyelle) ? 1 : 0];
     }
-    
+
     if (indef && pluriel && prePose) {
       article = (voyelleAdj) ? "d'" : "de";
     }
-    
+
     if ((voyelle && noAdj) || (voyelle && !noAdj && !prePose) || (!noAdj && prePose && voyelleAdj)) {
       article = article.replace(/.\* /, "'").replace(/¤/, "t");
     }
-    
+
     if (noAdj) {
       cObj = article + " " + nom;
     } else {
@@ -1856,14 +1856,14 @@ var Generateur = {
         cObj += " " + adjectif;
       }
     }
-    
+
     if ((voyelle && noAdj) || (voyelle && !noAdj && !prePose) || (!noAdj && prePose && voyelleAdj)) {
       cObj = cObj.replace(/.\* /, "'").replace(/¤/, "t");
     }
     cObj = cObj.replace(/[\*¤]/g, "");
     return cObj;
   },
-  
+
   accordPluriel: function(mot, pluriel) {
     var retour = mot;
     if (pluriel) {
@@ -1884,21 +1884,21 @@ var Generateur = {
     }
     return retour;
   },
-  
+
   stats: function() {
     var tabResultat = [];
     var statsGN = Generateur.GN.compter();
     var statsCO = Generateur.CO.compter();
-    
+
     var listeST = Grimoire.recupererListe("ST");
     for (var i = 0, iMax = listeST.length; i < iMax; ++i) {
       var resultatStructure = 1;
       var struct = listeST[i];
-      
+
       for (var j = 0, jMax = struct.length; j < jMax; ++j) {
         var resultatBloc = 0;
         var bloc = struct[j];
-        
+
         if (bloc.substr(0, 1) == "§") {
           resultatBloc = 1;
         } else switch (bloc) {
@@ -1970,9 +1970,9 @@ var Generateur = {
           default:
             resultatBloc += Grimoire.recupererListe(bloc).length;
         }
-        
+
         if ((bloc == "CT") || (bloc == "CL") || (bloc == "AF")) {
-          
+
           var liste = Grimoire.recupererListe(bloc);
           var jokers = 0;
           var nombres = 9;// voir implémentation en dur dans Phrase() (c.a.d. un dé de 10, moins 1 ici pour la possibilité déjà décomptée "normalement " dans le switch) ^^' re-misère
@@ -1985,17 +1985,17 @@ var Generateur = {
             }
           }
           resultatBloc += (jokers * nombres);
-          
+
         }
         resultatStructure *= resultatBloc;
       }
       resultatStructure *= Grimoire.recupererListe("PF").length;// types de ponctuation finale
-      
+
       tabResultat.push(resultatStructure);
-    }      
+    }
     return tabResultat;
   },
-  
+
   Mots: {
     consonnes: ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z", "cc", "ff", "ll", "mm", "nn", "pp", "rr", "ss", "tt"],
     multiConsonnes: ["bl", "br", "ch", "cl", "cr", "dj", "dr", "dz", "fl", "fr", "gl", "gn", "gr", "kl", "kr", "ks", "mn", "ph", "pl", "pr", "ps", "pt", "rb", "rc", "rd", "rf", "rg", "rj", "rk", "rl", "rm", "rn", "rp", "rq", "rs", "rt", "rv", "rz", "sc", "sk", "sm", "sn", "sp", "sq", "st", "tr", "ts", "vl", "vr", "zb", "zd", "zm"],
@@ -2014,43 +2014,43 @@ var Generateur = {
         var consonne = "";
         if (de(3) > 1) {
           do {
-            consonne = (de(7) > 1) ? 
-            probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) : 
+            consonne = (de(7) > 1) ?
+            probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) :
             probaSwitch(Generateur.Mots.multiConsonnes, Generateur.Mots.PROBA_MULTICONSONNES_D);
           }
           while ((consonne.length > 1) && consonne.estHomogene());
         }
-        var voyelle = (de(5) > 1) ? 
-          probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) : 
+        var voyelle = (de(5) > 1) ?
+          probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) :
           probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES);
         return consonne + voyelle;
-      } else if (position == max) {// améliorer les finales (+ ajouter meta-donnees ici ?) 
+      } else if (position == max) {// améliorer les finales (+ ajouter meta-donnees ici ?)
         var syll;
         if (de(3) > 1) {
-          var consonne = (de(7) > 1) ? 
-            probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) : 
+          var consonne = (de(7) > 1) ?
+            probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) :
             probaSwitch(Generateur.Mots.multiConsonnes, Generateur.Mots.PROBA_MULTICONSONNES);
-          var voyelle = (de(5) > 1) ? 
-            probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES_F) : 
+          var voyelle = (de(5) > 1) ?
+            probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES_F) :
             probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES_F);
           syll = consonne + voyelle;
         } else {
-          var consonne = (de(7) > 1) ? 
-            probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) : 
+          var consonne = (de(7) > 1) ?
+            probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) :
             probaSwitch(Generateur.Mots.multiConsonnes, Generateur.Mots.PROBA_MULTICONSONNES);
-          var voyelle = (de(5) > 1) ? 
-            probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) : 
+          var voyelle = (de(5) > 1) ?
+            probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) :
             probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES);
           var term = probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES_F);
           syll = consonne + voyelle + term;
         }
         return syll;
       } else {
-        var consonne = (de(7) > 1) ? 
-          probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) : 
+        var consonne = (de(7) > 1) ?
+          probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) :
           probaSwitch(Generateur.Mots.multiConsonnes, Generateur.Mots.PROBA_MULTICONSONNES);
-        var voyelle = (de(5) > 1) ? 
-          probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) : 
+        var voyelle = (de(5) > 1) ?
+          probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) :
           probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES);
         return consonne + voyelle;
       }
@@ -2101,7 +2101,7 @@ String.prototype.repeter = function(n, sep) {
 // FONCTION : insère une sous-chaine dans la chaine courante
 // PARAM #1 : "chaine" (string) : sous-chaine à insérer
 // PARAM #2 : "indice" (number) : emplacement de l'insertion
-// RETOUR : chaine (construite à partir de la chaine courante) 
+// RETOUR : chaine (construite à partir de la chaine courante)
 String.prototype.inserer = function(chaine, indice) {
   if ((indice < 0) || (indice > this.length) || !chaine.toString)
     return false;
@@ -2135,7 +2135,7 @@ Number.prototype.estMultipleDe = function(val) {
 }
 
 // FONCTION : convertit un nombre en chaine de chiffres, avec le formatage souhaité
-// PARAM #1 : "decimales" (number) : nombre de décimales souhaitées à l'affichage (ne modifie en rien le nombre courant) 
+// PARAM #1 : "decimales" (number) : nombre de décimales souhaitées à l'affichage (ne modifie en rien le nombre courant)
 // PARAM #2 : "sepDecimal" (string) : SI ce param est présent, il remplace le "." comme séparateur décimal
 // PARAM #3 : "sepMilliers" (string) : SI ce param est présent, il est utilisé comme séparateur des milliers/millions/milliards/etc.
 // RETOUR : chaine représentant le nombre courant
@@ -2156,7 +2156,7 @@ Number.prototype.formater = function(decimales, sepDecimal, sepMilliers) {
   return resultat;
 }
 
-// FONCTION : convertit le nombre courant en toutes lettres (sans l'éventuelle partie décimale) 
+// FONCTION : convertit le nombre courant en toutes lettres (sans l'éventuelle partie décimale)
 // RETOUR : chaine représentant le nombre courant
 Number.prototype.enLettres = function() {
   if (Math.abs(this) > 999999999999) return false;
@@ -2166,7 +2166,7 @@ Number.prototype.enLettres = function() {
   if (chaine == "1001") return ((negatif) ? "moins ": "") + "mille-et-un";
 
   // tableau de correspondance pour tout nombre compris entre 0 et 99
-  // on accède par exemple à "42" par >>> nombresFr[4][2] 
+  // on accède par exemple à "42" par >>> nombresFr[4][2]
   var nombresFr = [
     ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "£uit", "neuf"],
     ["dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf"],
@@ -2188,9 +2188,9 @@ Number.prototype.enLettres = function() {
     "quatre-vingt-quinze", "quatre-vingt-seize", "quatre-vingt-dix-sept", "quatre-vingt-dix-huit", "quatre-vingt-dix-neuf"]
   ];
   var grandeursFr = [["cent", "mille", "million", "milliard"], ["cents", "mille", "millions", "milliards"]];
-  
+
   // découpage de la chaine en blocs de 3 chiffres, en partant des unités
-  // par exemple, pour le nombre courant 42150, on obtient après cette étape le tableau suivant : tabBloc >>> ["42", "150"] 
+  // par exemple, pour le nombre courant 42150, on obtient après cette étape le tableau suivant : tabBloc >>> ["42", "150"]
   var blocs = [];
   var longueur = chaine.length;
   while (longueur > 0) {
@@ -2203,11 +2203,11 @@ Number.prototype.enLettres = function() {
     }
     longueur = chaine.length;
   }
-  
+
   // boucle sur les blocs : découpage du bloc courant, calcul de la chaine correspondante au bloc courant, stockage dans le tabResultat
   var tabResultat = [], tabBloc, bloc;
   for (var i = 0; i < blocs.length; ++i) {
-    bloc = blocs[i];      
+    bloc = blocs[i];
     tabBloc = [];
     for (var j = 0; j < bloc.length; ++j) {
       tabBloc.push(parseInt(bloc.substr(j, 1), 10));
@@ -2224,7 +2224,7 @@ Number.prototype.enLettres = function() {
       tabResultat.push("cent" + ((sousResultat == "zéro") ? "" : " " + sousResultat));
     } else if (sousResultat != "zéro") {
       tabResultat.push(sousResultat);
-    }         
+    }
     if ((blocs.length > (i + 1)) && (bloc != "000")) {
       var grandeur = grandeursFr[(tabResultat[i] == "un") ? 0 : 1][blocs.length - i - 1];
       tabResultat[((i == (blocs.length - 2)) && (bloc == "1")) ? (tabResultat.length - 1) : tabResultat.length] = grandeur;
@@ -2270,7 +2270,7 @@ Array.prototype.pushEach = function() {
 }
 
 // FONCTION : copie le tableau courant par valeur (et non pas deux références au même élément)
-// RETOUR : copie conforme du tableau courant (taille, indices, valeurs) 
+// RETOUR : copie conforme du tableau courant (taille, indices, valeurs)
 Array.prototype.cloner = function() {
   var clone = new Array();
   for (var i = 0; i < this.length; ++i) {
@@ -2292,7 +2292,7 @@ Array.prototype.additionner = function() {
 }
 
 // FONCTION : repère les doublons dans le tableau courant
-// RETOUR : tableau contenant les doublons 
+// RETOUR : tableau contenant les doublons
 Array.prototype.chercherDoublons = function() {
   var doublons = [];
   for (var i = 0; i < this.length - 1; ++i) {
@@ -2315,27 +2315,27 @@ Array.prototype.aplatir = function() {
 
 // FONCTION : formate la date courante selon les options choisies
 // PARAM #1 : "options" (objet anonyme) comportant 6 options :
-// "separateur"      >>> si présent, est utilisé pour séparer les trois groupes de nombres ; inutile si "lettres" (toujours séparateur espace) 
+// "separateur"      >>> si présent, est utilisé pour séparer les trois groupes de nombres ; inutile si "lettres" (toujours séparateur espace)
 // "inverse"         >>> si "équivalent à TRUE", format AMJ à la place de JMA
-// "zeros"           >>> si "équivalent à TRUE", les zéros non-significatifs sont conservés (ex : mai >>> 05) 
+// "zeros"           >>> si "équivalent à TRUE", les zéros non-significatifs sont conservés (ex : mai >>> 05)
 // "AA"              >>> si "équivalent à TRUE", l'année n'est représentée que sur deux chiffres
-// "jour"            >>> si "équivalent à TRUE", le jour de la semaine préfixe la chaine (mot complet avec "options.lettres", sinon seulement l'initiale en capitale) 
+// "jour"            >>> si "équivalent à TRUE", le jour de la semaine préfixe la chaine (mot complet avec "options.lettres", sinon seulement l'initiale en capitale)
 // "lettres"         >>> si "équivalent à TRUE", le nom du mois est écrit en toutes lettres
-// RETOUR : chaine représentant la date courante 
+// RETOUR : chaine représentant la date courante
 Date.prototype.formater = function(options) {
   options = options || {};
   var resultat = [], retour = "";
   resultat[options.inverse ? 2 : 0] = (options.zeros && this.getUTCDate() < 10) ? "0" + this.getUTCDate() : this.getUTCDate();
   resultat[1] = (options.zeros && this.getUTCMonth() < 9) ? "0" + (this.getUTCMonth() + 1) : this.getUTCMonth() + 1;
   resultat[options.inverse ? 0 : 2] = options.AA ? this.getUTCFullYear().toString().substr(2) : this.getUTCFullYear();
-  
+
   if (options.lettres) {
     var moisFr = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
     resultat[1] = moisFr[parseInt((resultat[1] - 1), 10)];
     options.separateur = " ";
     if (this.getUTCDate() == 1) resultat[options.inverse ? 2 : 0] += "er";
   }
-  
+
   if (options.jour) {
     var joursFr = options.lettres ?
       ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"] :
@@ -2384,7 +2384,7 @@ function posXY_old(elem) {
   var tabPosition = [];
   tabPosition[0] = elem.offsetLeft;
   tabPosition[1] = elem.offsetTop;
-  
+
   while(elem.offsetParent) {
     elem = elem.offsetParent; // récursivité
     tabPosition[0] += elem.offsetLeft;
@@ -2410,7 +2410,7 @@ function posXY(elem) {
 // FONCTION : détermine le type de l'objet passé en paramètre
 // PARAM #1 : "objet" (object) : objet à examiner
 // RETOUR : chaine décrivant le type :
-// ("string", "number(int)", "number(float)", "date", "array", "function", "element", "node", "object", "undefined") 
+// ("string", "number(int)", "number(float)", "date", "array", "function", "element", "node", "object", "undefined")
 function type(objet) {
   if (typeof objet == "string")
     return "string";
@@ -2426,7 +2426,7 @@ function type(objet) {
     return (objet.nodeType == Node.ELEMENT_NODE) ? "element" : "node";
   if ((objet != null) && (typeof objet == "object"))
     return "object";
-  
+
   return "undefined";
 }
 
@@ -2459,13 +2459,13 @@ function probaSwitch(tabValeurs, tabPoids) {
     alert("arguments de la fonction probaSwitch() mal formés :\ntabValeurs.length = " + tabValeurs.length + "\ntabPoids.length = " + tabPoids.length);
     return null;
   }
-  
+
   var somme = tabPoids.additionner();
-  var echelle = 100 / somme;   
+  var echelle = 100 / somme;
   for (var i = 0, iMax = tabValeurs.length; i < iMax; ++i) {
     tabPoids[i] *= echelle;
   }
-  
+
   var seuil, tirage = Math.random() * 100;
   for (var i = 0, iMax = tabValeurs.length; i < iMax; ++i) {
     seuil = 0;
@@ -2493,384 +2493,384 @@ function accumuler(total, suivant) {
   return total + suivant;
 }
 
-function afficherStats() {
-  var messageTotal;
-  var tab = Generateur.stats();
-  
-  var total = 0;
-  for (var i = 0, iMax = tab.length; i < iMax; ++i) {
-    total += tab[i];
-  }
-  
-  var affichageTotal = total.formater(null, null, " ");
-  var indexE = affichageTotal.indexOf("e");
-  var puissances = affichageTotal.substr(indexE + 2);
-  puissances = parseInt(puissances, 10);
-  var affichageEntier = affichageTotal.substr(0, indexE).replace(/\./, "");
-  var zeros = puissances - affichageEntier.length + 1;
-  affichageEntier += "0".repeter(zeros);
-  var compteurChiffres = 0;
-  for (var i = affichageEntier.length - 1, iMin = 0; i >= iMin; --i) {
-    ++compteurChiffres;
-    if (compteurChiffres == 3) {
-      affichageEntier = affichageEntier.inserer(" ", i);
-      compteurChiffres = 0;
-    }
-  }
-  
-  affichageTotal = affichageTotal.replace(/^([1-9]\.[1-9])(.*)(e.*)$/, "$1$3");
-  affichageTotal = affichageTotal.replace(/e\+/, " x 10 puissance ");
-  
-  messageTotal = "NOMBRE DE PHRASES POSSIBLES :<br/><br/>≈ " + affichageEntier + " phrases possibles.<br/>(en notation scientifique : ~ " + affichageTotal + ")<br/><br/>>>> c'est-à-dire environ ";
-  var echellesTotal = 0, echellesTotalLettres = 0;
-  var memTotal = total;
-  var trans = "";
-  while (total > 1e9) {
-    total /= 1e9;
-    ++echellesTotal;
-  }
-  messageTotal += Math.floor(total).formater(null, null, " ");
-  for (var e = 0; e < echellesTotal; ++e) {
-    messageTotal += " milliard" + (((Math.floor(total) == 1) && (e == 0)) ? "" : "s") + " de";
-  }
-  while (memTotal > 1e6) {
-    memTotal /= 1e6;
-    ++echellesTotalLettres;
-  }
-  var ordres = ["", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion", "décillion"];
-  var plur = (memTotal >= 2) ? "s" : ""; 
-  if ((echellesTotalLettres > 0) && (echellesTotalLettres < 11)) {
-    trans = memTotal.formater(null, null, " ") + " " + ordres[echellesTotalLettres] + plur + " et quelques...";
-  } else {
-    trans = memTotal.formater(null, null, " ");
-  }
-  
-  messageTotal += " phrases. (" + trans + ")<br/><br/>";
-  
-  el("txt_stats").innerHTML = messageTotal;
-}
+// function afficherStats() {
+//   var messageTotal;
+//   var tab = Generateur.stats();
+//
+//   var total = 0;
+//   for (var i = 0, iMax = tab.length; i < iMax; ++i) {
+//     total += tab[i];
+//   }
+//
+//   var affichageTotal = total.formater(null, null, " ");
+//   var indexE = affichageTotal.indexOf("e");
+//   var puissances = affichageTotal.substr(indexE + 2);
+//   puissances = parseInt(puissances, 10);
+//   var affichageEntier = affichageTotal.substr(0, indexE).replace(/\./, "");
+//   var zeros = puissances - affichageEntier.length + 1;
+//   affichageEntier += "0".repeter(zeros);
+//   var compteurChiffres = 0;
+//   for (var i = affichageEntier.length - 1, iMin = 0; i >= iMin; --i) {
+//     ++compteurChiffres;
+//     if (compteurChiffres == 3) {
+//       affichageEntier = affichageEntier.inserer(" ", i);
+//       compteurChiffres = 0;
+//     }
+//   }
+//
+//   affichageTotal = affichageTotal.replace(/^([1-9]\.[1-9])(.*)(e.*)$/, "$1$3");
+//   affichageTotal = affichageTotal.replace(/e\+/, " x 10 puissance ");
+//
+//   messageTotal = "NOMBRE DE PHRASES POSSIBLES :<br/><br/>≈ " + affichageEntier + " phrases possibles.<br/>(en notation scientifique : ~ " + affichageTotal + ")<br/><br/>>>> c'est-à-dire environ ";
+//   var echellesTotal = 0, echellesTotalLettres = 0;
+//   var memTotal = total;
+//   var trans = "";
+//   while (total > 1e9) {
+//     total /= 1e9;
+//     ++echellesTotal;
+//   }
+//   messageTotal += Math.floor(total).formater(null, null, " ");
+//   for (var e = 0; e < echellesTotal; ++e) {
+//     messageTotal += " milliard" + (((Math.floor(total) == 1) && (e == 0)) ? "" : "s") + " de";
+//   }
+//   while (memTotal > 1e6) {
+//     memTotal /= 1e6;
+//     ++echellesTotalLettres;
+//   }
+//   var ordres = ["", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion", "décillion"];
+//   var plur = (memTotal >= 2) ? "s" : "";
+//   if ((echellesTotalLettres > 0) && (echellesTotalLettres < 11)) {
+//     trans = memTotal.formater(null, null, " ") + " " + ordres[echellesTotalLettres] + plur + " et quelques...";
+//   } else {
+//     trans = memTotal.formater(null, null, " ");
+//   }
+//
+//   messageTotal += " phrases. (" + trans + ")<br/><br/>";
+//
+//   el("txt_stats").innerHTML = messageTotal;
+// }
 
-function graphSondage(type) {   
-  var pQuestion = el("pQuestion");
-  var divGraph = el("divGraph");
-  for (var i = 0, iMax = pQuestion.childNodes.length; i < iMax; ++i) {
-    pQuestion.removeChild(pQuestion.firstChild);
-  }
-  if (divGraph.firstChild) divGraph.removeChild(divGraph.firstChild);
-  
-  // RESTE A FAIRE : questions "Comment" >>> adverbes OU participes présents
-  
-  var question, questions = {
-    qui: PseudoBDD.graphSondage.questions.qui,
-    ou: PseudoBDD.graphSondage.questions.ou,
-    quand: PseudoBDD.graphSondage.questions.quand,
-    quoi: PseudoBDD.graphSondage.questions.quoi,
-    fermee: PseudoBDD.graphSondage.questions.fermee
-  };
-  questions = questions[type];
-  var question = questions.puiser();
-  
-  while (question.indexOf("<") > -1) {
-    var choix = question.match(/<([^<>]+)>/)[1];
-    choix = choix.split("|").puiser();
-    question = question.replace(/<[^<>]+>/, choix);
-  }
-  
-	var reponseGroupe, reponsePersonnalite, genreReponseM, genreReponseF, tempsDemande;
-  var tiersObjet = true;
-	if (type == "qui") {
-		reponseGroupe = question.indexOf("_grp") > -1;
-		reponsePersonnalite = question.indexOf("_per") > -1;
-		if (reponsePersonnalite) {
-			genreReponseM = (/_.{3}M/).test(question);
-			genreReponseF = (/_.{3}F/).test(question);
-		}
-		question = question.replace(/_(grp|per)[FM]?/, "");
-	} else if (type == "quand") {
-    var posFin = question.indexOf("?");
-    tempsDemande = question.charAt(posFin + 2);
-    question = question.replace(/¤[13]/, "");
-  } else if ((type == "quoi") && (question.indexOf("_subj") > -1)) {
-    tiersObjet = false;
-    question = question.split("_")[0];
-  }
-  
-  if (question.indexOf("+V") > -1) {
-    var verbe = Grimoire.recupererMot("VN").replace(/#[^\s]*/, "").sansAccents();
-    if ((type == "fermee") && (question.indexOf("_subj") > -1)) {
-      verbe = verbe.replace(/^s(e |\')/, "vous ");
-      question = question.split("_")[0];
-    }
-    question = question.replace(/\+V/, verbe);
-  }
-  
-	var pos$ = question.indexOf("$");
-  if (pos$ > -1) {
-		var pers, fem, genreImpose = "";
-		if ((/\$[FM]/).test(question)) genreImpose = question.substr((pos$ + 1), 1);
-
-	  do {
-      pers = Generateur.GN.nomsPropres.puiser();
-	    fem = "";
-	    if (pers.indexOf("_F") > -1) {
-	      fem = "e";
-	      pers = pers.split("_")[0];
-      }
-		}
-		while (((genreImpose == "F") && (fem == "")) || ((genreImpose == "M") && (fem == "e")));
-    if ((pers.substr(0, 3) == "le ") && ((/ a \$/).test(question))) {
-      pers = "au " + pers.substr(3);
-      question = question.replace(/ a( \$)/, "$1");
-    }
-    question = question.replace(/\$[FM]?/, pers.sansAccents()).replace(/\[e\]/, fem).replace(/µ/g, "Y");
-  }
-  question = question.replace(/ de ([aeiouy])/gi, " d'$1").replace(/£/g, "h");
-  
-  // transformer toute la partie "tirage des sondés" par une variante de Generateur.groupeNominal
-  var notice = "Réponses à notre question, posée à 100 ¤";
-  //var notice = "Réponses à notre question, posée à " + Math.pow(10, de(3) + 1).formater(null, null, " ") + " ¤";
-  var sondes = Generateur.GN.nomsCommuns.puiser();
-  if (sondes.indexOf("%") > -1) {
-    sondes = sondes.split("%");
-    if (sondes[1].length == 1) {
-      sondes[1] = sondes[0].replace(/².*$/, "") + sondes[1];
-    }
-    sondes = sondes.puiser();
-  }
-  if (sondes.indexOf("_") > -1) {
-    sondes = sondes.split("_")[0];
-  }
-  sondes = Generateur.accordPluriel(sondes, true);      
-  notice = notice.replace(/¤/, sondes).replace(/£/g, "h").replace(/µ/g, "Y").replace(/¥/g, "y");
-  
-  pQuestion.appendChild(document.createTextNode(notice));
-  pQuestion.style.fontWeight = "bolder";
-  
-  // IMAGE DU SONDAGE
-  var spe = (de(8) > 7);
-  var nbValeurs = spe ? (de(3) + 1): (de(5) + 2);
-  var restreint = ((type == "fermee") || (type == "quoi"));
-  if (restreint) nbValeurs = (de(4) > 3) ? 3: 2;
-  var valMax = 0, indexValMax;
-  var baseUrl = "http://chart.apis.google.com/chart?chs=670x200&chd=t:";
-  var valeurDe = 100;
-  for (var i = 0; i < nbValeurs; ++i) {
-    var val = de(valeurDe);
-    if ((i == 0) && spe) {
-      val = 100;
-      valeurDe = 10;
-    }
-    if (restreint && (nbValeurs == 3) && (i == 0)) {
-      val = 1;
-    }
-    if (val > valMax) {
-      valMax = val;
-      indexValMax = i;
-    }
-    baseUrl += val;
-    if (i < (nbValeurs - 1)) {
-      baseUrl += ",";
-    }
-  }
-  baseUrl += "&chtt=" + question;
-  baseUrl += "&chl=";
-  var autresReponses = ["ne se prononcent pas", "n'ont pas compris la question", "refusent de repondre", "ne savent pas"];
-  var tabDeja = [];
-  for (var i = 0; i < nbValeurs; ++i) {
-    if ((autresReponses.length > 0) && (de(20) > 19)) {
-      var tirage = de(autresReponses.length) - 1;
-      baseUrl += autresReponses.splice(tirage, 1) + "|";
-    } else {
-      var label, deja, invalide, genreF;
-      switch (type) {
-        case "qui":
-          do {
-						do {
-							genre = "M";
-							if (reponsePersonnalite) label = Generateur.GN.nomsPropres.puiser();
-	            else label = Generateur.groupeNominal().split("@")[0];
-							if (label.indexOf("_F") > -1) genre = "F";
-							label = label.replace(/\_F/, "");
-						}
-						while (((genreReponseM) && (genre == "F")) || ((genreReponseF) && (genre == "M")));
-            label = label.sansAccents().replace(/£/g, "h");
-            deja = tabDeja.indexOf(label);
-            invalide = (deja > -1) || (label.length > 42) || !(/^(les |[A-Z])/).test(label) || (/et [mt]oi$/).test(label) || (/[^a-z0-9 '\-\"]/i).test(label) || (reponseGroupe && (/[A-Z]/).test(label));
-          }
-          while (invalide);
-          break;
-        case "ou":
-          do {
-            label = Grimoire.complements.lieu.puiser();
-            
-            while (label.indexOf("$") > -1) {
-              var nom;
-              do {
-                nom = Generateur.GN.nomsPropres.puiser().replace(/_F/, "");
-              }
-              while (label.indexOf(nom) > -1);
-              label = label.replace(/\$/, nom);
-            }
-            label = label.replace(/ de ([aeiouyhéèâœ])/gi, " d'$1").replace(/ de (le|du) /g, " du ");
-            
-            while (label.indexOf("+") > -1) {
-              var posPlus = label.indexOf("+");
-              var fem = label.charAt(posPlus + 1) == "F";
-              
-              var nom, ok;
-              do {
-                ok = true;
-                nom = Generateur.GN.nomsCommuns.puiser();
-                if (nom.indexOf("_") > -1) {
-                  var pos = nom.indexOf("_");
-                  var genre = nom.charAt(pos + 1);
-                  if (!fem && (genre == "F") || (fem && genre == "H")) {
-                    ok = false;
-                  } else {
-                    nom = nom.split("_")[0];
-                  }
-                } else {
-                  var pos = nom.indexOf("%");
-                  if (nom.substr(pos + 1).length == 1) {
-                    nom = nom.replace(/(.*)%e/, "$1%$1e");
-                  }
-                  nom = nom.split("%")[((fem) ? 1 : 0)];
-                }
-              }
-              while ((!ok) || (nom === undefined));
-              nom = Generateur.accordPluriel(nom, false);
-              label = label.replace(/\+[FH]/, nom);
-            }
-
-            var nombre;
-            while (label.indexOf("&") > -1) {
-              nombre = de(10) + 1;
-              if (label.indexOf("&0") > -1) {
-                nombre = (nombre * 10) - 10;
-              }
-              if (label.indexOf("&00") > -1) {
-                nombre *= 10;
-              }
-              nombre = nombre.enLettres();
-              label = label.replace(/&(0){0,2}/, nombre);
-            }
-            
-            label = label.sansAccents().replace(/£/g, "h");
-            deja = tabDeja.indexOf(label);
-          }
-          while ((deja > -1) || (label.length > 42) || (/[^a-z1-9 '\-\"]/i).test(label) || (/(en direction d|chez eux)/).test(label));
-          break;
-        case "quand":
-          do {
-            var posT, tempsLabel;
-            do {
-              label = Grimoire.recupererMot("CT");
-              posT = label.indexOf("¤");
-              tempsLabel = label.charAt(posT + 1);
-              if ((/(jusqu|à partir|jamais|dorénavant)/).test(label)) tempsLabel = 0;
-            }
-            while (tempsLabel != tempsDemande);
-            label = label.replace(/¤[123]/, "");
-            
-            while (label.indexOf("$") > -1) {
-              var nom;
-              do {
-                nom = Generateur.GN.nomsPropres.puiser().replace(/_F/, "");
-              }
-              while (label.indexOf(nom) > -1);
-              label = label.replace(/\$/, nom);
-            }
-            label = label.replace(/ (d|qu)e ([aeiouyhéèâœ])/gi, " $1'$2").replace(/ de (le|du) /g, " du ");
-
-            var nombre;
-            while (label.indexOf("&") > -1) {
-              nombre = de(10) + 1;
-              if (label.indexOf("&0") > -1) {
-                nombre = (nombre * 10) - 10;
-              }
-              if (label.indexOf("&00") > -1) {
-                nombre *= 10;
-              }
-              nombre = nombre.enLettres();
-              label = label.replace(/&(0){0,2}/, nombre);
-            }
-            
-            label = label.sansAccents().replace(/£/g, "h");
-            deja = tabDeja.indexOf(label);
-          }
-          while ((deja > -1) || (label.length > 42) || (/[^a-z1-9 '\-\"]/i).test(label));
-					break;
-        case "quoi":
-          do {
-            var typeV = (de(8) > 3) ? "transitifs": "intransitifs";
-            label = Grimoire.verbes[typeV].puiser();
-            if (label.indexOf("#") > -1) label = label.split("#")[0];
-            if (typeV == "transitifs") {
-              var comp;
-              do {
-                comp = Generateur.complementObjet(1);
-              }
-              while ((/^(mon|ton|son|ma|ta|sa|notre|votre|leur|mes|tes|ses|nos|vos|leurs|ce|cet|cette|ces) /).test(comp));
-              label += " " + comp;
-            }
-            if ((typeV == "intransitifs") && (!tiersObjet)) label = label.replace(/s(e |')/, "m$1");
-            label = label.sansAccents().replace(/£/g, "h");
-            deja = tabDeja.indexOf(label);
-          }
-          while ((label.length > 42) || (/[^a-z1-9 '\-\"]/i).test(label) || (deja > -1));
-          break;
-        case "fermee":
-          var labels = ["oui", "non", "ca depend", "a la rigueur", "absolument pas", "tout-a-fait",
-          "pas vraiment", "carrement", "a peine", "oui... et non", "c'est pas faux", "mouais", "NON !"];
-          var probas_labels = [5,5,1,1,1,1,1,1,1,1,1,1,1];
-          do {
-            label = probaSwitch(labels, probas_labels);
-          }
-          while (tabDeja.indexOf(label) > -1);
-          break;
-      }
-      baseUrl += label;
-      tabDeja.push(label);
-      if (i < (nbValeurs - 1)) {
-        baseUrl += "|";
-      }
-    }
-  }
-  baseUrl += "&cht=p" + ((de(2) > 1) ? "3" : "");
-  baseUrl += "&chco=";
-  for (var i = 0; i < nbValeurs; ++i) {
-    for (var j = 0; j < 6; ++j) {
-      var couleur = de(16) - 1;
-      switch (couleur) {
-        case 10: couleur = "A"; break;
-        case 11: couleur = "B"; break;
-        case 12: couleur = "C"; break;
-        case 13: couleur = "D"; break;
-        case 14: couleur = "E"; break;
-        case 15: couleur = "F"; break;
-      }
-      baseUrl += couleur;// à améliorer : colorer en fonction du poids des réponses (garder un tableau des valeurs à la place de valMax et indexValMax) 
-    }
-    if (i < (nbValeurs - 1)) {
-      baseUrl += ",";
-    }
-  }
-  
-  var graph = document.createElement("IMG");
-  graph.setAttribute("id", "imgGraph");
-  graph.setAttribute("src", baseUrl);
-  graph.setAttribute("width", "670");
-  graph.setAttribute("height", "200");
-  graph.setAttribute("alt", "le sondage minute");
-  divGraph.appendChild(graph);
-  onOff(graph);
-  onOff(el("imgLoader"));
-  setTimeout(function() {
-    onOff(el("imgLoader"));
-    onOff(el("imgGraph"));
-    el("b_sondage").removeAttribute("disabled");
-  }, 1500);
-}
+// function graphSondage(type) {
+//   var pQuestion = el("pQuestion");
+//   var divGraph = el("divGraph");
+//   for (var i = 0, iMax = pQuestion.childNodes.length; i < iMax; ++i) {
+//     pQuestion.removeChild(pQuestion.firstChild);
+//   }
+//   if (divGraph.firstChild) divGraph.removeChild(divGraph.firstChild);
+//
+//   // RESTE A FAIRE : questions "Comment" >>> adverbes OU participes présents
+//
+//   var question, questions = {
+//     qui: PseudoBDD.graphSondage.questions.qui,
+//     ou: PseudoBDD.graphSondage.questions.ou,
+//     quand: PseudoBDD.graphSondage.questions.quand,
+//     quoi: PseudoBDD.graphSondage.questions.quoi,
+//     fermee: PseudoBDD.graphSondage.questions.fermee
+//   };
+//   questions = questions[type];
+//   var question = questions.puiser();
+//
+//   while (question.indexOf("<") > -1) {
+//     var choix = question.match(/<([^<>]+)>/)[1];
+//     choix = choix.split("|").puiser();
+//     question = question.replace(/<[^<>]+>/, choix);
+//   }
+//
+// 	var reponseGroupe, reponsePersonnalite, genreReponseM, genreReponseF, tempsDemande;
+//   var tiersObjet = true;
+// 	if (type == "qui") {
+// 		reponseGroupe = question.indexOf("_grp") > -1;
+// 		reponsePersonnalite = question.indexOf("_per") > -1;
+// 		if (reponsePersonnalite) {
+// 			genreReponseM = (/_.{3}M/).test(question);
+// 			genreReponseF = (/_.{3}F/).test(question);
+// 		}
+// 		question = question.replace(/_(grp|per)[FM]?/, "");
+// 	} else if (type == "quand") {
+//     var posFin = question.indexOf("?");
+//     tempsDemande = question.charAt(posFin + 2);
+//     question = question.replace(/¤[13]/, "");
+//   } else if ((type == "quoi") && (question.indexOf("_subj") > -1)) {
+//     tiersObjet = false;
+//     question = question.split("_")[0];
+//   }
+//
+//   if (question.indexOf("+V") > -1) {
+//     var verbe = Grimoire.recupererMot("VN").replace(/#[^\s]*/, "").sansAccents();
+//     if ((type == "fermee") && (question.indexOf("_subj") > -1)) {
+//       verbe = verbe.replace(/^s(e |\')/, "vous ");
+//       question = question.split("_")[0];
+//     }
+//     question = question.replace(/\+V/, verbe);
+//   }
+//
+// 	var pos$ = question.indexOf("$");
+//   if (pos$ > -1) {
+// 		var pers, fem, genreImpose = "";
+// 		if ((/\$[FM]/).test(question)) genreImpose = question.substr((pos$ + 1), 1);
+//
+// 	  do {
+//       pers = Generateur.GN.nomsPropres.puiser();
+// 	    fem = "";
+// 	    if (pers.indexOf("_F") > -1) {
+// 	      fem = "e";
+// 	      pers = pers.split("_")[0];
+//       }
+// 		}
+// 		while (((genreImpose == "F") && (fem == "")) || ((genreImpose == "M") && (fem == "e")));
+//     if ((pers.substr(0, 3) == "le ") && ((/ a \$/).test(question))) {
+//       pers = "au " + pers.substr(3);
+//       question = question.replace(/ a( \$)/, "$1");
+//     }
+//     question = question.replace(/\$[FM]?/, pers.sansAccents()).replace(/\[e\]/, fem).replace(/µ/g, "Y");
+//   }
+//   question = question.replace(/ de ([aeiouy])/gi, " d'$1").replace(/£/g, "h");
+//
+//   // transformer toute la partie "tirage des sondés" par une variante de Generateur.groupeNominal
+//   var notice = "Réponses à notre question, posée à 100 ¤";
+//   //var notice = "Réponses à notre question, posée à " + Math.pow(10, de(3) + 1).formater(null, null, " ") + " ¤";
+//   var sondes = Generateur.GN.nomsCommuns.puiser();
+//   if (sondes.indexOf("%") > -1) {
+//     sondes = sondes.split("%");
+//     if (sondes[1].length == 1) {
+//       sondes[1] = sondes[0].replace(/².*$/, "") + sondes[1];
+//     }
+//     sondes = sondes.puiser();
+//   }
+//   if (sondes.indexOf("_") > -1) {
+//     sondes = sondes.split("_")[0];
+//   }
+//   sondes = Generateur.accordPluriel(sondes, true);
+//   notice = notice.replace(/¤/, sondes).replace(/£/g, "h").replace(/µ/g, "Y").replace(/¥/g, "y");
+//
+//   pQuestion.appendChild(document.createTextNode(notice));
+//   pQuestion.style.fontWeight = "bolder";
+//
+//   // IMAGE DU SONDAGE
+//   var spe = (de(8) > 7);
+//   var nbValeurs = spe ? (de(3) + 1): (de(5) + 2);
+//   var restreint = ((type == "fermee") || (type == "quoi"));
+//   if (restreint) nbValeurs = (de(4) > 3) ? 3: 2;
+//   var valMax = 0, indexValMax;
+//   var baseUrl = "http://chart.apis.google.com/chart?chs=670x200&chd=t:";
+//   var valeurDe = 100;
+//   for (var i = 0; i < nbValeurs; ++i) {
+//     var val = de(valeurDe);
+//     if ((i == 0) && spe) {
+//       val = 100;
+//       valeurDe = 10;
+//     }
+//     if (restreint && (nbValeurs == 3) && (i == 0)) {
+//       val = 1;
+//     }
+//     if (val > valMax) {
+//       valMax = val;
+//       indexValMax = i;
+//     }
+//     baseUrl += val;
+//     if (i < (nbValeurs - 1)) {
+//       baseUrl += ",";
+//     }
+//   }
+//   baseUrl += "&chtt=" + question;
+//   baseUrl += "&chl=";
+//   var autresReponses = ["ne se prononcent pas", "n'ont pas compris la question", "refusent de repondre", "ne savent pas"];
+//   var tabDeja = [];
+//   for (var i = 0; i < nbValeurs; ++i) {
+//     if ((autresReponses.length > 0) && (de(20) > 19)) {
+//       var tirage = de(autresReponses.length) - 1;
+//       baseUrl += autresReponses.splice(tirage, 1) + "|";
+//     } else {
+//       var label, deja, invalide, genreF;
+//       switch (type) {
+//         case "qui":
+//           do {
+// 						do {
+// 							genre = "M";
+// 							if (reponsePersonnalite) label = Generateur.GN.nomsPropres.puiser();
+// 	            else label = Generateur.groupeNominal().split("@")[0];
+// 							if (label.indexOf("_F") > -1) genre = "F";
+// 							label = label.replace(/\_F/, "");
+// 						}
+// 						while (((genreReponseM) && (genre == "F")) || ((genreReponseF) && (genre == "M")));
+//             label = label.sansAccents().replace(/£/g, "h");
+//             deja = tabDeja.indexOf(label);
+//             invalide = (deja > -1) || (label.length > 42) || !(/^(les |[A-Z])/).test(label) || (/et [mt]oi$/).test(label) || (/[^a-z0-9 '\-\"]/i).test(label) || (reponseGroupe && (/[A-Z]/).test(label));
+//           }
+//           while (invalide);
+//           break;
+//         case "ou":
+//           do {
+//             label = Grimoire.complements.lieu.puiser();
+//
+//             while (label.indexOf("$") > -1) {
+//               var nom;
+//               do {
+//                 nom = Generateur.GN.nomsPropres.puiser().replace(/_F/, "");
+//               }
+//               while (label.indexOf(nom) > -1);
+//               label = label.replace(/\$/, nom);
+//             }
+//             label = label.replace(/ de ([aeiouyhéèâœ])/gi, " d'$1").replace(/ de (le|du) /g, " du ");
+//
+//             while (label.indexOf("+") > -1) {
+//               var posPlus = label.indexOf("+");
+//               var fem = label.charAt(posPlus + 1) == "F";
+//
+//               var nom, ok;
+//               do {
+//                 ok = true;
+//                 nom = Generateur.GN.nomsCommuns.puiser();
+//                 if (nom.indexOf("_") > -1) {
+//                   var pos = nom.indexOf("_");
+//                   var genre = nom.charAt(pos + 1);
+//                   if (!fem && (genre == "F") || (fem && genre == "H")) {
+//                     ok = false;
+//                   } else {
+//                     nom = nom.split("_")[0];
+//                   }
+//                 } else {
+//                   var pos = nom.indexOf("%");
+//                   if (nom.substr(pos + 1).length == 1) {
+//                     nom = nom.replace(/(.*)%e/, "$1%$1e");
+//                   }
+//                   nom = nom.split("%")[((fem) ? 1 : 0)];
+//                 }
+//               }
+//               while ((!ok) || (nom === undefined));
+//               nom = Generateur.accordPluriel(nom, false);
+//               label = label.replace(/\+[FH]/, nom);
+//             }
+//
+//             var nombre;
+//             while (label.indexOf("&") > -1) {
+//               nombre = de(10) + 1;
+//               if (label.indexOf("&0") > -1) {
+//                 nombre = (nombre * 10) - 10;
+//               }
+//               if (label.indexOf("&00") > -1) {
+//                 nombre *= 10;
+//               }
+//               nombre = nombre.enLettres();
+//               label = label.replace(/&(0){0,2}/, nombre);
+//             }
+//
+//             label = label.sansAccents().replace(/£/g, "h");
+//             deja = tabDeja.indexOf(label);
+//           }
+//           while ((deja > -1) || (label.length > 42) || (/[^a-z1-9 '\-\"]/i).test(label) || (/(en direction d|chez eux)/).test(label));
+//           break;
+//         case "quand":
+//           do {
+//             var posT, tempsLabel;
+//             do {
+//               label = Grimoire.recupererMot("CT");
+//               posT = label.indexOf("¤");
+//               tempsLabel = label.charAt(posT + 1);
+//               if ((/(jusqu|à partir|jamais|dorénavant)/).test(label)) tempsLabel = 0;
+//             }
+//             while (tempsLabel != tempsDemande);
+//             label = label.replace(/¤[123]/, "");
+//
+//             while (label.indexOf("$") > -1) {
+//               var nom;
+//               do {
+//                 nom = Generateur.GN.nomsPropres.puiser().replace(/_F/, "");
+//               }
+//               while (label.indexOf(nom) > -1);
+//               label = label.replace(/\$/, nom);
+//             }
+//             label = label.replace(/ (d|qu)e ([aeiouyhéèâœ])/gi, " $1'$2").replace(/ de (le|du) /g, " du ");
+//
+//             var nombre;
+//             while (label.indexOf("&") > -1) {
+//               nombre = de(10) + 1;
+//               if (label.indexOf("&0") > -1) {
+//                 nombre = (nombre * 10) - 10;
+//               }
+//               if (label.indexOf("&00") > -1) {
+//                 nombre *= 10;
+//               }
+//               nombre = nombre.enLettres();
+//               label = label.replace(/&(0){0,2}/, nombre);
+//             }
+//
+//             label = label.sansAccents().replace(/£/g, "h");
+//             deja = tabDeja.indexOf(label);
+//           }
+//           while ((deja > -1) || (label.length > 42) || (/[^a-z1-9 '\-\"]/i).test(label));
+// 					break;
+//         case "quoi":
+//           do {
+//             var typeV = (de(8) > 3) ? "transitifs": "intransitifs";
+//             label = Grimoire.verbes[typeV].puiser();
+//             if (label.indexOf("#") > -1) label = label.split("#")[0];
+//             if (typeV == "transitifs") {
+//               var comp;
+//               do {
+//                 comp = Generateur.complementObjet(1);
+//               }
+//               while ((/^(mon|ton|son|ma|ta|sa|notre|votre|leur|mes|tes|ses|nos|vos|leurs|ce|cet|cette|ces) /).test(comp));
+//               label += " " + comp;
+//             }
+//             if ((typeV == "intransitifs") && (!tiersObjet)) label = label.replace(/s(e |')/, "m$1");
+//             label = label.sansAccents().replace(/£/g, "h");
+//             deja = tabDeja.indexOf(label);
+//           }
+//           while ((label.length > 42) || (/[^a-z1-9 '\-\"]/i).test(label) || (deja > -1));
+//           break;
+//         case "fermee":
+//           var labels = ["oui", "non", "ca depend", "a la rigueur", "absolument pas", "tout-a-fait",
+//           "pas vraiment", "carrement", "a peine", "oui... et non", "c'est pas faux", "mouais", "NON !"];
+//           var probas_labels = [5,5,1,1,1,1,1,1,1,1,1,1,1];
+//           do {
+//             label = probaSwitch(labels, probas_labels);
+//           }
+//           while (tabDeja.indexOf(label) > -1);
+//           break;
+//       }
+//       baseUrl += label;
+//       tabDeja.push(label);
+//       if (i < (nbValeurs - 1)) {
+//         baseUrl += "|";
+//       }
+//     }
+//   }
+//   baseUrl += "&cht=p" + ((de(2) > 1) ? "3" : "");
+//   baseUrl += "&chco=";
+//   for (var i = 0; i < nbValeurs; ++i) {
+//     for (var j = 0; j < 6; ++j) {
+//       var couleur = de(16) - 1;
+//       switch (couleur) {
+//         case 10: couleur = "A"; break;
+//         case 11: couleur = "B"; break;
+//         case 12: couleur = "C"; break;
+//         case 13: couleur = "D"; break;
+//         case 14: couleur = "E"; break;
+//         case 15: couleur = "F"; break;
+//       }
+//       baseUrl += couleur;// à améliorer : colorer en fonction du poids des réponses (garder un tableau des valeurs à la place de valMax et indexValMax)
+//     }
+//     if (i < (nbValeurs - 1)) {
+//       baseUrl += ",";
+//     }
+//   }
+//
+//   var graph = document.createElement("IMG");
+//   graph.setAttribute("id", "imgGraph");
+//   graph.setAttribute("src", baseUrl);
+//   graph.setAttribute("width", "670");
+//   graph.setAttribute("height", "200");
+//   graph.setAttribute("alt", "le sondage minute");
+//   divGraph.appendChild(graph);
+//   onOff(graph);
+//   onOff(el("imgLoader"));
+//   setTimeout(function() {
+//     onOff(el("imgLoader"));
+//     onOff(el("imgGraph"));
+//     el("b_sondage").removeAttribute("disabled");
+//   }, 1500);
+// }
 
 // affiche le sujet d'indice donné, masque tous les autres
 function voirSujet(numSujet) {
@@ -2961,10 +2961,10 @@ function ecouteur_navigation(e) {
   return voirSujet(cible.id.substr(4));
 }
 
-function ecouteur_sondage(e) {
-  el("b_sondage").disabled = "disabled";
-  graphSondage(TypesSondages.suivant());
-}
+// function ecouteur_sondage(e) {
+//   el("b_sondage").disabled = "disabled";
+//   graphSondage(TypesSondages.suivant());
+// }
 
 var TypesSondages = {
   types: ["qui", "ou", "quand", "quoi", "fermee"],
@@ -2974,7 +2974,7 @@ var TypesSondages = {
     if (++this.curseur >= this.types.length) this.curseur = 0;
     return this.types[this.curseur];
   }
-};   
+};
 
 function ecouteur_generer(e) {
   var isLimited = el("checkLg").checked;
@@ -3033,7 +3033,7 @@ function ecouteur_generer(e) {
   else {
     Generateur.Memoire.longueurAuChoix = [null, null];
   }
-  
+
   Generateur.Memoire.sujetAuChoix = null;
   if ((el("checkSujet").checked) && (el("txtSujet").value.length > 0)) {
     var suj = el("txtSujet").value;
@@ -3041,10 +3041,10 @@ function ecouteur_generer(e) {
     var personne = sel[sel.selectedIndex].value;
     Generateur.Memoire.sujetAuChoix = suj + "@" + personne;
   }
-  
+
   var bouton = el("b_generer");
   bouton.style.visibility = "hidden";
-  
+
   // début effectif de la génération
   setTimeout(function() {
     var p, nombreEssais = 0;
@@ -3098,9 +3098,9 @@ function ecouteur_generer(e) {
     var nouvelle = document.createElement("SPAN");
     nouvelle.id = "phrase_" + Generateur.Memoire.generations
     nouvelle.appendChild(document.createTextNode(p.lire()));//  + "(" + nombreEssais + ")"
-    var sep = document.createElement("HR");
-    sep.setAttribute("id", "sep_" + Generateur.Memoire.generations);
-    if (window.navigator.userAgent.indexOf("Mozilla") > -1) sep.style.opacity = 0.5;
+    // var sep = document.createElement("HR");
+    // sep.setAttribute("id", "sep_" + Generateur.Memoire.generations);
+    // if (window.navigator.userAgent.indexOf("Mozilla") > -1) sep.style.opacity = 0.5;
     conteneur.appendChild(nouvelle);
     declencheur(nouvelle, "click", function(e) {
       var cible = e.target || e.srcElement;
@@ -3111,55 +3111,55 @@ function ecouteur_generer(e) {
       }, 1000);
     });
 
-    var b_audio = document.createElement("IMG");
-    b_audio.src = "images/audio.png";
-    //b_audio.setAttribute("class", "b_audio");
-    //b_audio.value = "wtf";
-    b_audio.title= "prononcer !";
-    b_audio.setAttribute("id", "b_audio_" + Generateur.Memoire.generations);
-    declencheur(b_audio, "click", function(e) {
-      var cible = e.target || e.srcElement;
-      var num = cible.id.split("_")[2];
-      prononcer(el("phrase_" + num).innerHTML);
-    });
-    conteneur.appendChild(b_audio);
-    if (liste_phrases.firstChild) conteneur.appendChild(sep);
-    b_audio.style.display = "none";
+    // var b_audio = document.createElement("IMG");
+    // b_audio.src = "images/audio.png";
+    // //b_audio.setAttribute("class", "b_audio");
+    // //b_audio.value = "wtf";
+    // b_audio.title= "prononcer !";
+    // b_audio.setAttribute("id", "b_audio_" + Generateur.Memoire.generations);
+    // declencheur(b_audio, "click", function(e) {
+    //   var cible = e.target || e.srcElement;
+    //   var num = cible.id.split("_")[2];
+    //   prononcer(el("phrase_" + num).innerHTML);
+    // });
+    // conteneur.appendChild(b_audio);
+    // if (liste_phrases.firstChild) conteneur.appendChild(sep);
+    // b_audio.style.display = "none";
 
-    var b_suppr = document.createElement("IMG");
-    b_suppr.src = "images/zap.png";
-    //b_suppr.setAttribute("class", "b_suppr");
-    //b_suppr.value = "ZAP";
-    b_suppr.title= "supprimer ?";
-    b_suppr.setAttribute("id", "b_suppr_" + Generateur.Memoire.generations);
-    declencheur(b_suppr, "click", function(e) {
-      var cible = e.target || e.srcElement;
-      var num = cible.id.split("_")[2];
-      var a_zapper = el("c_phrase_" + num);
-      if (liste_phrases.firstChild == a_zapper && a_zapper.nextSibling) a_zapper.nextSibling.removeChild(a_zapper.nextSibling.firstChild);
-      a_zapper.parentNode.removeChild(a_zapper);
-    });
-    conteneur.appendChild(b_suppr);
-    if (liste_phrases.firstChild) conteneur.appendChild(sep);
-    b_suppr.style.display = "none";
+    // var b_suppr = document.createElement("IMG");
+    // b_suppr.src = "images/zap.png";
+    // //b_suppr.setAttribute("class", "b_suppr");
+    // //b_suppr.value = "ZAP";
+    // b_suppr.title= "supprimer ?";
+    // b_suppr.setAttribute("id", "b_suppr_" + Generateur.Memoire.generations);
+    // declencheur(b_suppr, "click", function(e) {
+    //   var cible = e.target || e.srcElement;
+    //   var num = cible.id.split("_")[2];
+    //   var a_zapper = el("c_phrase_" + num);
+    //   if (liste_phrases.firstChild == a_zapper && a_zapper.nextSibling) a_zapper.nextSibling.removeChild(a_zapper.nextSibling.firstChild);
+    //   a_zapper.parentNode.removeChild(a_zapper);
+    // });
+    // conteneur.appendChild(b_suppr);
+    // if (liste_phrases.firstChild) conteneur.appendChild(sep);
+    // b_suppr.style.display = "none";
 
-    declencheur(conteneur, "mouseover", function(e) {
-      var cible = e.target || e.srcElement;
-      var num = cible.id.split("_");
-      num = num[(num.length - 1)];
-      el("b_suppr_" + num).style.display = "";
-      el("b_audio_" + num).style.display = "";
-    });
-    declencheur(conteneur, "mouseout", function(e) {
-      var cible = e.target || e.srcElement;
-      var num = cible.id.split("_");
-      num = num[(num.length - 1)];
-      el("b_suppr_" + num).style.display = "none";
-      el("b_audio_" + num).style.display = "none";
-    });
+    // declencheur(conteneur, "mouseover", function(e) {
+    //   var cible = e.target || e.srcElement;
+    //   var num = cible.id.split("_");
+    //   num = num[(num.length - 1)];
+    //   el("b_suppr_" + num).style.display = "";
+    //   el("b_audio_" + num).style.display = "";
+    // });
+    // declencheur(conteneur, "mouseout", function(e) {
+    //   var cible = e.target || e.srcElement;
+    //   var num = cible.id.split("_");
+    //   num = num[(num.length - 1)];
+    //   el("b_suppr_" + num).style.display = "none";
+    //   el("b_audio_" + num).style.display = "none";
+    // });
     liste_phrases.insertBefore(conteneur, liste_phrases.firstChild);
     //liste_phrases.scrollTop = liste_phrases.scrollHeight;
-    
+
     // réactivation (le cas échéant) de l'option "même structure"
     if (el("checkST").disabled == true) {
       el("checkST").disabled = false;
@@ -3185,7 +3185,7 @@ function ecouteur_generer(e) {
         divCommentaire(ajout, traduction, 50, -66);
       }
     }
-    
+
     if (Generateur.Memoire.audio) prononcer(p.lire());
     bouton.style.visibility = "visible";
     bouton.focus();
@@ -3386,20 +3386,20 @@ function alerte(message) {
   alert(remplacer(message));
 }
 
-function divCommentaire(elementRacine, texte, offsetX, offsetY) {   
+function divCommentaire(elementRacine, texte, offsetX, offsetY) {
   var divC = document.createElement("DIV");
   elementRacine.appendChild(divC);
   divC.id = "divCom_" + elementRacine.id.substr(4);
   divC.className = "divCom";
   divC.style.display = "none";
-  
+
   declencheur(elementRacine, "mouseover", ecouteur_commentaire);
   declencheur(elementRacine, "mouseout", ecouteur_commentaire);
-  
-  var positionRelative = posXY(elementRacine);// tableau à 2 postes : [positionX, positionY] 
-  divC.style.left = (positionRelative[0] - 150 + offsetX) + 'px';// -150 = moitié de la largeur du div ( pour centrage ) 
+
+  var positionRelative = posXY(elementRacine);// tableau à 2 postes : [positionX, positionY]
+  divC.style.left = (positionRelative[0] - 150 + offsetX) + 'px';// -150 = moitié de la largeur du div ( pour centrage )
   divC.style.top = (positionRelative[1] + 10 + offsetY) + 'px';// +10 = simple ajustement pour l'harmonie de l'affichage
-  
+
   // écriture du contenu
   var spanTexte = document.createElement("SPAN");
   divC.appendChild(spanTexte);
@@ -3699,12 +3699,12 @@ function dumpListes(isMixte) {
     resultat += listes.F.join("<br/>");
   }
 
-  el("listes").innerHTML = resultat + "<br/><br/><hr/>";
+  el("listes").innerHTML = resultat + "......<br/><br/>";
+  // var foo = new P5.Speech(); // speech synthesis object
+  // foo.speak(resultat);
 }
 
 
 /* ------------------------ POINT D'ENTRÉE JAVASCRIPT ------------------------ */
 
 declencheur(window, 'load', INITIALISATION);
-
-
