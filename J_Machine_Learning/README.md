@@ -4,7 +4,7 @@
 - https://progur.com/2018/02/how-to-use-mozilla-deepspeech-tutorial.html
 - https://docs.snips.ai/articles/platform/asr (french soon)
 
-Datasets (audio files + transcriptions) for training models :
+## Datasets (audio files + transcriptions) for training models :
 - https://www.ortolang.fr/market/corpora/tcof
 - https://voice.mozilla.org/fr/datasets
 - http://deeplearning.net/datasets/
