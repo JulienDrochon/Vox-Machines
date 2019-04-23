@@ -1,5 +1,5 @@
 // creations des variables
-let output, speechRec, button, svg, rec;
+let output, speechRec, button, svg, rec, lecteursAudio;
 let audioChunks = []; // variable de type list
 let state = 0;
 
@@ -7,6 +7,7 @@ function setup() {
   noCanvas(); // p5js -- pas de canvas, on travaille directement dans le html (DOM)
   output = select("#speech"); //  p5js -- on associe la balise avec l'id 'speech' de index.html à la variable output
   svg = select('.svgstyle'); //  p5js -- on associe la balise avec la class 'svgstyle' de index.html à la variable svg
+  lecteursAudio = select('#lecteursAudio'); //  p5js -- on associe la balise avec l'id  lecteursAudio à la variable lecteursAudio
 }
 
 function listen() { // js -- fonction listen (activée quand on clique sur l'icone micro)
@@ -57,15 +58,16 @@ function handlerFunction(stream) {
     audioChunks.push(e.data); // js -- on met le résulat de l'enregistrement audio dans un tableau
 
     if (rec.state == "inactive"){ // js -- on s'assure que l'enregistrement est terminé
-      let blob = new Blob(audioChunks,{type:'audio/mpeg-3'}); // js -- création des Blob
+    let blob = new Blob(audioChunks,{type:'audio/mpeg-3'}); // js -- création des Blob
 
-      // pour chaque blob audio je crée les balises audio dans le HTML et
-      // j'attribue le blob au lecteur
-      for (var i =0; i < audioChunks.length; i++){ // js -- voir boucle for : https://www.youtube.com/watch?v=h4ApLHe8tbk
-        var audiodiv = createElement('audio'); // p5js -- on créé un element html audio dans index.html
-        audiodiv.id(state).attribute('src', URL.createObjectURL(audioChunks[i])); // p5js + js -- attribution du blob audio au lecteur audio
-        audiodiv.attribute('controls','true'); // p5js -- affichage du lecteur audio
-      }
+    // pour chaque blob audio je crée les balises audio dans le HTML et
+    // j'attribue le blob au lecteur
+    lecteursAudio.html('');
+    for (var i =0; i < audioChunks.length; i++){ // js -- voir boucle for : https://www.youtube.com/watch?v=h4ApLHe8tbk
+      var audiodiv = lecteursAudio.createElement('audio'); // p5js -- on créé un element html audio dans la balise dans index.html
+      audiodiv.id(state).attribute('src', URL.createObjectURL(audioChunks[i])); // p5js + js -- attribution du blob audio au lecteur audio
+      audiodiv.attribute('controls','true'); // p5js -- affichage du lecteur audio
     }
   }
+}
 }
