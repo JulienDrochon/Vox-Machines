@@ -7,3 +7,5 @@
 Datasets (audio files + transcriptions) for training models :
 - https://www.ortolang.fr/market/corpora/tcof
 - https://voice.mozilla.org/fr/datasets
+- http://deeplearning.net/datasets/
+- http://www.voxforge.org/fr/downloads (french soon)
