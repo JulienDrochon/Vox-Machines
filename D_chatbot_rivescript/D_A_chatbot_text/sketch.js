@@ -1,21 +1,12 @@
 
+let bot;
 
 function setup() {
   noCanvas();
-  let bot = new RiveScript({utf8: true});
+  bot = new RiveScript({utf8: true});
   // Load a list of files all at once
-  var files = ['brain/knockknock.rive'];
-  bot.loadFile(files, botLoaded, errorLoading);
-
-  function botLoaded() {
-    console.log("Bot loaded");
-    bot.sortReplies();
-  }
-
-  function errorLoading(error) {
-    console.log("Error when loading rivescript files: " + error);
-  }
-
+  bot.loadFile("brain/knockknock.rive").then(botLoaded).catch(errorLoading);
+  
   var button = select('#submit');
   var input = select('#textinput');
   var output = select('#bot');
@@ -24,7 +15,20 @@ function setup() {
 
   function chat() {
     var txt = input.value();
-    var reply = bot.reply("local-user", txt);
-    output.html(reply);
+    bot.reply("local-user", txt).then(function(reply) {
+      output.html(reply);
+    });
+    //
+    // var reply = bot.reply("local-user", txt);
+
   }
+}
+
+function botLoaded() {
+  console.log("Bot loaded");
+  bot.sortReplies();
+}
+
+function errorLoading(error) {
+  console.log("Error when loading rivescript files: " + error);
 }

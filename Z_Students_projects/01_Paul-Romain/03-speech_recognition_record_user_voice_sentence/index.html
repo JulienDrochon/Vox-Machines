@@ -12,8 +12,10 @@
   <!-- inclusion des différentes biblitohèques js -->
   <script src="libraries/p5.js"></script>
   <script src="libraries/p5.dom.js"></script>
-  <!-- <script src="libraries/p5.sound.js"></script> -->
   <script src="libraries/p5.speech.js"></script>
+
+    <script src="libraries/jquery-3.2.1.min.js"></script>
+    <script src="libraries/rivescript.js"></script>
   <style>
   /* style css pour enlever les bordure par défaut autour du bouton */
   button {
@@ -26,7 +28,7 @@
 </head>
 
 <body>
-  <h3>Speak!</h3>
+  <h3>Cliquez sur le bouton et dites : "bonjour"</h3>
   <button onclick="listen();"><!-- quand on clique sur le bouton on lance la fonction listen présente dans le fichie sketch.js -->
     <!-- icone du microphone au format vectoriel svg -->
     <svg class='svgstyle' version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

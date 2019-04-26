@@ -1,13 +1,21 @@
 // creations des variables
-let output, speechRec, button, svg, rec, lecteursAudio;
+let output, speechRec, button, svg, rec, lecteursAudio, bot, myVoice;
 let audioChunks = []; // variable de type list
-let state = 0;
 
 function setup() {
   noCanvas(); // p5js -- pas de canvas, on travaille directement dans le html (DOM)
   output = select("#speech"); //  p5js -- on associe la balise avec l'id 'speech' de index.html à la variable output
   svg = select('.svgstyle'); //  p5js -- on associe la balise avec la class 'svgstyle' de index.html à la variable svg
   lecteursAudio = select('#lecteursAudio'); //  p5js -- on associe la balise avec l'id  lecteursAudio à la variable lecteursAudio
+
+  //activation du bot rivescript
+  bot = new RiveScript({utf8: true});
+  // Load a list of files all at once
+  // var files = ['brain/knockknock.rive'];
+  bot.loadFile("brain/knockknock.rive").then(botLoaded).catch(errorLoading);
+
+  //---- Voice Speech ---//
+  myVoice = new p5.Speech();
 }
 
 function listen() { // js -- fonction listen (activée quand on clique sur l'icone micro)
@@ -26,8 +34,19 @@ function gotSpeech() { // js -- fonction gotSpeech
   // console.log(speechRec); // pour afficher dans la console du navigateur
   if (speechRec.resultValue) { //  p5js -- si il y a un resultat à la reconnaissance …
     output.html(speechRec.resultString); //  p5js -- … j'affiche le texte de cette reconnaissance dans la div avec l'id "speech" (voir ligne 8 de ce code)
+
+  bot.reply("local-user", speechRec.resultString).then(function(reply) {
+    console.log("The bot says: " + reply);
+    myVoice.speak(reply);
+
+
+  });
+
+    //var reply = bot.reply("local-user", speechRec.resultString); // j'envoie la reconnaissance vocale au bot rivescript
+
   }
 }
+
 speechRec.onEnd = theEnd; //  p5js -- à la fin de la reconnaissance je lance la fonction theEnd
 speechRec.onStart = theStart; //  p5js -- au début de la reconnaissance je lance la fonction theEnd
 }
@@ -62,7 +81,7 @@ function handlerFunction(stream) {
 
     // pour chaque blob audio je crée les balises audio dans le HTML et
     // j'attribue le blob au lecteur
-    lecteursAudio.html('');
+    lecteursAudio.html(''); // j'efface les précédents affichages de lecteur
     for (var i =0; i < audioChunks.length; i++){ // js -- voir boucle for : https://www.youtube.com/watch?v=h4ApLHe8tbk
       let audiodiv = createElement('audio').parent(lecteursAudio); // p5js -- on créé un element html audio dans la balise dans index.html
       audiodiv.id(i).attribute('src', URL.createObjectURL(audioChunks[i])); // p5js + js -- attribution du blob audio au lecteur audio
@@ -70,4 +89,19 @@ function handlerFunction(stream) {
     }
   }
 }
+}
+
+function botLoaded() {
+  console.log("Bot has finished loading!");
+
+  // Now the replies must be sorted!
+  bot.sortReplies();
+
+
+  // NOTE: the API has changed in v2.0.0 and returns a Promise now.
+
+}
+
+function errorLoading(error) {
+  console.log("Error when loading rivescript files: " + error);
 }

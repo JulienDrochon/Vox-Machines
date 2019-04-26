@@ -9,12 +9,11 @@ function setup() {
   noCanvas();
   let bot = new RiveScript({utf8: true});
   // Load a list of files all at once
-  var files = ['brain/knockknock.rive'];
-  bot.loadFile(files, botLoaded, errorLoading);
+  bot.loadFile("brain/knockknock.rive").then(botLoaded).catch(errorLoading);
+
   //---- Voice Speech ---//
   myVoice = new p5.Speech();
-  console.log(myVoice.listVoices());
-  myVoice.setVoice(0);
+
 
   // ----- Voice Recognition
   // Create a Speech Recognition object with callback
@@ -36,10 +35,12 @@ function setup() {
     console.log(speechRec);
     if (speechRec.resultValue) {
       said = speechRec.resultString;
-      var reply = bot.reply("local-user", said);
+      bot.reply("local-user", said).then(function(reply) {
+          myVoice.speak(reply);
+      });
       output = select('#bot');
       output.html(reply);
-      myVoice.speak(reply);
+
       // Show user
       outputspeech.html(said);
     }
