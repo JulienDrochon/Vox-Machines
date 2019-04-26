@@ -1,4 +1,6 @@
-﻿// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+let dernierePhrase;
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 // ----------- INITIALISATION DÉCLENCHÉE AU CHARGEMENT COMPLET DU DOM -------------
 function INITIALISATION() {
 
@@ -139,17 +141,17 @@ function Phrase(options) {
   var seuilSimple, seuilInv;
   switch (Generateur.Memoire.modeInterrogatif) {
     case "libre":
-      seuilSimple = 94;
-      seuilInv = 77;
-      break;
+    seuilSimple = 94;
+    seuilInv = 77;
+    break;
     case "interdit":
-      seuilSimple = 100;
-      seuilInv = 100;
-      break;
+    seuilSimple = 100;
+    seuilInv = 100;
+    break;
     case "forcé":
-      seuilSimple = 78;
-      seuilInv = 0;
-      break;
+    seuilSimple = 78;
+    seuilInv = 0;
+    break;
   }
   var tirageModeInterrogatif = de(100);
   if (tirageModeInterrogatif > seuilSimple) {
@@ -183,43 +185,43 @@ function Phrase(options) {
       do {
         switch(this.structure[i]) {
           case "GN":
-            if (options.sujetChoisi && !premierGN) {
-              mot = options.sujetChoisi;
-              pronoms = /^(je|tu|il|elle|nous|vous|ils|elles)@\d$/i;
-              if (pronoms.test(mot)) {
+          if (options.sujetChoisi && !premierGN) {
+            mot = options.sujetChoisi;
+            pronoms = /^(je|tu|il|elle|nous|vous|ils|elles)@\d$/i;
+            if (pronoms.test(mot)) {
+              this.PP = true;
+            }
+            this.genreSujet = "F";
+          } else {
+            if (de(11) > 1) {
+              mot = Generateur.groupeNominal(premierGN);
+              if (mot.indexOf("_PP") > -1) {
+                mot = mot.replace(/_PP/, "");
                 this.PP = true;
               }
-              this.genreSujet = "F";
-            } else {
-              if (de(11) > 1) {
-                mot = Generateur.groupeNominal(premierGN);
-                if (mot.indexOf("_PP") > -1) {
-                  mot = mot.replace(/_PP/, "");
-                  this.PP = true;
-                }
-              } else {
-                mot = Grimoire.recupererMot(this.structure[i]);
-              }
-              if (!premierGN) this.genreSujet = (mot.indexOf("__F") > -1) ? "F": "H";
-              mot = mot.replace(/__F/, "");
-            }
-            if (!premierGN) premierGN = (i + 1);
-            break;
-          case "CO":
-            if (de(11) > 1) {
-              mot = Generateur.complementObjet(personne);
             } else {
               mot = Grimoire.recupererMot(this.structure[i]);
             }
-            break;
-          case "VET":
-            mot = Grimoire.recupererMot((de(8) > 7) ? "VT": "VET");
-            break;
-          case "VAV":
-            mot = Grimoire.recupererMot((de(10) > 9) ? "VT": "VAV");
-            break;
-          default:
+            if (!premierGN) this.genreSujet = (mot.indexOf("__F") > -1) ? "F": "H";
+            mot = mot.replace(/__F/, "");
+          }
+          if (!premierGN) premierGN = (i + 1);
+          break;
+          case "CO":
+          if (de(11) > 1) {
+            mot = Generateur.complementObjet(personne);
+          } else {
             mot = Grimoire.recupererMot(this.structure[i]);
+          }
+          break;
+          case "VET":
+          mot = Grimoire.recupererMot((de(8) > 7) ? "VT": "VET");
+          break;
+          case "VAV":
+          mot = Grimoire.recupererMot((de(10) > 9) ? "VT": "VAV");
+          break;
+          default:
+          mot = Grimoire.recupererMot(this.structure[i]);
         }
 
         var chercheParticule = mot.match(/(.*)\{(.*)\}/);// not boobs, I swear. Ok, I don't swear but seriously.
@@ -515,39 +517,39 @@ var Grimoire = {
 
     switch (verbe) {
       case "VT":
-        str.push((de(4) > 1) ? "CO": "GN");
-        break;
+      str.push((de(4) > 1) ? "CO": "GN");
+      break;
       case "VTL":
-        str.push("CL");
-        flagCL = true;
-        break;
+      str.push("CL");
+      flagCL = true;
+      break;
       case "VOA":
-        str.push("§à");
-        str.push((de(4) > 1) ? "CO": "GN");
-        break;
+      str.push("§à");
+      str.push((de(4) > 1) ? "CO": "GN");
+      break;
       case "VOD":
-        str.push("§de");
-        str.push((de(4) > 1) ? "CO": "GN");
-        break;
+      str.push("§de");
+      str.push((de(4) > 1) ? "CO": "GN");
+      break;
       case "VOS":
-        str.push("§sur");
-        str.push((de(4) > 1) ? "CO": "GN");
-        break;
+      str.push("§sur");
+      str.push((de(4) > 1) ? "CO": "GN");
+      break;
       case "VOI":
-        str.push((de(11) > 1) ? "CO": "GN");
-        str.push("§à");
-        str.push((de(11) > 1) ? "GN": "CO");
-        break;
+      str.push((de(11) > 1) ? "CO": "GN");
+      str.push("§à");
+      str.push((de(11) > 1) ? "GN": "CO");
+      break;
       case "VAV":
-        str.push((de(5) > 1) ? "CO": "GN");
-        str.push("§avec");
-        str.push((de(5) > 1) ? "CO": "GN");
-        break;
+      str.push((de(5) > 1) ? "CO": "GN");
+      str.push("§avec");
+      str.push((de(5) > 1) ? "CO": "GN");
+      break;
       case "VET":
-        str.push((de(5) > 1) ? "CO": "GN");
-        str.push("§et");
-        str.push((de(5) > 1) ? "CO": "GN");
-        break;
+      str.push((de(5) > 1) ? "CO": "GN");
+      str.push("§et");
+      str.push((de(5) > 1) ? "CO": "GN");
+      break;
     }
 
     if (de(100) < 20) {
@@ -583,39 +585,39 @@ var Grimoire = {
 
         switch (verbe) {
           case "VT":
-            str.push((de(4) > 1) ? "CO": "GN");
-            break;
+          str.push((de(4) > 1) ? "CO": "GN");
+          break;
           case "VTL":
-            str.push("CL");
-            flagCL = true;
-            break;
+          str.push("CL");
+          flagCL = true;
+          break;
           case "VOA":
-            str.push("§à");
-            str.push((de(4) > 1) ? "CO": "GN");
-            break;
+          str.push("§à");
+          str.push((de(4) > 1) ? "CO": "GN");
+          break;
           case "VOD":
-            str.push("§de");
-            str.push((de(4) > 1) ? "CO": "GN");
-            break;
+          str.push("§de");
+          str.push((de(4) > 1) ? "CO": "GN");
+          break;
           case "VOS":
-            str.push("§sur");
-            str.push((de(4) > 1) ? "CO": "GN");
-            break;
+          str.push("§sur");
+          str.push((de(4) > 1) ? "CO": "GN");
+          break;
           case "VOI":
-            str.push((de(11) > 1) ? "CO": "GN");
-            str.push("§à");
-            str.push((de(11) > 1) ? "CO": "GN");
-            break;
+          str.push((de(11) > 1) ? "CO": "GN");
+          str.push("§à");
+          str.push((de(11) > 1) ? "CO": "GN");
+          break;
           case "VAV":
-            str.push((de(5) > 1) ? "CO": "GN");
-            str.push("§avec");
-            str.push((de(5) > 1) ? "CO": "GN");
-            break;
+          str.push((de(5) > 1) ? "CO": "GN");
+          str.push("§avec");
+          str.push((de(5) > 1) ? "CO": "GN");
+          break;
           case "VET":
-            str.push((de(5) > 1) ? "CO": "GN");
-            str.push("§et");
-            str.push((de(5) > 1) ? "CO": "GN");
-            break;
+          str.push((de(5) > 1) ? "CO": "GN");
+          str.push("§et");
+          str.push((de(5) > 1) ? "CO": "GN");
+          break;
         }
       }
     }
@@ -651,9 +653,9 @@ var Grimoire = {
       proto = [];
       switch(i) {
         case 0:
-          proto.push("CT"); proto.push("VG"); break;
+        proto.push("CT"); proto.push("VG"); break;
         case 1:
-          proto.push("CL"); proto.push("VG"); break;
+        proto.push("CL"); proto.push("VG"); break;
       }
       proto.push("GN");
       liste.push(proto);
@@ -817,22 +819,22 @@ var Grimoire = {
       proto = memListe.cloner();
       switch (i) {
         case 0:
-          proto.pushEach("AF");
-          break;
+        proto.pushEach("AF");
+        break;
         case 1:
-          for (var j = 0, jMax = proto.length; j < jMax; ++j) {
-            if (proto[j].indexOf("CL") == -1) {
-              proto[j].push("CL");
-            }
+        for (var j = 0, jMax = proto.length; j < jMax; ++j) {
+          if (proto[j].indexOf("CL") == -1) {
+            proto[j].push("CL");
           }
-          break;
+        }
+        break;
         case 2:
-          for (var j = 0, jMax = proto.length; j < jMax; ++j) {
-            if (proto[j].indexOf("CT") == -1) {
-              proto[j].push("CT");
-            }
+        for (var j = 0, jMax = proto.length; j < jMax; ++j) {
+          if (proto[j].indexOf("CT") == -1) {
+            proto[j].push("CT");
           }
-          break;
+        }
+        break;
       }
       for (var j = 0, jMax = proto.length; j < jMax; ++j) {
         liste.push(proto[j]);
@@ -995,216 +997,216 @@ var Grimoire = {
       var racine, terminaisons, inter = "";
       switch (groupe) {
         case 1:// verbes #1 : (modèle: chanter)
-          racine = verbe.substr(0, verbe.lastIndexOf("er"));
-          terminaisons = [
-            ["ais", "ais", "ait", "ions", "iez", "aient"],
-            ["e", "es", "e", "ons", "ez", "ent"],
-            ["erai", "eras", "era", "erons", "erez", "eront"],
-            ["é", "ant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("er"));
+        terminaisons = [
+          ["ais", "ais", "ait", "ions", "iez", "aient"],
+          ["e", "es", "e", "ons", "ez", "ent"],
+          ["erai", "eras", "era", "erons", "erez", "eront"],
+          ["é", "ant"]
+        ];
+        break;
         case 2:// verbes #2 : (modèle: finir)
-          racine = verbe.substr(0, verbe.lastIndexOf("ir"));
-          terminaisons = [
-            ["issais", "issais", "issait", "issions", "issiez", "issaient"],
-            ["is", "is", "it", "issons", "issez", "issent"],
-            ["irai", "iras", "ira", "irons", "irez", "iront"],
-            ["i", "issant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("ir"));
+        terminaisons = [
+          ["issais", "issais", "issait", "issions", "issiez", "issaient"],
+          ["is", "is", "it", "issons", "issez", "issent"],
+          ["irai", "iras", "ira", "irons", "irez", "iront"],
+          ["i", "issant"]
+        ];
+        break;
         case 3:// verbes #3 : (modèle: sentir)
-          racine = verbe.substr(0, verbe.lastIndexOf("tir"));
-          terminaisons = [
-            ["tais", "tais", "tait", "tions", "tiez", "taient"],
-            ["s", "s", "t", "tons", "tez", "tent"],
-            ["tirai", "tiras", "tira", "tirons", "tirez", "tiront"],
-            ["ti", "tant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("tir"));
+        terminaisons = [
+          ["tais", "tais", "tait", "tions", "tiez", "taient"],
+          ["s", "s", "t", "tons", "tez", "tent"],
+          ["tirai", "tiras", "tira", "tirons", "tirez", "tiront"],
+          ["ti", "tant"]
+        ];
+        break;
         case 4:// verbes #4 : (modèle: vendre/répondre)
-          racine = verbe.substr(0, verbe.lastIndexOf("re"));
-          terminaisons = [
-            ["ais", "ais", "ait", "ions", "iez", "aient"],
-            ["s", "s", "", "ons", "ez", "ent"],
-            ["rai", "ras", "ra", "rons", "rez", "ront"],
-            ["u", "ant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("re"));
+        terminaisons = [
+          ["ais", "ais", "ait", "ions", "iez", "aient"],
+          ["s", "s", "", "ons", "ez", "ent"],
+          ["rai", "ras", "ra", "rons", "rez", "ront"],
+          ["u", "ant"]
+        ];
+        break;
         case 5:// verbes #5 : (modèle: paraître)
-          racine = verbe.substr(0, verbe.lastIndexOf("aître"));
-          terminaisons = [
-            ["aissais", "aissais", "aissait", "aissions", "aissiez", "aissaient"],
-            ["ais", "ais", "aît", "aissons", "aissez", "aissent"],
-            ["aîtrai", "aîtras", "aîtra", "aîtrons", "aîtrez", "aîtront"],
-            ["u", "aissant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("aître"));
+        terminaisons = [
+          ["aissais", "aissais", "aissait", "aissions", "aissiez", "aissaient"],
+          ["ais", "ais", "aît", "aissons", "aissez", "aissent"],
+          ["aîtrai", "aîtras", "aîtra", "aîtrons", "aîtrez", "aîtront"],
+          ["u", "aissant"]
+        ];
+        break;
         case 6:// verbes #6 : (modèle: construire)
-          racine = verbe.substr(0, verbe.lastIndexOf("re"));
-          terminaisons = [
-            ["sais", "sais", "sait", "sions", "siez", "saient"],
-            ["s", "s", "t", "sons", "sez", "sent"],
-            ["rai", "ras", "ra", "rons", "rez", "ront"],
-            ["t", "sant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("re"));
+        terminaisons = [
+          ["sais", "sais", "sait", "sions", "siez", "saient"],
+          ["s", "s", "t", "sons", "sez", "sent"],
+          ["rai", "ras", "ra", "rons", "rez", "ront"],
+          ["t", "sant"]
+        ];
+        break;
         case 7:// verbes #7 : (modèle: peindre/joindre/craindre)
-          racine = verbe.substr(0, verbe.lastIndexOf("ndre"));
-          terminaisons = [
-            ["gnais", "gnais", "gnait", "gnions", "gniez", "gnaient"],
-            ["ns", "ns", "nt", "gnons", "gnez", "gnent"],
-            ["ndrai", "ndras", "ndra", "ndrons", "ndrez", "ndront"],
-            ["nt", "gnant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("ndre"));
+        terminaisons = [
+          ["gnais", "gnais", "gnait", "gnions", "gniez", "gnaient"],
+          ["ns", "ns", "nt", "gnons", "gnez", "gnent"],
+          ["ndrai", "ndras", "ndra", "ndrons", "ndrez", "ndront"],
+          ["nt", "gnant"]
+        ];
+        break;
         case 8:// verbes #8 : (modèle: tenir)
-          racine = verbe.substr(0, verbe.lastIndexOf("enir"));
-          terminaisons = [
-            ["enais", "enais", "enait", "enions", "eniez", "enaient"],
-            ["iens", "iens", "ient", "enons", "enez", "iennent"],
-            ["iendrai", "iendras", "iendra", "iendrons", "iendrez", "iendront"],
-            ["enu", "enant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("enir"));
+        terminaisons = [
+          ["enais", "enais", "enait", "enions", "eniez", "enaient"],
+          ["iens", "iens", "ient", "enons", "enez", "iennent"],
+          ["iendrai", "iendras", "iendra", "iendrons", "iendrez", "iendront"],
+          ["enu", "enant"]
+        ];
+        break;
         case 9:// verbes #9 : (modèle: placer)
-          racine = verbe.substr(0, verbe.lastIndexOf("cer"));
-          terminaisons = [
-            ["çais", "çais", "çait", "cions", "ciez", "çaient"],
-            ["ce", "ces", "ce", "çons", "cez", "cent"],
-            ["cerai", "ceras", "cera", "cerons", "cerez", "ceront"],
-            ["cé", "çant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("cer"));
+        terminaisons = [
+          ["çais", "çais", "çait", "cions", "ciez", "çaient"],
+          ["ce", "ces", "ce", "çons", "cez", "cent"],
+          ["cerai", "ceras", "cera", "cerons", "cerez", "ceront"],
+          ["cé", "çant"]
+        ];
+        break;
         case 10:// verbes #10 : (modèle: manger)
-          racine = verbe.substr(0, verbe.lastIndexOf("er"));
-          terminaisons = [
-            ["eais", "eais", "eait", "ions", "iez", "eaient"],
-            ["e", "es", "e", "eons", "ez", "ent"],
-            ["erai", "eras", "era", "erons", "erez", "eront"],
-            ["é", "eant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("er"));
+        terminaisons = [
+          ["eais", "eais", "eait", "ions", "iez", "eaient"],
+          ["e", "es", "e", "eons", "ez", "ent"],
+          ["erai", "eras", "era", "erons", "erez", "eront"],
+          ["é", "eant"]
+        ];
+        break;
         case 11:// verbes #11 : (modèle: récupérer/accéder)
-          var posEaigu = verbe.lastIndexOf("é");
-          racine = verbe.substr(0, posEaigu);
-          inter = verbe.replace(/^(.*)é([^é]*)er#11$/, "$2");
-          terminaisons = [
-            ["é_ais", "é_ais", "é_ait", "é_ions", "é_iez", "é_aient"],
-            ["è_e", "è_es", "è_e", "é_ons", "é_ez", "è_ent"],
-            ["é_erai", "é_eras", "é_era", "é_erons", "é_erez", "é_eront"],
-            ["é_é", "é_ant"]
-          ];
-          break;
+        var posEaigu = verbe.lastIndexOf("é");
+        racine = verbe.substr(0, posEaigu);
+        inter = verbe.replace(/^(.*)é([^é]*)er#11$/, "$2");
+        terminaisons = [
+          ["é_ais", "é_ais", "é_ait", "é_ions", "é_iez", "é_aient"],
+          ["è_e", "è_es", "è_e", "é_ons", "é_ez", "è_ent"],
+          ["é_erai", "é_eras", "é_era", "é_erons", "é_erez", "é_eront"],
+          ["é_é", "é_ant"]
+        ];
+        break;
         case 12:// verbes #12 : (modèle: mener/lever/peser)
-          var posEfaible = verbe.lastIndexOf("e");
-          posEfaible = verbe.substr(0, posEfaible).lastIndexOf("e");
-          racine = verbe.substr(0, posEfaible);
-          inter = verbe.replace(/^(.*)e([^e]*)er#12$/, "$2");
-          terminaisons = [
-            ["e_ais", "e_ais", "e_ait", "e_ions", "e_iez", "e_aient"],
-            ["è_e", "è_es", "è_e", "e_ons", "e_ez", "è_ent"],
-            ["è_erai", "è_eras", "è_era", "è_erons", "è_erez", "è_eront"],
-            ["e_é", "e_ant"]
-          ];
-          break;
+        var posEfaible = verbe.lastIndexOf("e");
+        posEfaible = verbe.substr(0, posEfaible).lastIndexOf("e");
+        racine = verbe.substr(0, posEfaible);
+        inter = verbe.replace(/^(.*)e([^e]*)er#12$/, "$2");
+        terminaisons = [
+          ["e_ais", "e_ais", "e_ait", "e_ions", "e_iez", "e_aient"],
+          ["è_e", "è_es", "è_e", "e_ons", "e_ez", "è_ent"],
+          ["è_erai", "è_eras", "è_era", "è_erons", "è_erez", "è_eront"],
+          ["e_é", "e_ant"]
+        ];
+        break;
         case 13:// verbes #13 : (modèle: prendre)
-          racine = verbe.substr(0, verbe.lastIndexOf("endre"));
-          terminaisons = [
-            ["enais", "enais", "enait", "enions", "eniez", "enaient"],
-            ["ends", "ends", "end", "enons", "enez", "ennent"],
-            ["endrai", "endras", "endra", "endrons", "endrez", "endront"],
-            ["is", "enant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("endre"));
+        terminaisons = [
+          ["enais", "enais", "enait", "enions", "eniez", "enaient"],
+          ["ends", "ends", "end", "enons", "enez", "ennent"],
+          ["endrai", "endras", "endra", "endrons", "endrez", "endront"],
+          ["is", "enant"]
+        ];
+        break;
         case 14:// verbes #14 : (modèle: mettre)
-          racine = verbe.substr(0, verbe.lastIndexOf("ettre"));
-          terminaisons = [
-            ["ettais", "ettais", "ettait", "ettions", "ettiez", "ettaient"],
-            ["ets", "ets", "et", "ettons", "ettez", "ettent"],
-            ["ettrai", "ettras", "ettra", "ettrons", "ettrez", "ettront"],
-            ["is", "ettant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("ettre"));
+        terminaisons = [
+          ["ettais", "ettais", "ettait", "ettions", "ettiez", "ettaient"],
+          ["ets", "ets", "et", "ettons", "ettez", "ettent"],
+          ["ettrai", "ettras", "ettra", "ettrons", "ettrez", "ettront"],
+          ["is", "ettant"]
+        ];
+        break;
         case 15:// verbes #15 : (modèle: essuyer/employer)
-          racine = verbe.substr(0, verbe.lastIndexOf("yer"));
-          terminaisons = [
-            ["yais", "yais", "yait", "yions", "yiez", "yaient"],
-            ["ie", "ies", "ie", "yons", "yez", "ient"],
-            ["ierai", "ieras", "iera", "ierons", "ierez", "ieront"],
-            ["yé", "yant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("yer"));
+        terminaisons = [
+          ["yais", "yais", "yait", "yions", "yiez", "yaient"],
+          ["ie", "ies", "ie", "yons", "yez", "ient"],
+          ["ierai", "ieras", "iera", "ierons", "ierez", "ieront"],
+          ["yé", "yant"]
+        ];
+        break;
         case 16:// verbes #16 : (modèle: ouvrir)
-          racine = verbe.substr(0, verbe.lastIndexOf("rir"));
-          terminaisons = [
-            ["rais", "rais", "rait", "rions", "riez", "raient"],
-            ["re", "res", "re", "rons", "rez", "rent"],
-            ["rirai", "riras", "rira", "rirons", "rirez", "riront"],
-            ["ert", "rant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("rir"));
+        terminaisons = [
+          ["rais", "rais", "rait", "rions", "riez", "raient"],
+          ["re", "res", "re", "rons", "rez", "rent"],
+          ["rirai", "riras", "rira", "rirons", "rirez", "riront"],
+          ["ert", "rant"]
+        ];
+        break;
         case 17:// verbes #17 : (modèle: battre)
-          racine = verbe.substr(0, verbe.lastIndexOf("tre"));
-          terminaisons = [
-            ["tais", "tais", "tait", "tions", "tiez", "taient"],
-            ["s", "s", "", "tons", "tez", "tent"],
-            ["trai", "tras", "tra", "trons", "trez", "tront"],
-            ["tu", "tant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("tre"));
+        terminaisons = [
+          ["tais", "tais", "tait", "tions", "tiez", "taient"],
+          ["s", "s", "", "tons", "tez", "tent"],
+          ["trai", "tras", "tra", "trons", "trez", "tront"],
+          ["tu", "tant"]
+        ];
+        break;
         case 18:// verbes #18 : (modèle: écrire)
-          racine = verbe.substr(0, verbe.lastIndexOf("re"));
-          terminaisons = [
-            ["vais", "vais", "vait", "vions", "viez", "vaient"],
-            ["s", "s", "t", "vons", "vez", "vent"],
-            ["rai", "ras", "ra", "rons", "rez", "ront"],
-            ["t", "vant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("re"));
+        terminaisons = [
+          ["vais", "vais", "vait", "vions", "viez", "vaient"],
+          ["s", "s", "t", "vons", "vez", "vent"],
+          ["rai", "ras", "ra", "rons", "rez", "ront"],
+          ["t", "vant"]
+        ];
+        break;
         case 19:// verbes #19 : (modèle: servir)
-          racine = verbe.substr(0, verbe.lastIndexOf("vir"));
-          terminaisons = [
-            ["vais", "vais", "vait", "vions", "viez", "vaient"],
-            ["s", "s", "t", "vons", "vez", "vent"],
-            ["virai", "viras", "vira", "virons", "virez", "viront"],
-            ["vi", "vant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("vir"));
+        terminaisons = [
+          ["vais", "vais", "vait", "vions", "viez", "vaient"],
+          ["s", "s", "t", "vons", "vez", "vent"],
+          ["virai", "viras", "vira", "virons", "virez", "viront"],
+          ["vi", "vant"]
+        ];
+        break;
         case 20:// verbes #20 : (modèle: percevoir)
-          racine = verbe.substr(0, verbe.lastIndexOf("cevoir"));
-          terminaisons = [
-            ["cevais", "cevais", "cevait", "cevions", "ceviez", "cevaient"],
-            ["çois", "çois", "çoit", "cevons", "cevez", "çoivent"],
-            ["cevrai", "cevras", "cevra", "cevrons", "cevrez", "cevront"],
-            ["çu", "cevant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("cevoir"));
+        terminaisons = [
+          ["cevais", "cevais", "cevait", "cevions", "ceviez", "cevaient"],
+          ["çois", "çois", "çoit", "cevons", "cevez", "çoivent"],
+          ["cevrai", "cevras", "cevra", "cevrons", "cevrez", "cevront"],
+          ["çu", "cevant"]
+        ];
+        break;
         case 21:// verbes #21 : (modèle: jeter)
-          racine = verbe.substr(0, verbe.lastIndexOf("er"));
-          terminaisons = [
-            ["ais", "ais", "ait", "ions", "iez", "aient"],
-            ["te", "tes", "te", "ons", "ez", "tent"],
-            ["terai", "teras", "tera", "terons", "terez", "teront"],
-            ["é", "ant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("er"));
+        terminaisons = [
+          ["ais", "ais", "ait", "ions", "iez", "aient"],
+          ["te", "tes", "te", "ons", "ez", "tent"],
+          ["terai", "teras", "tera", "terons", "terez", "teront"],
+          ["é", "ant"]
+        ];
+        break;
         case 22:// verbes #22 : (modèle: vivre)
-          racine = verbe.substr(0, verbe.lastIndexOf("ivre"));
-          terminaisons = [
-            ["ivais", "ivais", "ivait", "ivions", "iviez", "ivaient"],
-            ["is", "is", "it", "ivons", "ivez", "ivent"],
-            ["ivrai", "ivras", "ivra", "ivrons", "ivrez", "ivront"],
-            ["écu", "vant"]
-          ];
+        racine = verbe.substr(0, verbe.lastIndexOf("ivre"));
+        terminaisons = [
+          ["ivais", "ivais", "ivait", "ivions", "iviez", "ivaient"],
+          ["is", "is", "it", "ivons", "ivez", "ivent"],
+          ["ivrai", "ivras", "ivra", "ivrons", "ivrez", "ivront"],
+          ["écu", "vant"]
+        ];
         case 23:// verbes #23 : (modèle: appeler)
-          racine = verbe.substr(0, verbe.lastIndexOf("er"));
-          terminaisons = [
-            ["ais", "ais", "ait", "ions", "iez", "aient"],
-            ["le", "les", "le", "ons", "ez", "lent"],
-            ["lerai", "leras", "lera", "lerons", "lerez", "leront"],
-            ["é", "ant"]
-          ];
-          break;
+        racine = verbe.substr(0, verbe.lastIndexOf("er"));
+        terminaisons = [
+          ["ais", "ais", "ait", "ions", "iez", "aient"],
+          ["le", "les", "le", "ons", "ez", "lent"],
+          ["lerai", "leras", "lera", "lerons", "lerez", "leront"],
+          ["é", "ant"]
+        ];
+        break;
       }
 
       var ligne, terminaison;
@@ -1222,229 +1224,229 @@ var Grimoire = {
     } else { // conjugaisons irrégulières ou non encore catégorisées
       switch (verbe) {
         case "être":
-          formes = [
-            ["étais", "étais", "était", "étions", "étiez", "étaient"],
-            ["suis", "es", "est", "sommes", "êtes", "sont"],
-            ["serai", "seras", "sera", "serons", "serez", "seront"],
-            ["été", "étant"]
-          ];
-          break;
+        formes = [
+          ["étais", "étais", "était", "étions", "étiez", "étaient"],
+          ["suis", "es", "est", "sommes", "êtes", "sont"],
+          ["serai", "seras", "sera", "serons", "serez", "seront"],
+          ["été", "étant"]
+        ];
+        break;
         case "avoir":
-          formes = [
-            ["avais", "avais", "avait", "avions", "aviez", "avaient"],
-            ["ai", "as", "a", "avons", "avez", "ont"],
-            ["aurai", "auras", "aura", "aurons", "aurez", "auront"],
-            ["eu", "ayant"]
-          ];
-          break;
+        formes = [
+          ["avais", "avais", "avait", "avions", "aviez", "avaient"],
+          ["ai", "as", "a", "avons", "avez", "ont"],
+          ["aurai", "auras", "aura", "aurons", "aurez", "auront"],
+          ["eu", "ayant"]
+        ];
+        break;
         case "aller":
-          formes = [
-            ["allais", "allais", "allait", "allions", "alliez", "allaient"],
-            ["vais", "vas", "va", "allons", "allez", "vont"],
-            ["irai", "iras", "ira", "irons", "irez", "iront"],
-            ["allé", "allant"]
-          ];
-          break;
+        formes = [
+          ["allais", "allais", "allait", "allions", "alliez", "allaient"],
+          ["vais", "vas", "va", "allons", "allez", "vont"],
+          ["irai", "iras", "ira", "irons", "irez", "iront"],
+          ["allé", "allant"]
+        ];
+        break;
         case "devoir":
-          formes = [
-            ["devais", "devais", "devait", "devions", "deviez", "devaient"],
-            ["dois", "dois", "doit", "devons", "devez", "doivent"],
-            ["devrai", "devras", "devra", "devrons", "devrez", "devront"],
-            ["du", "devant"]
-          ];
-          break;
+        formes = [
+          ["devais", "devais", "devait", "devions", "deviez", "devaient"],
+          ["dois", "dois", "doit", "devons", "devez", "doivent"],
+          ["devrai", "devras", "devra", "devrons", "devrez", "devront"],
+          ["du", "devant"]
+        ];
+        break;
         case "voir":
-          formes = [
-            ["voyais", "voyais", "voyait", "voyions", "voyiez", "voyaient"],
-            ["vois", "vois", "voit", "voyons", "voyez", "voient"],
-            ["verrai", "verras", "verra", "verrons", "verrez", "verront"],
-            ["vu", "voyant"]
-          ];
-          break;
+        formes = [
+          ["voyais", "voyais", "voyait", "voyions", "voyiez", "voyaient"],
+          ["vois", "vois", "voit", "voyons", "voyez", "voient"],
+          ["verrai", "verras", "verra", "verrons", "verrez", "verront"],
+          ["vu", "voyant"]
+        ];
+        break;
         case "savoir":
-          formes = [
-            ["savais", "savais", "savait", "savions", "saviez", "savaient"],
-            ["sais", "sais", "sait", "savons", "savez", "savent"],
-            ["saurai", "sauras", "saura", "saurons", "saurez", "sauront"],
-            ["su", "sachant"]
-          ];
-          break;
+        formes = [
+          ["savais", "savais", "savait", "savions", "saviez", "savaient"],
+          ["sais", "sais", "sait", "savons", "savez", "savent"],
+          ["saurai", "sauras", "saura", "saurons", "saurez", "sauront"],
+          ["su", "sachant"]
+        ];
+        break;
         case "pouvoir":
-          formes = [
-            ["pouvais", "pouvais", "pouvait", "pouvions", "pouviez", "pouvaient"],
-            ["peux", "peux", "peut", "pouvons", "pouvez", "peuvent"],
-            ["pourrai", "pourras", "pourra", "pourrons", "pourrez", "pourront"],
-            ["pu", "pouvant"]
-          ];
-          break;
+        formes = [
+          ["pouvais", "pouvais", "pouvait", "pouvions", "pouviez", "pouvaient"],
+          ["peux", "peux", "peut", "pouvons", "pouvez", "peuvent"],
+          ["pourrai", "pourras", "pourra", "pourrons", "pourrez", "pourront"],
+          ["pu", "pouvant"]
+        ];
+        break;
         case "résoudre":
-          formes = [
-            ["résolvais", "résolvais", "résolvait", "résolvions", "résolviez", "résolvaient"],
-            ["résous", "résous", "résout", "résolvons", "résolvez", "résolvent"],
-            ["résoudrai", "résoudras", "résoudra", "résoudrons", "résoudrez", "résoudront"],
-            ["résolu", "résolvant"]
-          ];
-          break;
+        formes = [
+          ["résolvais", "résolvais", "résolvait", "résolvions", "résolviez", "résolvaient"],
+          ["résous", "résous", "résout", "résolvons", "résolvez", "résolvent"],
+          ["résoudrai", "résoudras", "résoudra", "résoudrons", "résoudrez", "résoudront"],
+          ["résolu", "résolvant"]
+        ];
+        break;
         case "mordre":
-          formes = [
-            ["mordais", "mordais", "mordait", "mordions", "mordiez", "mordaient"],
-            ["mords", "mords", "mord", "mordons", "mordez", "mordent"],
-            ["mordrai", "mordras", "mordra", "mordrons", "mordrez", "mordront"],
-            ["mordu", "mordant"]
-          ];
-          break;
+        formes = [
+          ["mordais", "mordais", "mordait", "mordions", "mordiez", "mordaient"],
+          ["mords", "mords", "mord", "mordons", "mordez", "mordent"],
+          ["mordrai", "mordras", "mordra", "mordrons", "mordrez", "mordront"],
+          ["mordu", "mordant"]
+        ];
+        break;
         case "envoyer":
-          formes = [
-            ["envoyais", "envoyais", "envoyait", "envoyions", "envoyiez", "envoyaient"],
-            ["envoie", "envoies", "envoie", "envoyons", "envoyez", "envoient"],
-            ["enverrai", "enverras", "enverra", "enverrons", "enverrez", "enverront"],
-            ["envoyé", "envoyant"]
-          ];
-          break;
+        formes = [
+          ["envoyais", "envoyais", "envoyait", "envoyions", "envoyiez", "envoyaient"],
+          ["envoie", "envoies", "envoie", "envoyons", "envoyez", "envoient"],
+          ["enverrai", "enverras", "enverra", "enverrons", "enverrez", "enverront"],
+          ["envoyé", "envoyant"]
+        ];
+        break;
         case "faire":
-          formes = [
-            ["faisais", "faisais", "faisait", "faisions", "faisiez", "faisaient"],
-            ["fais", "fais", "fait", "faisons", "faites", "font"],
-            ["ferai", "feras", "fera", "ferons", "ferez", "feront"],
-            ["fait", "faisant"]
-          ];
-          break;
+        formes = [
+          ["faisais", "faisais", "faisait", "faisions", "faisiez", "faisaient"],
+          ["fais", "fais", "fait", "faisons", "faites", "font"],
+          ["ferai", "feras", "fera", "ferons", "ferez", "feront"],
+          ["fait", "faisant"]
+        ];
+        break;
         case "vouloir":
-          formes = [
-            ["voulais", "voulais", "voulait", "voulions", "vouliez", "voulaient"],
-            ["veux", "veux", "veut", "voulons", "voulez", "veulent"],
-            ["voudrai", "voudras", "voudra", "voudrons", "voudrez", "voudront"],
-            ["voulu", "voulant"]
-          ];
-          break;
+        formes = [
+          ["voulais", "voulais", "voulait", "voulions", "vouliez", "voulaient"],
+          ["veux", "veux", "veut", "voulons", "voulez", "veulent"],
+          ["voudrai", "voudras", "voudra", "voudrons", "voudrez", "voudront"],
+          ["voulu", "voulant"]
+        ];
+        break;
         case "croire":
-          formes = [
-            ["croyais", "croyais", "croyait", "croyions", "croyiez", "croyaient"],
-            ["crois", "crois", "croit", "croyons", "croyez", "croient"],
-            ["croirai", "croiras", "croira", "croirons", "croirez", "croiront"],
-            ["cru", "croyant"]
-          ];
-          break;
+        formes = [
+          ["croyais", "croyais", "croyait", "croyions", "croyiez", "croyaient"],
+          ["crois", "crois", "croit", "croyons", "croyez", "croient"],
+          ["croirai", "croiras", "croira", "croirons", "croirez", "croiront"],
+          ["cru", "croyant"]
+        ];
+        break;
         case "rire":
-          formes = [
-            ["riais", "riais", "riait", "riions", "riiez", "riaient"],
-            ["ris", "ris", "rit", "rions", "riez", "rient"],
-            ["rirai", "riras", "rira", "rirons", "rirez", "riront"],
-            ["ri", "riant"]
-          ];
-          break;
+        formes = [
+          ["riais", "riais", "riait", "riions", "riiez", "riaient"],
+          ["ris", "ris", "rit", "rions", "riez", "rient"],
+          ["rirai", "riras", "rira", "rirons", "rirez", "riront"],
+          ["ri", "riant"]
+        ];
+        break;
         case "lire":
-          formes = [
-            ["lisais", "lisais", "lisait", "lisions", "lisiez", "lisaient"],
-            ["lis", "lis", "lit", "lisons", "lisez", "lisent"],
-            ["lirai", "liras", "lira", "lirons", "lirez", "liront"],
-            ["lu", "lisant"]
-          ];
-          break;
+        formes = [
+          ["lisais", "lisais", "lisait", "lisions", "lisiez", "lisaient"],
+          ["lis", "lis", "lit", "lisons", "lisez", "lisent"],
+          ["lirai", "liras", "lira", "lirons", "lirez", "liront"],
+          ["lu", "lisant"]
+        ];
+        break;
         case "dire":
-          formes = [
-            ["disais", "disais", "disait", "disions", "disiez", "disaient"],
-            ["dis", "dis", "dit", "disons", "dites", "disent"],
-            ["dirai", "diras", "dira", "dirons", "direz", "diront"],
-            ["dit", "disant"]
-          ];
-          break;
+        formes = [
+          ["disais", "disais", "disait", "disions", "disiez", "disaient"],
+          ["dis", "dis", "dit", "disons", "dites", "disent"],
+          ["dirai", "diras", "dira", "dirons", "direz", "diront"],
+          ["dit", "disant"]
+        ];
+        break;
         case "interdire":
-          formes = [
-            ["interdisais", "interdisais", "interdisait", "interdisions", "interdisiez", "interdisaient"],
-            ["interdis", "interdis", "interdit", "interdisons", "interdisez", "interdisent"],
-            ["interdirai", "interdiras", "interdira", "interdirons", "interdirez", "interdiront"],
-            ["interdit", "interdisant"]
-          ];
-          break;
+        formes = [
+          ["interdisais", "interdisais", "interdisait", "interdisions", "interdisiez", "interdisaient"],
+          ["interdis", "interdis", "interdit", "interdisons", "interdisez", "interdisent"],
+          ["interdirai", "interdiras", "interdira", "interdirons", "interdirez", "interdiront"],
+          ["interdit", "interdisant"]
+        ];
+        break;
         case "suivre":
-          formes = [
-            ["suivais", "suivais", "suivait", "suivions", "suiviez", "suivaient"],
-            ["suis", "suis", "suit", "suivons", "suivez", "suivent"],
-            ["suivrai", "suivras", "suivra", "suivrons", "suivrez", "suivront"],
-            ["suivi", "suivant"]
-          ];
-          break;
+        formes = [
+          ["suivais", "suivais", "suivait", "suivions", "suiviez", "suivaient"],
+          ["suis", "suis", "suit", "suivons", "suivez", "suivent"],
+          ["suivrai", "suivras", "suivra", "suivrons", "suivrez", "suivront"],
+          ["suivi", "suivant"]
+        ];
+        break;
         case "perdre":
-          formes = [
-            ["perdais", "perdais", "perdait", "perdions", "perdiez", "perdaient"],
-            ["perds", "perds", "perd", "perdons", "perdez", "perdent"],
-            ["perdrai", "perdras", "perdra", "perdrons", "perdrez", "perdront"],
-            ["perdu", "perdant"]
-          ];
-          break;
+        formes = [
+          ["perdais", "perdais", "perdait", "perdions", "perdiez", "perdaient"],
+          ["perds", "perds", "perd", "perdons", "perdez", "perdent"],
+          ["perdrai", "perdras", "perdra", "perdrons", "perdrez", "perdront"],
+          ["perdu", "perdant"]
+        ];
+        break;
         case "dormir":
-          formes = [
-            ["dormais", "dormais", "dormait", "dormions", "dormiez", "dormaient"],
-            ["dors", "dors", "dort", "dormons", "dormez", "dorment"],
-            ["dormirai", "dormiras", "dormira", "dormirons", "dormirez", "dormiront"],
-            ["dormi", "dormant"]
-          ];
-          break;
+        formes = [
+          ["dormais", "dormais", "dormait", "dormions", "dormiez", "dormaient"],
+          ["dors", "dors", "dort", "dormons", "dormez", "dorment"],
+          ["dormirai", "dormiras", "dormira", "dormirons", "dormirez", "dormiront"],
+          ["dormi", "dormant"]
+        ];
+        break;
         case "courir":
-          formes = [
-            ["courais", "courais", "courait", "courions", "couriez", "couraient"],
-            ["cours", "cours", "court", "courons", "courez", "courent"],
-            ["courrai", "courras", "courra", "courrons", "courrez", "courront"],
-            ["couru", "courant"]
-          ];
-          break;
+        formes = [
+          ["courais", "courais", "courait", "courions", "couriez", "couraient"],
+          ["cours", "cours", "court", "courons", "courez", "courent"],
+          ["courrai", "courras", "courra", "courrons", "courrez", "courront"],
+          ["couru", "courant"]
+        ];
+        break;
         case "recourir":
-          formes = [
-            ["recourais", "recourais", "recourait", "recourions", "recouriez", "recouraient"],
-            ["recours", "recours", "recourt", "recourons", "recourez", "recourent"],
-            ["recourrai", "recourras", "recourra", "recourrons", "recourrez", "recourront"],
-            ["recouru", "recourant"]
-          ];
-          break;
+        formes = [
+          ["recourais", "recourais", "recourait", "recourions", "recouriez", "recouraient"],
+          ["recours", "recours", "recourt", "recourons", "recourez", "recourent"],
+          ["recourrai", "recourras", "recourra", "recourrons", "recourrez", "recourront"],
+          ["recouru", "recourant"]
+        ];
+        break;
         case "mourir":
-          formes = [
-            ["mourais", "mourais", "mourait", "mourions", "mouriez", "mouraient"],
-            ["meurs", "meurs", "meurt", "mourons", "mourez", "meurent"],
-            ["mourrai", "mourras", "mourra", "mourrons", "mourrez", "mourront"],
-            ["mort", "mourant"]
-          ];
-          break;
+        formes = [
+          ["mourais", "mourais", "mourait", "mourions", "mouriez", "mouraient"],
+          ["meurs", "meurs", "meurt", "mourons", "mourez", "meurent"],
+          ["mourrai", "mourras", "mourra", "mourrons", "mourrez", "mourront"],
+          ["mort", "mourant"]
+        ];
+        break;
         case "plaire":
-          formes = [
-            ["plaisais", "plaisais", "plaisait", "plaisions", "plaisiez", "plaisaient"],
-            ["plais", "plais", "plaît", "plaisons", "plaisez", "plaisent"],
-            ["plairai", "plairas", "plaira", "plairons", "plairez", "plairont"],
-            ["plu", "plaisant"]
-          ];
-          break;
+        formes = [
+          ["plaisais", "plaisais", "plaisait", "plaisions", "plaisiez", "plaisaient"],
+          ["plais", "plais", "plaît", "plaisons", "plaisez", "plaisent"],
+          ["plairai", "plairas", "plaira", "plairons", "plairez", "plairont"],
+          ["plu", "plaisant"]
+        ];
+        break;
         case "nuire":
-          formes = [
-            ["nuisais", "nuisais", "nuisait", "nuisions", "nuisiez", "nuisaient"],
-            ["nuis", "nuis", "nuit", "nuisons", "nuisez", "nuisent"],
-            ["nuirai", "nuiras", "nuira", "nuirons", "nuirez", "nuiront"],
-            ["nui", "nuisant"]
-          ];
-          break;
+        formes = [
+          ["nuisais", "nuisais", "nuisait", "nuisions", "nuisiez", "nuisaient"],
+          ["nuis", "nuis", "nuit", "nuisons", "nuisez", "nuisent"],
+          ["nuirai", "nuiras", "nuira", "nuirons", "nuirez", "nuiront"],
+          ["nui", "nuisant"]
+        ];
+        break;
         case "fuir":
-          formes = [
-            ["fuyais", "fuyais", "fuyait", "fuyions", "fuyiez", "fuyaient"],
-            ["fuis", "fuis", "fuit", "fuyons", "fuyez", "fuient"],
-            ["fuirai", "fuiras", "fuira", "fuirons", "fuirez", "fuiront"],
-            ["fui", "fuyant"]
-          ];
-          break;
+        formes = [
+          ["fuyais", "fuyais", "fuyait", "fuyions", "fuyiez", "fuyaient"],
+          ["fuis", "fuis", "fuit", "fuyons", "fuyez", "fuient"],
+          ["fuirai", "fuiras", "fuira", "fuirons", "fuirez", "fuiront"],
+          ["fui", "fuyant"]
+        ];
+        break;
         case "enfuir":
-          formes = [
-            ["enfuyais", "enfuyais", "enfuyait", "enfuyions", "enfuyiez", "enfuyaient"],
-            ["enfuis", "enfuis", "enfuit", "enfuyons", "enfuyez", "enfuient"],
-            ["enfuirai", "enfuiras", "enfuira", "enfuirons", "enfuirez", "enfuiront"],
-            ["enfui", "enfuyant"]
-          ];
-          break;
+        formes = [
+          ["enfuyais", "enfuyais", "enfuyait", "enfuyions", "enfuyiez", "enfuyaient"],
+          ["enfuis", "enfuis", "enfuit", "enfuyons", "enfuyez", "enfuient"],
+          ["enfuirai", "enfuiras", "enfuira", "enfuirons", "enfuirez", "enfuiront"],
+          ["enfui", "enfuyant"]
+        ];
+        break;
         case "£aïr":
-          formes = [
-            ["£aïssais", "£aïssais", "£aïssait", "£aïssions", "£aïssiez", "£aïssaient"],
-            ["£ais", "£ais", "£ait", "£aïssons", "£aïssez", "£aïssent"],
-            ["£aïrai", "£aïras", "£aïra", "£aïrons", "£aïrez", "£aïront"],
-            ["£aï", "£aïssant"]
-          ];
-          break;
+        formes = [
+          ["£aïssais", "£aïssais", "£aïssait", "£aïssions", "£aïssiez", "£aïssaient"],
+          ["£ais", "£ais", "£ait", "£aïssons", "£aïssez", "£aïssent"],
+          ["£aïrai", "£aïras", "£aïra", "£aïrons", "£aïrez", "£aïront"],
+          ["£aï", "£aïssant"]
+        ];
+        break;
       }
     }
 
@@ -1903,55 +1905,55 @@ var Generateur = {
           resultatBloc = 1;
         } else switch (bloc) {
           case "GN":
-            resultatBloc += statsGN;
-            resultatBloc += Grimoire.recupererListe(bloc).length;
-            break;
+          resultatBloc += statsGN;
+          resultatBloc += Grimoire.recupererListe(bloc).length;
+          break;
           case "CO":
-            resultatBloc += statsCO;
-            resultatBloc += Grimoire.recupererListe(bloc).length;
-            break;
+          resultatBloc += statsCO;
+          resultatBloc += Grimoire.recupererListe(bloc).length;
+          break;
           case "CT":
-            var jokers = 0;
-            var liste = Grimoire.recupererListe(bloc);
-            for (var k = 0, kMax = liste.length; k < kMax; ++k) {
-              var elem = liste[k];
-              resultatBloc += 3;
-              for (var l = 0, lMax = elem.length; l < lMax; ++l) {
-                if (elem.charAt(l) == "$") {
-                  ++jokers;
-                }
-                if (elem.charAt(l) == "¤") {
-                  resultatBloc -= 2;
-                }
+          var jokers = 0;
+          var liste = Grimoire.recupererListe(bloc);
+          for (var k = 0, kMax = liste.length; k < kMax; ++k) {
+            var elem = liste[k];
+            resultatBloc += 3;
+            for (var l = 0, lMax = elem.length; l < lMax; ++l) {
+              if (elem.charAt(l) == "$") {
+                ++jokers;
               }
-              ++resultatBloc;
+              if (elem.charAt(l) == "¤") {
+                resultatBloc -= 2;
+              }
             }
-            resultatBloc += (jokers * Generateur.GN.nomsPropres.length);
-            // pour dates aléatoires
-            var nbAlea = new Date() / (1000 * 60 * 60 * 24);// valeur en jours de la fourchette courante
-            nbAlea *= 11;// fourchette de la génération de Date.random()
-            resultatBloc += (nbAlea * 2);// pour l'affichage (ou non) du nom du jour, exemple : "le (dimanche) 2 janvier 2011"
-            resultatBloc += 4000;// pour les dates de Generateur.annee()
-            break;
+            ++resultatBloc;
+          }
+          resultatBloc += (jokers * Generateur.GN.nomsPropres.length);
+          // pour dates aléatoires
+          var nbAlea = new Date() / (1000 * 60 * 60 * 24);// valeur en jours de la fourchette courante
+          nbAlea *= 11;// fourchette de la génération de Date.random()
+          resultatBloc += (nbAlea * 2);// pour l'affichage (ou non) du nom du jour, exemple : "le (dimanche) 2 janvier 2011"
+          resultatBloc += 4000;// pour les dates de Generateur.annee()
+          break;
           case "CL":
           case "AF":
-            var jokers = 0, jokersPlus = 0;
-            var liste = Grimoire.recupererListe(bloc);
-            for (var k = 0, kMax = liste.length; k < kMax; ++k) {
-              var elem = liste[k];
-              for (var l = 0, lMax = elem.length; l < lMax; ++l) {
-                if (elem.charAt(l) == "$") {
-                  ++jokers;
-                }
-                if (elem.charAt(l) == "+") {
-                  ++jokersPlus;
-                }
+          var jokers = 0, jokersPlus = 0;
+          var liste = Grimoire.recupererListe(bloc);
+          for (var k = 0, kMax = liste.length; k < kMax; ++k) {
+            var elem = liste[k];
+            for (var l = 0, lMax = elem.length; l < lMax; ++l) {
+              if (elem.charAt(l) == "$") {
+                ++jokers;
               }
-              ++resultatBloc;
+              if (elem.charAt(l) == "+") {
+                ++jokersPlus;
+              }
             }
-            resultatBloc += (jokers * Generateur.GN.nomsPropres.length);
-            resultatBloc += Math.floor((jokersPlus * Generateur.GN.nomsCommuns.length) / 1.5);// approximation (on ne peut pas compter tous les noms communs car le genre doit correspondre)
-            break;
+            ++resultatBloc;
+          }
+          resultatBloc += (jokers * Generateur.GN.nomsPropres.length);
+          resultatBloc += Math.floor((jokersPlus * Generateur.GN.nomsCommuns.length) / 1.5);// approximation (on ne peut pas compter tous les noms communs car le genre doit correspondre)
+          break;
           case "VT":
           case "VN":
           case "VM":
@@ -1966,9 +1968,9 @@ var Generateur = {
           case "VOS":
           case "PR_T":
           case "PR_N":
-            resultatBloc += Grimoire.recupererListe(bloc).length * (Grimoire.recupererListe("NG").length + 1);
+          resultatBloc += Grimoire.recupererListe(bloc).length * (Grimoire.recupererListe("NG").length + 1);
           default:
-            resultatBloc += Grimoire.recupererListe(bloc).length;
+          resultatBloc += Grimoire.recupererListe(bloc).length;
         }
 
         if ((bloc == "CT") || (bloc == "CL") || (bloc == "AF")) {
@@ -2021,37 +2023,37 @@ var Generateur = {
           while ((consonne.length > 1) && consonne.estHomogene());
         }
         var voyelle = (de(5) > 1) ?
-          probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) :
-          probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES);
+        probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) :
+        probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES);
         return consonne + voyelle;
       } else if (position == max) {// améliorer les finales (+ ajouter meta-donnees ici ?)
         var syll;
         if (de(3) > 1) {
           var consonne = (de(7) > 1) ?
-            probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) :
-            probaSwitch(Generateur.Mots.multiConsonnes, Generateur.Mots.PROBA_MULTICONSONNES);
+          probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) :
+          probaSwitch(Generateur.Mots.multiConsonnes, Generateur.Mots.PROBA_MULTICONSONNES);
           var voyelle = (de(5) > 1) ?
-            probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES_F) :
-            probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES_F);
+          probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES_F) :
+          probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES_F);
           syll = consonne + voyelle;
         } else {
           var consonne = (de(7) > 1) ?
-            probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) :
-            probaSwitch(Generateur.Mots.multiConsonnes, Generateur.Mots.PROBA_MULTICONSONNES);
+          probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) :
+          probaSwitch(Generateur.Mots.multiConsonnes, Generateur.Mots.PROBA_MULTICONSONNES);
           var voyelle = (de(5) > 1) ?
-            probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) :
-            probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES);
+          probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) :
+          probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES);
           var term = probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES_F);
           syll = consonne + voyelle + term;
         }
         return syll;
       } else {
         var consonne = (de(7) > 1) ?
-          probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) :
-          probaSwitch(Generateur.Mots.multiConsonnes, Generateur.Mots.PROBA_MULTICONSONNES);
+        probaSwitch(Generateur.Mots.consonnes, Generateur.Mots.PROBA_CONSONNES) :
+        probaSwitch(Generateur.Mots.multiConsonnes, Generateur.Mots.PROBA_MULTICONSONNES);
         var voyelle = (de(5) > 1) ?
-          probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) :
-          probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES);
+        probaSwitch(Generateur.Mots.voyelles, Generateur.Mots.PROBA_VOYELLES) :
+        probaSwitch(Generateur.Mots.diphtongues, Generateur.Mots.PROBA_DIPHTONGUES);
         return consonne + voyelle;
       }
     },
@@ -2094,7 +2096,7 @@ String.prototype.repeter = function(n, sep) {
   var chaine = "";
   n = Math.round(n);
   for (var i = 0 ; i < n ; ++i)
-    chaine += this + ((sep && (n > (i + 1)))?sep:"");
+  chaine += this + ((sep && (n > (i + 1)))?sep:"");
   return chaine;
 }
 
@@ -2104,7 +2106,7 @@ String.prototype.repeter = function(n, sep) {
 // RETOUR : chaine (construite à partir de la chaine courante)
 String.prototype.inserer = function(chaine, indice) {
   if ((indice < 0) || (indice > this.length) || !chaine.toString)
-    return false;
+  return false;
   return this.substr(0, indice) + chaine + this.substr(indice);
 }
 
@@ -2118,10 +2120,10 @@ String.prototype.sansAccents = function() {
 // RETOUR : booléen. renvoie "false" uniquement si la chaine continent au moins 2 caractères différents
 String.prototype.estHomogene = function() {
   if (this.length > 1)
-    for (var i = 1, iMax = this.length; i < iMax; ++i)
-      if (this.charAt(0) != this.charAt(i))
-        return false;
-          // -_-'
+  for (var i = 1, iMax = this.length; i < iMax; ++i)
+  if (this.charAt(0) != this.charAt(i))
+  return false;
+  // -_-'
   return true;
 }
 
@@ -2243,7 +2245,7 @@ if (!Array.prototype.indexOf) Array.prototype.indexOf = function(item, i) {
   var length = this.length;
   if (i < 0) i = length + i;
   for (; i < length; i++)
-    if (this[i] === item) return i;
+  if (this[i] === item) return i;
   return -1;
 }
 
@@ -2338,8 +2340,8 @@ Date.prototype.formater = function(options) {
 
   if (options.jour) {
     var joursFr = options.lettres ?
-      ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"] :
-      ["D", "L", "M", "M", "J", "V", "S"];
+    ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"] :
+    ["D", "L", "M", "M", "J", "V", "S"];
     retour = resultat.join(options.separateur ? options.separateur : "");
     retour = joursFr[this.getDay()] + " " + retour;
     return retour;
@@ -2413,19 +2415,19 @@ function posXY(elem) {
 // ("string", "number(int)", "number(float)", "date", "array", "function", "element", "node", "object", "undefined")
 function type(objet) {
   if (typeof objet == "string")
-    return "string";
+  return "string";
   if (typeof objet == "number")
-    return (Math.round(objet) != objet) ? "number(float)" : "number(int)";
+  return (Math.round(objet) != objet) ? "number(float)" : "number(int)";
   if ((objet != null) && ("getUTCFullYear" in objet))
-    return "date";
+  return "date";
   if (typeof objet == "function")
-    return "function";
+  return "function";
   if ((objet != null) && ("splice" in objet) && ("join" in objet))
-    return "array";
+  return "array";
   if ((objet != null) && objet.nodeType)
-    return (objet.nodeType == Node.ELEMENT_NODE) ? "element" : "node";
+  return (objet.nodeType == Node.ELEMENT_NODE) ? "element" : "node";
   if ((objet != null) && (typeof objet == "object"))
-    return "object";
+  return "object";
 
   return "undefined";
 }
@@ -2493,385 +2495,6 @@ function accumuler(total, suivant) {
   return total + suivant;
 }
 
-// function afficherStats() {
-//   var messageTotal;
-//   var tab = Generateur.stats();
-//
-//   var total = 0;
-//   for (var i = 0, iMax = tab.length; i < iMax; ++i) {
-//     total += tab[i];
-//   }
-//
-//   var affichageTotal = total.formater(null, null, " ");
-//   var indexE = affichageTotal.indexOf("e");
-//   var puissances = affichageTotal.substr(indexE + 2);
-//   puissances = parseInt(puissances, 10);
-//   var affichageEntier = affichageTotal.substr(0, indexE).replace(/\./, "");
-//   var zeros = puissances - affichageEntier.length + 1;
-//   affichageEntier += "0".repeter(zeros);
-//   var compteurChiffres = 0;
-//   for (var i = affichageEntier.length - 1, iMin = 0; i >= iMin; --i) {
-//     ++compteurChiffres;
-//     if (compteurChiffres == 3) {
-//       affichageEntier = affichageEntier.inserer(" ", i);
-//       compteurChiffres = 0;
-//     }
-//   }
-//
-//   affichageTotal = affichageTotal.replace(/^([1-9]\.[1-9])(.*)(e.*)$/, "$1$3");
-//   affichageTotal = affichageTotal.replace(/e\+/, " x 10 puissance ");
-//
-//   messageTotal = "NOMBRE DE PHRASES POSSIBLES :<br/><br/>≈ " + affichageEntier + " phrases possibles.<br/>(en notation scientifique : ~ " + affichageTotal + ")<br/><br/>>>> c'est-à-dire environ ";
-//   var echellesTotal = 0, echellesTotalLettres = 0;
-//   var memTotal = total;
-//   var trans = "";
-//   while (total > 1e9) {
-//     total /= 1e9;
-//     ++echellesTotal;
-//   }
-//   messageTotal += Math.floor(total).formater(null, null, " ");
-//   for (var e = 0; e < echellesTotal; ++e) {
-//     messageTotal += " milliard" + (((Math.floor(total) == 1) && (e == 0)) ? "" : "s") + " de";
-//   }
-//   while (memTotal > 1e6) {
-//     memTotal /= 1e6;
-//     ++echellesTotalLettres;
-//   }
-//   var ordres = ["", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion", "décillion"];
-//   var plur = (memTotal >= 2) ? "s" : "";
-//   if ((echellesTotalLettres > 0) && (echellesTotalLettres < 11)) {
-//     trans = memTotal.formater(null, null, " ") + " " + ordres[echellesTotalLettres] + plur + " et quelques...";
-//   } else {
-//     trans = memTotal.formater(null, null, " ");
-//   }
-//
-//   messageTotal += " phrases. (" + trans + ")<br/><br/>";
-//
-//   el("txt_stats").innerHTML = messageTotal;
-// }
-
-// function graphSondage(type) {
-//   var pQuestion = el("pQuestion");
-//   var divGraph = el("divGraph");
-//   for (var i = 0, iMax = pQuestion.childNodes.length; i < iMax; ++i) {
-//     pQuestion.removeChild(pQuestion.firstChild);
-//   }
-//   if (divGraph.firstChild) divGraph.removeChild(divGraph.firstChild);
-//
-//   // RESTE A FAIRE : questions "Comment" >>> adverbes OU participes présents
-//
-//   var question, questions = {
-//     qui: PseudoBDD.graphSondage.questions.qui,
-//     ou: PseudoBDD.graphSondage.questions.ou,
-//     quand: PseudoBDD.graphSondage.questions.quand,
-//     quoi: PseudoBDD.graphSondage.questions.quoi,
-//     fermee: PseudoBDD.graphSondage.questions.fermee
-//   };
-//   questions = questions[type];
-//   var question = questions.puiser();
-//
-//   while (question.indexOf("<") > -1) {
-//     var choix = question.match(/<([^<>]+)>/)[1];
-//     choix = choix.split("|").puiser();
-//     question = question.replace(/<[^<>]+>/, choix);
-//   }
-//
-// 	var reponseGroupe, reponsePersonnalite, genreReponseM, genreReponseF, tempsDemande;
-//   var tiersObjet = true;
-// 	if (type == "qui") {
-// 		reponseGroupe = question.indexOf("_grp") > -1;
-// 		reponsePersonnalite = question.indexOf("_per") > -1;
-// 		if (reponsePersonnalite) {
-// 			genreReponseM = (/_.{3}M/).test(question);
-// 			genreReponseF = (/_.{3}F/).test(question);
-// 		}
-// 		question = question.replace(/_(grp|per)[FM]?/, "");
-// 	} else if (type == "quand") {
-//     var posFin = question.indexOf("?");
-//     tempsDemande = question.charAt(posFin + 2);
-//     question = question.replace(/¤[13]/, "");
-//   } else if ((type == "quoi") && (question.indexOf("_subj") > -1)) {
-//     tiersObjet = false;
-//     question = question.split("_")[0];
-//   }
-//
-//   if (question.indexOf("+V") > -1) {
-//     var verbe = Grimoire.recupererMot("VN").replace(/#[^\s]*/, "").sansAccents();
-//     if ((type == "fermee") && (question.indexOf("_subj") > -1)) {
-//       verbe = verbe.replace(/^s(e |\')/, "vous ");
-//       question = question.split("_")[0];
-//     }
-//     question = question.replace(/\+V/, verbe);
-//   }
-//
-// 	var pos$ = question.indexOf("$");
-//   if (pos$ > -1) {
-// 		var pers, fem, genreImpose = "";
-// 		if ((/\$[FM]/).test(question)) genreImpose = question.substr((pos$ + 1), 1);
-//
-// 	  do {
-//       pers = Generateur.GN.nomsPropres.puiser();
-// 	    fem = "";
-// 	    if (pers.indexOf("_F") > -1) {
-// 	      fem = "e";
-// 	      pers = pers.split("_")[0];
-//       }
-// 		}
-// 		while (((genreImpose == "F") && (fem == "")) || ((genreImpose == "M") && (fem == "e")));
-//     if ((pers.substr(0, 3) == "le ") && ((/ a \$/).test(question))) {
-//       pers = "au " + pers.substr(3);
-//       question = question.replace(/ a( \$)/, "$1");
-//     }
-//     question = question.replace(/\$[FM]?/, pers.sansAccents()).replace(/\[e\]/, fem).replace(/µ/g, "Y");
-//   }
-//   question = question.replace(/ de ([aeiouy])/gi, " d'$1").replace(/£/g, "h");
-//
-//   // transformer toute la partie "tirage des sondés" par une variante de Generateur.groupeNominal
-//   var notice = "Réponses à notre question, posée à 100 ¤";
-//   //var notice = "Réponses à notre question, posée à " + Math.pow(10, de(3) + 1).formater(null, null, " ") + " ¤";
-//   var sondes = Generateur.GN.nomsCommuns.puiser();
-//   if (sondes.indexOf("%") > -1) {
-//     sondes = sondes.split("%");
-//     if (sondes[1].length == 1) {
-//       sondes[1] = sondes[0].replace(/².*$/, "") + sondes[1];
-//     }
-//     sondes = sondes.puiser();
-//   }
-//   if (sondes.indexOf("_") > -1) {
-//     sondes = sondes.split("_")[0];
-//   }
-//   sondes = Generateur.accordPluriel(sondes, true);
-//   notice = notice.replace(/¤/, sondes).replace(/£/g, "h").replace(/µ/g, "Y").replace(/¥/g, "y");
-//
-//   pQuestion.appendChild(document.createTextNode(notice));
-//   pQuestion.style.fontWeight = "bolder";
-//
-//   // IMAGE DU SONDAGE
-//   var spe = (de(8) > 7);
-//   var nbValeurs = spe ? (de(3) + 1): (de(5) + 2);
-//   var restreint = ((type == "fermee") || (type == "quoi"));
-//   if (restreint) nbValeurs = (de(4) > 3) ? 3: 2;
-//   var valMax = 0, indexValMax;
-//   var baseUrl = "http://chart.apis.google.com/chart?chs=670x200&chd=t:";
-//   var valeurDe = 100;
-//   for (var i = 0; i < nbValeurs; ++i) {
-//     var val = de(valeurDe);
-//     if ((i == 0) && spe) {
-//       val = 100;
-//       valeurDe = 10;
-//     }
-//     if (restreint && (nbValeurs == 3) && (i == 0)) {
-//       val = 1;
-//     }
-//     if (val > valMax) {
-//       valMax = val;
-//       indexValMax = i;
-//     }
-//     baseUrl += val;
-//     if (i < (nbValeurs - 1)) {
-//       baseUrl += ",";
-//     }
-//   }
-//   baseUrl += "&chtt=" + question;
-//   baseUrl += "&chl=";
-//   var autresReponses = ["ne se prononcent pas", "n'ont pas compris la question", "refusent de repondre", "ne savent pas"];
-//   var tabDeja = [];
-//   for (var i = 0; i < nbValeurs; ++i) {
-//     if ((autresReponses.length > 0) && (de(20) > 19)) {
-//       var tirage = de(autresReponses.length) - 1;
-//       baseUrl += autresReponses.splice(tirage, 1) + "|";
-//     } else {
-//       var label, deja, invalide, genreF;
-//       switch (type) {
-//         case "qui":
-//           do {
-// 						do {
-// 							genre = "M";
-// 							if (reponsePersonnalite) label = Generateur.GN.nomsPropres.puiser();
-// 	            else label = Generateur.groupeNominal().split("@")[0];
-// 							if (label.indexOf("_F") > -1) genre = "F";
-// 							label = label.replace(/\_F/, "");
-// 						}
-// 						while (((genreReponseM) && (genre == "F")) || ((genreReponseF) && (genre == "M")));
-//             label = label.sansAccents().replace(/£/g, "h");
-//             deja = tabDeja.indexOf(label);
-//             invalide = (deja > -1) || (label.length > 42) || !(/^(les |[A-Z])/).test(label) || (/et [mt]oi$/).test(label) || (/[^a-z0-9 '\-\"]/i).test(label) || (reponseGroupe && (/[A-Z]/).test(label));
-//           }
-//           while (invalide);
-//           break;
-//         case "ou":
-//           do {
-//             label = Grimoire.complements.lieu.puiser();
-//
-//             while (label.indexOf("$") > -1) {
-//               var nom;
-//               do {
-//                 nom = Generateur.GN.nomsPropres.puiser().replace(/_F/, "");
-//               }
-//               while (label.indexOf(nom) > -1);
-//               label = label.replace(/\$/, nom);
-//             }
-//             label = label.replace(/ de ([aeiouyhéèâœ])/gi, " d'$1").replace(/ de (le|du) /g, " du ");
-//
-//             while (label.indexOf("+") > -1) {
-//               var posPlus = label.indexOf("+");
-//               var fem = label.charAt(posPlus + 1) == "F";
-//
-//               var nom, ok;
-//               do {
-//                 ok = true;
-//                 nom = Generateur.GN.nomsCommuns.puiser();
-//                 if (nom.indexOf("_") > -1) {
-//                   var pos = nom.indexOf("_");
-//                   var genre = nom.charAt(pos + 1);
-//                   if (!fem && (genre == "F") || (fem && genre == "H")) {
-//                     ok = false;
-//                   } else {
-//                     nom = nom.split("_")[0];
-//                   }
-//                 } else {
-//                   var pos = nom.indexOf("%");
-//                   if (nom.substr(pos + 1).length == 1) {
-//                     nom = nom.replace(/(.*)%e/, "$1%$1e");
-//                   }
-//                   nom = nom.split("%")[((fem) ? 1 : 0)];
-//                 }
-//               }
-//               while ((!ok) || (nom === undefined));
-//               nom = Generateur.accordPluriel(nom, false);
-//               label = label.replace(/\+[FH]/, nom);
-//             }
-//
-//             var nombre;
-//             while (label.indexOf("&") > -1) {
-//               nombre = de(10) + 1;
-//               if (label.indexOf("&0") > -1) {
-//                 nombre = (nombre * 10) - 10;
-//               }
-//               if (label.indexOf("&00") > -1) {
-//                 nombre *= 10;
-//               }
-//               nombre = nombre.enLettres();
-//               label = label.replace(/&(0){0,2}/, nombre);
-//             }
-//
-//             label = label.sansAccents().replace(/£/g, "h");
-//             deja = tabDeja.indexOf(label);
-//           }
-//           while ((deja > -1) || (label.length > 42) || (/[^a-z1-9 '\-\"]/i).test(label) || (/(en direction d|chez eux)/).test(label));
-//           break;
-//         case "quand":
-//           do {
-//             var posT, tempsLabel;
-//             do {
-//               label = Grimoire.recupererMot("CT");
-//               posT = label.indexOf("¤");
-//               tempsLabel = label.charAt(posT + 1);
-//               if ((/(jusqu|à partir|jamais|dorénavant)/).test(label)) tempsLabel = 0;
-//             }
-//             while (tempsLabel != tempsDemande);
-//             label = label.replace(/¤[123]/, "");
-//
-//             while (label.indexOf("$") > -1) {
-//               var nom;
-//               do {
-//                 nom = Generateur.GN.nomsPropres.puiser().replace(/_F/, "");
-//               }
-//               while (label.indexOf(nom) > -1);
-//               label = label.replace(/\$/, nom);
-//             }
-//             label = label.replace(/ (d|qu)e ([aeiouyhéèâœ])/gi, " $1'$2").replace(/ de (le|du) /g, " du ");
-//
-//             var nombre;
-//             while (label.indexOf("&") > -1) {
-//               nombre = de(10) + 1;
-//               if (label.indexOf("&0") > -1) {
-//                 nombre = (nombre * 10) - 10;
-//               }
-//               if (label.indexOf("&00") > -1) {
-//                 nombre *= 10;
-//               }
-//               nombre = nombre.enLettres();
-//               label = label.replace(/&(0){0,2}/, nombre);
-//             }
-//
-//             label = label.sansAccents().replace(/£/g, "h");
-//             deja = tabDeja.indexOf(label);
-//           }
-//           while ((deja > -1) || (label.length > 42) || (/[^a-z1-9 '\-\"]/i).test(label));
-// 					break;
-//         case "quoi":
-//           do {
-//             var typeV = (de(8) > 3) ? "transitifs": "intransitifs";
-//             label = Grimoire.verbes[typeV].puiser();
-//             if (label.indexOf("#") > -1) label = label.split("#")[0];
-//             if (typeV == "transitifs") {
-//               var comp;
-//               do {
-//                 comp = Generateur.complementObjet(1);
-//               }
-//               while ((/^(mon|ton|son|ma|ta|sa|notre|votre|leur|mes|tes|ses|nos|vos|leurs|ce|cet|cette|ces) /).test(comp));
-//               label += " " + comp;
-//             }
-//             if ((typeV == "intransitifs") && (!tiersObjet)) label = label.replace(/s(e |')/, "m$1");
-//             label = label.sansAccents().replace(/£/g, "h");
-//             deja = tabDeja.indexOf(label);
-//           }
-//           while ((label.length > 42) || (/[^a-z1-9 '\-\"]/i).test(label) || (deja > -1));
-//           break;
-//         case "fermee":
-//           var labels = ["oui", "non", "ca depend", "a la rigueur", "absolument pas", "tout-a-fait",
-//           "pas vraiment", "carrement", "a peine", "oui... et non", "c'est pas faux", "mouais", "NON !"];
-//           var probas_labels = [5,5,1,1,1,1,1,1,1,1,1,1,1];
-//           do {
-//             label = probaSwitch(labels, probas_labels);
-//           }
-//           while (tabDeja.indexOf(label) > -1);
-//           break;
-//       }
-//       baseUrl += label;
-//       tabDeja.push(label);
-//       if (i < (nbValeurs - 1)) {
-//         baseUrl += "|";
-//       }
-//     }
-//   }
-//   baseUrl += "&cht=p" + ((de(2) > 1) ? "3" : "");
-//   baseUrl += "&chco=";
-//   for (var i = 0; i < nbValeurs; ++i) {
-//     for (var j = 0; j < 6; ++j) {
-//       var couleur = de(16) - 1;
-//       switch (couleur) {
-//         case 10: couleur = "A"; break;
-//         case 11: couleur = "B"; break;
-//         case 12: couleur = "C"; break;
-//         case 13: couleur = "D"; break;
-//         case 14: couleur = "E"; break;
-//         case 15: couleur = "F"; break;
-//       }
-//       baseUrl += couleur;// à améliorer : colorer en fonction du poids des réponses (garder un tableau des valeurs à la place de valMax et indexValMax)
-//     }
-//     if (i < (nbValeurs - 1)) {
-//       baseUrl += ",";
-//     }
-//   }
-//
-//   var graph = document.createElement("IMG");
-//   graph.setAttribute("id", "imgGraph");
-//   graph.setAttribute("src", baseUrl);
-//   graph.setAttribute("width", "670");
-//   graph.setAttribute("height", "200");
-//   graph.setAttribute("alt", "le sondage minute");
-//   divGraph.appendChild(graph);
-//   onOff(graph);
-//   onOff(el("imgLoader"));
-//   setTimeout(function() {
-//     onOff(el("imgLoader"));
-//     onOff(el("imgGraph"));
-//     el("b_sondage").removeAttribute("disabled");
-//   }, 1500);
-// }
-
 // affiche le sujet d'indice donné, masque tous les autres
 function voirSujet(numSujet) {
   var nbSujets = document.getElementsByClassName('sujet').length;
@@ -2924,11 +2547,11 @@ function orteilBeau() {
     var texte = [];
     switch (nb_pp) {
       case 1:
-        texte.push(borne[0], nom, select_pp[0], moyen, fin, borne[1]); break;
+      texte.push(borne[0], nom, select_pp[0], moyen, fin, borne[1]); break;
       case 2:
-        texte.push(borne[0], nom, select_pp[0], "et", select_pp[1], moyen, fin, borne[1]); break;
+      texte.push(borne[0], nom, select_pp[0], "et", select_pp[1], moyen, fin, borne[1]); break;
       case 3:
-        texte.push(borne[0], nom, (select_pp[0] + ","), select_pp[1], "et", select_pp[2], moyen, fin, borne[1]); break;
+      texte.push(borne[0], nom, (select_pp[0] + ","), select_pp[1], "et", select_pp[2], moyen, fin, borne[1]); break;
     }
     texte = texte.join(" ");
     texte = texte.replace(/à les /g, "aux ").replace(/à le /g, "au ");
@@ -3094,13 +2717,11 @@ function ecouteur_generer(e) {
     conteneur.setAttribute("id", "c_phrase_" + Generateur.Memoire.generations);
     conteneur.setAttribute("class", "c_phrase");
     conteneur.phrase = p;
+    dernierePhrase = p.corps;
 
     var nouvelle = document.createElement("SPAN");
     nouvelle.id = "phrase_" + Generateur.Memoire.generations
     nouvelle.appendChild(document.createTextNode(p.lire()));//  + "(" + nombreEssais + ")"
-    // var sep = document.createElement("HR");
-    // sep.setAttribute("id", "sep_" + Generateur.Memoire.generations);
-    // if (window.navigator.userAgent.indexOf("Mozilla") > -1) sep.style.opacity = 0.5;
     conteneur.appendChild(nouvelle);
     declencheur(nouvelle, "click", function(e) {
       var cible = e.target || e.srcElement;
@@ -3111,54 +2732,8 @@ function ecouteur_generer(e) {
       }, 1000);
     });
 
-    // var b_audio = document.createElement("IMG");
-    // b_audio.src = "images/audio.png";
-    // //b_audio.setAttribute("class", "b_audio");
-    // //b_audio.value = "wtf";
-    // b_audio.title= "prononcer !";
-    // b_audio.setAttribute("id", "b_audio_" + Generateur.Memoire.generations);
-    // declencheur(b_audio, "click", function(e) {
-    //   var cible = e.target || e.srcElement;
-    //   var num = cible.id.split("_")[2];
-    //   prononcer(el("phrase_" + num).innerHTML);
-    // });
-    // conteneur.appendChild(b_audio);
-    // if (liste_phrases.firstChild) conteneur.appendChild(sep);
-    // b_audio.style.display = "none";
 
-    // var b_suppr = document.createElement("IMG");
-    // b_suppr.src = "images/zap.png";
-    // //b_suppr.setAttribute("class", "b_suppr");
-    // //b_suppr.value = "ZAP";
-    // b_suppr.title= "supprimer ?";
-    // b_suppr.setAttribute("id", "b_suppr_" + Generateur.Memoire.generations);
-    // declencheur(b_suppr, "click", function(e) {
-    //   var cible = e.target || e.srcElement;
-    //   var num = cible.id.split("_")[2];
-    //   var a_zapper = el("c_phrase_" + num);
-    //   if (liste_phrases.firstChild == a_zapper && a_zapper.nextSibling) a_zapper.nextSibling.removeChild(a_zapper.nextSibling.firstChild);
-    //   a_zapper.parentNode.removeChild(a_zapper);
-    // });
-    // conteneur.appendChild(b_suppr);
-    // if (liste_phrases.firstChild) conteneur.appendChild(sep);
-    // b_suppr.style.display = "none";
-
-    // declencheur(conteneur, "mouseover", function(e) {
-    //   var cible = e.target || e.srcElement;
-    //   var num = cible.id.split("_");
-    //   num = num[(num.length - 1)];
-    //   el("b_suppr_" + num).style.display = "";
-    //   el("b_audio_" + num).style.display = "";
-    // });
-    // declencheur(conteneur, "mouseout", function(e) {
-    //   var cible = e.target || e.srcElement;
-    //   var num = cible.id.split("_");
-    //   num = num[(num.length - 1)];
-    //   el("b_suppr_" + num).style.display = "none";
-    //   el("b_audio_" + num).style.display = "none";
-    // });
     liste_phrases.insertBefore(conteneur, liste_phrases.firstChild);
-    //liste_phrases.scrollTop = liste_phrases.scrollHeight;
 
     // réactivation (le cas échéant) de l'option "même structure"
     if (el("checkST").disabled == true) {
@@ -3312,14 +2887,6 @@ function ecouteur_vider(e) {
   Generateur.Memoire.generations = 0;
 }
 
-/*function testStructures() {
-  var message = "STRUCTURES ALEATOIRES :\n";
-  for (var i = 0, iMax = 20; i < iMax; ++i) {
-    message += "\n" + Grimoire.genererStructure();
-  }
-  alert(message);
-}*/
-
 function testListeStructures() {
   var liste = Grimoire.listerStructures();
   var message = "Liste des structures : (total : " + liste.length + ")<br/><br/>";
@@ -3340,46 +2907,46 @@ function testMot(n) {
 }
 
 function remplacer(chaine) {
-   var copie = chaine;
-   var resultat = chaine;
-   // remplacement PReS
-   var valeur, _variable, prochaineFermante, prochaineOuvrante = copie.indexOf("<<");
-   while (prochaineOuvrante > -1) {
-      prochaineFermante = copie.indexOf(">>");
-      _variable = copie.substring((prochaineOuvrante+2), prochaineFermante);
-      valeur = eval(_variable);
-      resultat = resultat.replace(("<<" + _variable + ">>"), valeur);
-      copie = copie.substr((prochaineFermante + 2));
-      prochaineOuvrante = copie.indexOf("<<");
-   }
-   copie = resultat;
-   // tirages aléatoires avec probas
-   var liste, probas, tirage, aRemplacer, prochaineOuvrante2, prochaineFermante2;
-   prochaineOuvrante = copie.indexOf("((");
-   while (prochaineOuvrante > -1) {
-      prochaineFermante = copie.indexOf("))");
-      liste = copie.substring((prochaineOuvrante + 2), prochaineFermante).split("|");
-      probas = (copie.substr((prochaineFermante + 2), 1) == "[");
-      if (probas) {
-         prochaineOuvrante2 = copie.indexOf("[");
-         prochaineFermante2 = copie.indexOf("]");
-         aRemplacer = copie.substring(prochaineOuvrante, (prochaineFermante2 + 1));
-         probas = copie.substring((prochaineOuvrante2 + 1), prochaineFermante2).split(",");
-         for (var i = 0, iMax = probas.length; i < iMax; ++i) {
-            probas[i] = parseInt(probas[i], 10);
-         }
-         tirage = probaSwitch(liste, probas);
-         copie = copie.substr(prochaineFermante2 + 1);
+  var copie = chaine;
+  var resultat = chaine;
+  // remplacement PReS
+  var valeur, _variable, prochaineFermante, prochaineOuvrante = copie.indexOf("<<");
+  while (prochaineOuvrante > -1) {
+    prochaineFermante = copie.indexOf(">>");
+    _variable = copie.substring((prochaineOuvrante+2), prochaineFermante);
+    valeur = eval(_variable);
+    resultat = resultat.replace(("<<" + _variable + ">>"), valeur);
+    copie = copie.substr((prochaineFermante + 2));
+    prochaineOuvrante = copie.indexOf("<<");
+  }
+  copie = resultat;
+  // tirages aléatoires avec probas
+  var liste, probas, tirage, aRemplacer, prochaineOuvrante2, prochaineFermante2;
+  prochaineOuvrante = copie.indexOf("((");
+  while (prochaineOuvrante > -1) {
+    prochaineFermante = copie.indexOf("))");
+    liste = copie.substring((prochaineOuvrante + 2), prochaineFermante).split("|");
+    probas = (copie.substr((prochaineFermante + 2), 1) == "[");
+    if (probas) {
+      prochaineOuvrante2 = copie.indexOf("[");
+      prochaineFermante2 = copie.indexOf("]");
+      aRemplacer = copie.substring(prochaineOuvrante, (prochaineFermante2 + 1));
+      probas = copie.substring((prochaineOuvrante2 + 1), prochaineFermante2).split(",");
+      for (var i = 0, iMax = probas.length; i < iMax; ++i) {
+        probas[i] = parseInt(probas[i], 10);
       }
-      else {
-         aRemplacer = copie.substring(prochaineOuvrante, (prochaineFermante + 2));
-         tirage = liste.puiser();
-         copie = copie.substr(prochaineFermante + 2);
-      }
-      resultat = resultat.replace(aRemplacer, tirage);
-      prochaineOuvrante = copie.indexOf("((");
-   }
-   return resultat;
+      tirage = probaSwitch(liste, probas);
+      copie = copie.substr(prochaineFermante2 + 1);
+    }
+    else {
+      aRemplacer = copie.substring(prochaineOuvrante, (prochaineFermante + 2));
+      tirage = liste.puiser();
+      copie = copie.substr(prochaineFermante + 2);
+    }
+    resultat = resultat.replace(aRemplacer, tirage);
+    prochaineOuvrante = copie.indexOf("((");
+  }
+  return resultat;
 }
 
 function alerte(message) {
@@ -3404,7 +2971,7 @@ function divCommentaire(elementRacine, texte, offsetX, offsetY) {
   var spanTexte = document.createElement("SPAN");
   divC.appendChild(spanTexte);
   spanTexte.setAttribute("class","spanCom");
-  spanTexte.innerHTML = texte;
+  spanTexte.innerHTML = texte ;
 }
 
 function prononcer(texte) {
@@ -3456,27 +3023,27 @@ function dumpVerbes(type) {
   switch(type) {
     case "transitifs":
     case "intransitifs":
-      etiquette += " et assimilés";                                                                                                     break;
+    etiquette += " et assimilés";                                                                                                     break;
     case "simples":
-      etiquette = "modaux (+ action à l'infinitif)";          source = source.modaux;           suffixe = " (faire)";                   break;
+    etiquette = "modaux (+ action à l'infinitif)";          source = source.modaux;           suffixe = " (faire)";                   break;
     case "suivisDeDE":
-      etiquette = "modaux (+ DE + action à l'infinitif)";     source = source.modaux;           suffixe = " de (faire)";                break;
+    etiquette = "modaux (+ DE + action à l'infinitif)";     source = source.modaux;           suffixe = " de (faire)";                break;
     case "suivisDeA":
-      etiquette = "modaux (+ À + action à l'infinitif)";      source = source.modaux;           suffixe = " à (faire)";                 break;
+    etiquette = "modaux (+ À + action à l'infinitif)";      source = source.modaux;           suffixe = " à (faire)";                 break;
     case "codCoi":
-      etiquette = "à deux compléments (+ objet + À + cible)"; source = source.avecPreposition;  suffixe = " (quelquechose) à (cible)";  break;
+    etiquette = "à deux compléments (+ objet + À + cible)"; source = source.avecPreposition;  suffixe = " (quelquechose) à (cible)";  break;
     case "a":
-      etiquette = "suivis de la préposition À";               source = source.avecPreposition;  suffixe = " à (cible)";                 break;
+    etiquette = "suivis de la préposition À";               source = source.avecPreposition;  suffixe = " à (cible)";                 break;
     case "de":
-      etiquette = "suivis de la préposition DE";              source = source.avecPreposition;  suffixe = " de (cible)";                break;
+    etiquette = "suivis de la préposition DE";              source = source.avecPreposition;  suffixe = " de (cible)";                break;
     case "sur":
-      etiquette = "suivis de la préposition SUR";             source = source.avecPreposition;  suffixe = " sur (cible)";               break;
+    etiquette = "suivis de la préposition SUR";             source = source.avecPreposition;  suffixe = " sur (cible)";               break;
     case "avec2obj":
-      etiquette = "+ objet + AVEC + objet";                   source = source.avecPreposition;  suffixe = " (cible1) avec (cible2)";    break;
+    etiquette = "+ objet + AVEC + objet";                   source = source.avecPreposition;  suffixe = " (cible1) avec (cible2)";    break;
     case "et2obj":
-      etiquette = "+ objet + ET + objet";                     source = source.avecPreposition;  suffixe = " (cible1) et (cible2)";      break;
+    etiquette = "+ objet + ET + objet";                     source = source.avecPreposition;  suffixe = " (cible1) et (cible2)";      break;
     case "lieu":
-      etiquette = "suivis d'un lieu";                         source = source.avecPreposition;  suffixe = " (lieu)";                    break;
+    etiquette = "suivis d'un lieu";                         source = source.avecPreposition;  suffixe = " (lieu)";                    break;
   }
   var liste = source[type];
   for (var i = 0, iMax = liste.length; i < iMax; ++i) {
@@ -3487,8 +3054,8 @@ function dumpVerbes(type) {
   liste.forEach(function(mot) {
     mot = mot.match(matchVerbes);
     retour += mot[3] ?
-      mot[1] + " (" + mot[3] + ")" + suffixe + saut(1):
-      mot[1] + suffixe + saut(1);
+    mot[1] + " (" + mot[3] + ")" + suffixe + saut(1):
+    mot[1] + suffixe + saut(1);
   });
   return retour + saut(1);
 }
@@ -3677,7 +3244,7 @@ function dumpListes(isMixte) {
   resultat += saut(1) + "--- AFFICHAGE DE LA LISTE DES " + liste.length + " NOMS PROPRES ---" + saut(2);
   var listes = {F:[], H:[]};
   for (var i = 0, iMax = liste.length; i < iMax; ++i) {
-      liste[i] = liste[i].replace(/£/g, "h").replace(/µ/g, "Y");
+    liste[i] = liste[i].replace(/£/g, "h").replace(/µ/g, "Y");
   }
   liste = liste.sort();
   if (isMixte && isMixte.nomsPropres) {
@@ -3699,9 +3266,7 @@ function dumpListes(isMixte) {
     resultat += listes.F.join("<br/>");
   }
 
-  el("listes").innerHTML = resultat + "......<br/><br/>";
-  // var foo = new P5.Speech(); // speech synthesis object
-  // foo.speak(resultat);
+  // el("listes").innerHTML = resultat + "fzmkbcvlaerbfeajrb";
 }
 
 

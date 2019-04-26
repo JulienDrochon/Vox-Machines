@@ -1,0 +1,275 @@
+@charset "utf-8";
+/*
+** auteur : Romain VALERI
+** titre : style_screen.css
+** site : http://romainvaleri.online.fr
+** contenu : styles d'affichage a l'ecran
+** note : "Vivre ou mourrir, mais avec style."
+*/
+
+body {
+   margin: 20px;
+   background-color: #DDD;
+   font: 10pt "Courier New", "Lucida Console", monospace;
+}
+
+#options{
+  display: none;
+}
+#sujet_2, #sujet_3, #sujet_4, #encart_1, #encart_2, #encart_3, #encart_4, #encart_5, #colonne, .texte-base, #talon, #titreOptions, #checkOptions, #preClipboard{
+  display: none;
+}
+/*
+div#navigation {
+   margin-top: 40px;
+   float:left;
+   width: 150px;
+   height: 500px;
+}
+
+ul#menu {
+   list-style: none;
+   text-align: left;
+   margin: 5px 10px 0 -25px;
+}
+
+ul#menu li button {
+   width: 120px;
+   margin-bottom: 3px;
+   cursor: pointer;
+}
+
+div#article{
+   width: 660px;
+   margin: 0 0 0 180px;
+   padding: 0 10px;
+   min-height: 500px;
+}
+
+div#article textarea{
+   margin: 10px 0;
+   font-family: monospace;
+   padding: 4px;
+   border: 1px solid black;
+}
+
+div#colonne{
+   position: absolute;
+   left: 900px;
+   top: 40px;
+   height: 740px;
+   margin-left: 10px;
+   padding: 8px;
+   max-width: 220px;
+   font-family: verdana;
+   text-align: justify;
+}
+
+h1 {
+   margin-left: 80px;
+   font-family: verdana;
+}
+
+h2{
+   margin-top: 25px;
+}
+
+div#pied{
+   bottom: -120px;
+   margin: 30px 160px 30px 165px;
+   max-width: 710px;
+}
+
+#article button{
+   margin-bottom: 15px;
+   cursor: pointer;
+}
+
+button#b_vider{
+   position: relative;
+   float: right;
+}
+
+div#options{
+   border: 1px solid black;
+   padding-bottom: 5px;
+   padding-left: 2px;
+   max-width: 660px;
+   font-family: verdana;
+}
+
+div#choixLg{
+   display: inline;
+}
+
+input#txtLgMin, input#txtLgMax, input#txtPersonne{
+   max-width: 24px;
+   margin: 4px;
+}
+
+span#titreOptions{
+   font-style: italic;
+   font-family: verdana;
+}
+
+.texte-base{
+   font-family: verdana;
+   text-align: justify;
+}
+
+input#txtChoixStr{
+   width: 360px;
+}
+
+input#checkST, input#checkLg, input#checkSujet, input#checkPronoms, input#checkQuestions {
+   margin: 5px 0 5px 5px;
+   position: relative;
+   top: 2px;
+   cursor: pointer;
+}
+
+input#checkAllQuestions {
+   margin: 5px 0 5px 25px;
+   position: relative;
+   top: 2px;
+   cursor: pointer;
+}
+
+input#checkOptions {
+   margin: 10px 0 15px 5px;
+   position: relative;
+   top: 2px;
+   cursor: pointer;
+}
+
+textarea#txtSujet{
+   position: relative;
+   left: 10px;
+}
+
+div#choixSujet label{
+   position: relative;
+   left: 10px;
+}
+
+select#selectPersonne{
+   position: relative;
+   left: 15px;
+}
+
+img#imgLoader{
+   position: relative;
+   left: 300px;
+   top: 60px;
+}
+
+div#txtST{
+   display: inline;
+}
+
+div#stumble{
+   position: relative;
+   top: 40px;
+}
+
+div#indicePressePapier{
+   font-weight: bold;
+   position: fixed;
+   left: 400px;
+}
+
+div#liste_phrases{
+   height: 240px;
+   overflow: auto;
+   background-color: #000;
+   color: #FFF;
+   padding: 10px;
+   border: 3px #C86 solid;
+}
+
+div#liste_phrases hr{
+   margin: 5px 5px 2px 5px;
+}
+
+div#liste_phrases img{
+   position: relative;
+   margin-left: 5px;
+   height: 12px;
+   top: 2px;
+   cursor: pointer;
+}
+
+div#choixSujet p {
+   margin: 5px;
+   padding: 0 20px;
+}
+
+iframe{
+   position: absolute;
+   top: -6000px;
+}
+
+.c_phrase{
+   padding-bottom: 5px;
+}
+
+.divCom{
+   position: absolute;
+   border: 1px black solid;
+   background-color: #FFF;
+   width: 500px;
+   padding: 5px;
+   z-index:5;
+}
+
+.etiquette{
+   font-size: 0.5em;
+   margin-left: 1px;
+   padding: 0 2px;
+   border: 2px #666 solid;
+   cursor: default;
+   background-color: #BBB;
+}
+
+.spanCom{
+   text-align: center;
+   display: block;
+}
+
+.spanStats{
+   position: absolute;
+   border: 1px #AAA solid;
+   left: 50px;
+   top: 10px;
+   cursor: default;
+}
+
+.gras{
+   font-weight: bold;
+}
+
+.centre{
+   text-align: center;
+}
+
+.inl{
+   display: inline;
+}
+
+p#date-maj{
+   font-size: 0.8em;
+   color:#999;
+}
+
+.boite-structure{
+   float: left;
+   padding: 3px;
+   margin: 5px;
+   border: 1px black solid;
+}
+
+.wrapper-structure{
+   float: left;
+   width: 660px;
+   margin-bottom: 20px;
+} */
