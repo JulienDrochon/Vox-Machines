@@ -4,10 +4,11 @@ let said;
 let txt;
 var output;
 var myVoice;
+let bot;
 
 function setup() {
   noCanvas();
-  let bot = new RiveScript({utf8: true});
+  bot = new RiveScript({utf8: true});
   // Load a list of files all at once
   bot.loadFile("brain/knockknock.rive").then(botLoaded).catch(errorLoading);
 
@@ -33,13 +34,15 @@ function setup() {
     // Something is there
     // Get it as a string, you can also get JSON with more info
     console.log(speechRec);
+    output = select('#bot');
     if (speechRec.resultValue) {
       said = speechRec.resultString;
       bot.reply("local-user", said).then(function(reply) {
           myVoice.speak(reply);
+          output.html(reply);
       });
-      output = select('#bot');
-      output.html(reply);
+
+
 
       // Show user
       outputspeech.html(said);

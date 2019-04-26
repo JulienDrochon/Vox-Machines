@@ -16,6 +16,12 @@ function setup() {
 
   //---- Voice Speech ---//
   myVoice = new p5.Speech();
+
+  // la ligne suivante peut sembler complexe, c'est du js pur, qui utilise
+  // un changement récent de syntaxe dans l'écriture du js (voir promises : https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_promesses)
+  // voir aussi la fonction navigator.mediaDevices.getUserMedia : https://developer.mozilla.org/fr/docs/Web/API/MediaDevices/getUserMedia
+  navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {handlerFunction(stream)});
+
 }
 
 function listen() { // js -- fonction listen (activée quand on clique sur l'icone micro)
@@ -35,36 +41,44 @@ function gotSpeech() { // js -- fonction gotSpeech
   if (speechRec.resultValue) { //  p5js -- si il y a un resultat à la reconnaissance …
     output.html(speechRec.resultString); //  p5js -- … j'affiche le texte de cette reconnaissance dans la div avec l'id "speech" (voir ligne 8 de ce code)
 
-  bot.reply("local-user", speechRec.resultString).then(function(reply) {
-    console.log("The bot says: " + reply);
-    myVoice.speak(reply);
-
-
-  });
-
-    //var reply = bot.reply("local-user", speechRec.resultString); // j'envoie la reconnaissance vocale au bot rivescript
-
+    bot.reply("local-user", speechRec.resultString).then(function(reply) {
+      console.log("The bot says: " + reply);
+      if(reply == "ERR: No Reply Matched"){
+        myVoice.speak("Désolé, je ne comprends pas");
+      }else if(reply == "hahahaha, c'est marrant."){
+        
+      }else {
+        myVoice.speak(reply);
+      }
+    });
   }
 }
 
+myVoice.onEnd = theStart;
 speechRec.onEnd = theEnd; //  p5js -- à la fin de la reconnaissance je lance la fonction theEnd
 speechRec.onStart = theStart; //  p5js -- au début de la reconnaissance je lance la fonction theEnd
 }
 
 function theStart() { // js -- fonction theStart
+
   svg.style('fill', 'rgb(0,255,0)'); // p5js -- on change la couleur de l'icone microphone (vert)
-  rec.start(); // js -- déclenchement de l'enregistrement de l'audio
+  if (rec != undefined) {
+    if (rec.state == "inactive" ){
+      rec.start(); // js -- déclenchement de l'enregistrement de l'audio
+      speechRec.start(false, false); //  p5js -- activation de la reconnaissance et attribution des paramètres précédents
+    }
+  }
 }
 
 function theEnd() { // js -- fonction theEnd
   svg.style('fill', 'rgb(255,0,0)'); // p5js -- on change la couleur de l'icone microphone (rouge)
-  rec.stop(); // js -- on arrête l'enregistrement audio
+  if (rec != undefined) {
+    if (rec.state != "inactive"){
+      rec.stop(); // js -- on arrête l'enregistrement audio    }
+    }
+  }
 }
 
-// la ligne suivante peut sembler complexe, c'est du js pur, qui utilise
-// un changement récent de syntaxe dans l'écriture du js (voir promises : https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_promesses)
-// voir aussi la fonction navigator.mediaDevices.getUserMedia : https://developer.mozilla.org/fr/docs/Web/API/MediaDevices/getUserMedia
-navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {handlerFunction(stream)});
 
 // --------------------------------------------- //
 // Récupération de l'enregistrement audio +
@@ -93,13 +107,7 @@ function handlerFunction(stream) {
 
 function botLoaded() {
   console.log("Bot has finished loading!");
-
-  // Now the replies must be sorted!
   bot.sortReplies();
-
-
-  // NOTE: the API has changed in v2.0.0 and returns a Promise now.
-
 }
 
 function errorLoading(error) {
