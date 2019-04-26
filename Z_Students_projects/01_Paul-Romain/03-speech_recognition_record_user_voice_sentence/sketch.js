@@ -45,16 +45,20 @@ function gotSpeech() { // js -- fonction gotSpeech
       console.log("The bot says: " + reply);
       if(reply == "ERR: No Reply Matched"){
         myVoice.speak("Désolé, je ne comprends pas");
-      }else if(reply == "hahahaha, c'est marrant."){
-        
-      }else {
+      }else if(reply == "ha ha ha ha! c'est marrant."){
+
+        myVoice.speak("vous vous appelez");
+        myVoice.speak("bill");
+      myVoice.stop();
+    }else if(reply != "ha ha ha ha! c'est marrant."){
         myVoice.speak(reply);
+        myVoice.onEnd = theStart;
       }
     });
   }
 }
 
-myVoice.onEnd = theStart;
+// myVoice.onEnd = theStart;
 speechRec.onEnd = theEnd; //  p5js -- à la fin de la reconnaissance je lance la fonction theEnd
 speechRec.onStart = theStart; //  p5js -- au début de la reconnaissance je lance la fonction theEnd
 }
