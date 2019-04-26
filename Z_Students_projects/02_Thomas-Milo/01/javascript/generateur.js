@@ -27,7 +27,7 @@ function INITIALISATION() {
 
   // boutons des générateurs
   declencheur(el("b_generer"), "click", ecouteur_generer);
-  declencheur(el("b_vider"), "click", ecouteur_vider);
+  // declencheur(el("b_vider"), "click", ecouteur_vider);
   declencheur(el("checkLg"), "click", ecouteur_tailleFixe);
   declencheur(el("checkAudio"), "click", ecouteur_bascule_audio);
   declencheur(el("checkQuestions"), "click", ecouteur_optionQuestions);
@@ -41,6 +41,7 @@ function INITIALISATION() {
   //declencheur(el("bandeauTitre"), "click", function() { window.location.href = window.location.href; });
   declencheur(el("sesame"), "click", function() { el("concepteur").style.display = ""; alert("mode concepteur activé\n(écriture des structures)"); });
   declencheur(el("checkOptions"), "click", function() { onOff(el("options")); });
+
 
   // cacher le loader
   onOff(el("imgLoader"));
@@ -2572,11 +2573,11 @@ function orteilBeau() {
 // ----------------------------- ECOUTEURS D'EVENEMENTS ----------------------------- */
 
 function declencheur(cible, condition, effet) {
-  if (cible.addEventListener) {
-    cible.addEventListener(condition, effet, false);
-  } else if (cible.attachEvent) {
-    cible.attachEvent("on" + condition, effet);
-  }
+  // if (cible.addEventListener) {
+  //   cible.addEventListener(condition, effet, false);
+  // } else if (cible.attachEvent) {
+  //   cible.attachEvent("on" + condition, effet);
+  // }
 }
 
 function ecouteur_navigation(e) {
@@ -2879,13 +2880,6 @@ function ecouteur_choisir_structure(e) {
   } else {
     el("b_generer").focus();
   }
-}
-
-function ecouteur_vider(e) {
-  //el("txt_generer").value = "";
-  var liste = el("liste_phrases");
-  while (liste.hasChildNodes()) liste.removeChild(liste.firstChild);
-  Generateur.Memoire.generations = 0;
 }
 
 function testListeStructures() {
@@ -3292,7 +3286,7 @@ function listen() {
   speechRec = new p5.SpeechRec('fr', gotSpeech);
 
   // "Continuous recognition" (as opposed to one time only)
-  continuous = false;
+  continuous = true;
   // If you want to try partial recognition (faster, less accurate)
   interimResults = false;
   // This must come after setting the properties
@@ -3305,14 +3299,10 @@ function listen() {
     console.log(speechRec);
     if (speechRec.resultValue) {
       let said = speechRec.resultString;
-      // Show user
-      // output = createElement("div",said);
-      liste_phrases.innerHTML += said;
-      //liste_phrases.insertBefore(liste_phrases.lastChild, liste_phrases.lastChild.nextSibling)
-      // liste_phrases.lastChild;
 
-
+      liste_phrases.innerHTML += said; // j'écris la reconnaissance vocale de l'utilisateur
       console.log(said);
+      ecouteur_generer();
     }
   }
   speechRec.onEnd = theEnd;
@@ -3327,7 +3317,13 @@ function theEnd() {
   console.log('end');
   svg.style('fill', 'rgb(255,0,0)');
   speechRec.start(continuous, interimResults);
-  ecouteur_generer();
+}
+
+function draw() {
+  document.getElementById("b_vider").onclick = foo; // je sélectionne le bouton avec l'id b_vider et au clic j'active la fonction foo
+  function foo() {
+    liste_phrases.innerHTML = "";
+  }
 }
 
 function speakFrench(data){

@@ -19,7 +19,7 @@ body {
 #sujet_2, #sujet_3, #sujet_4, #encart_1, #encart_2, #encart_3, #encart_4, #encart_5, #colonne, .texte-base, #talon, #titreOptions, #checkOptions, #preClipboard{
   display: none; // cache les éléments HTML indiqués
 }
-button {
+#icon-micro {
   background: none;
   border:none;
   outline : 0;
