@@ -3,11 +3,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-  <meta name="Generator" content="Notepad++, SublimeText, Firefox, FileZilla, Git, et mes doigts" />
-  <meta name="Robots" content="Index, Follow">
-  <meta name="Revisit-after" content="10" />
-  <meta http-equiv="Pragma" content="no-cache" />
-
   <title lang="fr">Générateur de phrases</title>
 
   <link href="./styles/style_screen.css" rel="stylesheet" type="text/css" media="screen" />
@@ -16,9 +11,10 @@
 
   <script type="text/javascript" src="./javascript/p5.min.js"></script>
   <script type="text/javascript" src="./javascript/p5.speech.js"></script>
+  <script type="text/javascript" src="./javascript/p5.dom.js"></script>
 
   <script type="text/javascript" src="./javascript/data.js"></script>
-  <script type="text/javascript" src="./javascript/generateur.js"></script>
+
 </head>
 
 <body lang="fr">
@@ -26,7 +22,18 @@
     <div id="sujet_1">
       <form id="form_generer" action="" onsubmit="return false;">
         <br/>
-        <button id="b_generer">Générer une nouvelle phrase</button>
+        <button onclick="listen();">
+          <svg class='svgstyle' version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="79px" height="154px" viewBox="-381 221.3 79 154" style="enable-background:new -381 221.3 79 154;" xml:space="preserve">
+          <path d="M-340.8,234L-340.8,234c10.4,0,18.8,8.9,18.8,19.9v51.6c0,11-8.4,19.9-18.8,19.9l0,0c-10.4,0-18.8-8.9-18.8-19.9v-51.7
+          C-359.6,242.9-351.2,234-340.8,234z"/>
+          <path d="M-340.8,234L-340.8,234c10.4,0,18.8,8.9,18.8,19.9v51.6c0,11-8.4,19.9-18.8,19.9l0,0c-10.4,0-18.8-8.9-18.8-19.9v-51.7
+          C-359.6,242.9-351.2,234-340.8,234z"/>
+          <path d="M-317.4,292.4V307c0,12.4-10.5,22.5-23.3,22.5s-23.3-10.1-23.3-22.5v-14.5h-8.7V307c0,15.8,12.1,28.9,27.7,30.9v14.2h-16.8
+          v8.7h42.3v-8.7h-16.8v-14.2c15.6-2.1,27.7-15.1,27.7-30.9v-14.5H-317.4z"/>
+        </svg>
+
+        <!-- <button id="b_generer">Générer une nouvelle phrase</button> -->
         <button id="b_vider">Tout effacer</button>
         <br/>
         <div id="liste_phrases"></div>
@@ -93,5 +100,6 @@
     </div><!-- fin "sujet_1" -->
   </div><!-- fin "article" -->
   <script type="text/javascript" src="sketch.js"></script>
+  <script type="text/javascript" src="./javascript/generateur.js"></script>
 </body>
 </html>

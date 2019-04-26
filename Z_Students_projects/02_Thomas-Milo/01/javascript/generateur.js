@@ -1,5 +1,5 @@
-let dernierePhrase;
-
+let dernierePhrase,  liste_phrases;
+liste_phrases = el("liste_phrases");
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 // ----------- INITIALISATION DÉCLENCHÉE AU CHARGEMENT COMPLET DU DOM -------------
 function INITIALISATION() {
@@ -2665,8 +2665,8 @@ function ecouteur_generer(e) {
     Generateur.Memoire.sujetAuChoix = suj + "@" + personne;
   }
 
-  var bouton = el("b_generer");
-  bouton.style.visibility = "hidden";
+  // var bouton = el("b_generer");
+  // bouton.style.visibility = "hidden";
 
   // début effectif de la génération
   setTimeout(function() {
@@ -2712,12 +2712,14 @@ function ecouteur_generer(e) {
     Generateur.Memoire.lastPhrase = p;
     Generateur.Memoire.generations++;
 
-    var liste_phrases = el("liste_phrases");
+
     var conteneur = document.createElement("DIV");
     conteneur.setAttribute("id", "c_phrase_" + Generateur.Memoire.generations);
     conteneur.setAttribute("class", "c_phrase");
     conteneur.phrase = p;
     dernierePhrase = p.corps;
+    speakFrench(dernierePhrase); // envoie la phrase générée à la fonction speak() dans sketch.js ligne 50
+
 
     var nouvelle = document.createElement("SPAN");
     nouvelle.id = "phrase_" + Generateur.Memoire.generations
@@ -2732,8 +2734,7 @@ function ecouteur_generer(e) {
       }, 1000);
     });
 
-
-    liste_phrases.insertBefore(conteneur, liste_phrases.firstChild);
+    liste_phrases.insertBefore(conteneur, conteneur.nextSibling); // place la dernière phrase reconnue après la précédente
 
     // réactivation (le cas échéant) de l'option "même structure"
     if (el("checkST").disabled == true) {
@@ -2762,8 +2763,8 @@ function ecouteur_generer(e) {
     }
 
     if (Generateur.Memoire.audio) prononcer(p.lire());
-    bouton.style.visibility = "visible";
-    bouton.focus();
+    // bouton.style.visibility = "visible";
+    // bouton.focus();
   }, 1);
 }
 
@@ -3273,3 +3274,64 @@ function dumpListes(isMixte) {
 /* ------------------------ POINT D'ENTRÉE JAVASCRIPT ------------------------ */
 
 declencheur(window, 'load', INITIALISATION);
+
+/* ------------------------ custom code with p5js ------------------------ */
+let output, speechRec, button, svg;
+let continuous, interimResults;
+
+
+function setup() {
+  noCanvas();
+
+
+  svg = select('.svgstyle');
+}
+
+function listen() {
+
+  speechRec = new p5.SpeechRec('fr', gotSpeech);
+
+  // "Continuous recognition" (as opposed to one time only)
+  continuous = false;
+  // If you want to try partial recognition (faster, less accurate)
+  interimResults = false;
+  // This must come after setting the properties
+  speechRec.start(continuous, interimResults);
+
+  // Speech recognized event
+  function gotSpeech() {
+    // Something is there
+    // Get it as a string, you can also get JSON with more info
+    console.log(speechRec);
+    if (speechRec.resultValue) {
+      let said = speechRec.resultString;
+      // Show user
+      // output = createElement("div",said);
+      liste_phrases.innerHTML += said;
+      //liste_phrases.insertBefore(liste_phrases.lastChild, liste_phrases.lastChild.nextSibling)
+      // liste_phrases.lastChild;
+
+
+      console.log(said);
+    }
+  }
+  speechRec.onEnd = theEnd;
+  speechRec.onStart = ok;
+}
+
+function ok() {
+  svg.style('fill', 'rgb(0,255,0)');
+}
+
+function theEnd() {
+  console.log('end');
+  svg.style('fill', 'rgb(255,0,0)');
+  speechRec.start(continuous, interimResults);
+  ecouteur_generer();
+}
+
+function speakFrench(data){
+  var myVoice = new p5.Speech();
+  myVoice.setLang('fr_FR');
+  myVoice.speak(data); // recupère la phrase générée dans javascript/generateur.js ligne 2720
+}
