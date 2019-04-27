@@ -1,5 +1,5 @@
 // creations des variables
-let output, speechRec, button, svg, rec, lecteursAudio, bot, myVoice;
+let output, speechRec, button, svg, rec, lecteursAudio, bot, myVoice, finDiscussion, isListening;
 let audioChunks = []; // variable de type list
 
 function setup() {
@@ -8,10 +8,9 @@ function setup() {
   svg = select('.svgstyle'); //  p5js -- on associe la balise avec la class 'svgstyle' de index.html à la variable svg
   lecteursAudio = select('#lecteursAudio'); //  p5js -- on associe la balise avec l'id  lecteursAudio à la variable lecteursAudio
 
-  //activation du bot rivescript
-  bot = new RiveScript({utf8: true});
+
+  bot = new RiveScript({utf8: true}); //activation du bot rivescript, avec reconnaissance des accents français
   // Load a list of files all at once
-  // var files = ['brain/knockknock.rive'];
   bot.loadFile("brain/knockknock.rive").then(botLoaded).catch(errorLoading);
 
   //---- Voice Speech ---//
@@ -21,68 +20,99 @@ function setup() {
   // un changement récent de syntaxe dans l'écriture du js (voir promises : https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_promesses)
   // voir aussi la fonction navigator.mediaDevices.getUserMedia : https://developer.mozilla.org/fr/docs/Web/API/MediaDevices/getUserMedia
   navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {handlerFunction(stream)});
-
+  finDiscussion = false; // variable booleenne pour indiquer fin discussion
+  isListening = false; // variable booleenne pour indiquer activation de la reconnaissance
 }
 
 function listen() { // js -- fonction listen (activée quand on clique sur l'icone micro)
+isListening = !isListening; // inverse l'état d'affichage du bouton
+finDiscussion = false;
 
-// console.log('record on'); //indication dans la console pour vérifier que l'enregistrement audio est acivé
+if (rec != undefined) { console.log('rec.state 1 : ' + rec.state); }
+if (isListening && finDiscussion==false){
+  isListening = false;
+  // --------------------------------------------- //
+  // Activation reconnaissance vocale
+  // --------------------------------------------- //
+  speechRec = new p5.SpeechRec('fr', gotSpeech); //  p5js -- on détermine le français comme langue et le lancement de la fonction gotSpeech à chaque evenement de reconnaissance
+  let continuous = false; // js -- Reconnaissance vocale s'arrête à chaque reconnaissance
+  let interimResults = false; // js -- paramètre de reconnaissance (voir : )
+  speechRec.start(continuous, interimResults); //  p5js -- activation de la reconnaissance et attribution des paramètres précédents
 
-// --------------------------------------------- //
-// Activation reconnaissance vocale
-// --------------------------------------------- //
-speechRec = new p5.SpeechRec('fr', gotSpeech); //  p5js -- on détermine le français comme langue et le lancement de la fonction gotSpeech à chaque evenement de reconnaissance
-let continuous = false; // js -- Reconnaissance vocale s'arrête à chaque reconnaissance
-let interimResults = false; // js -- paramètre de reconnaissance (voir : )
-speechRec.start(continuous, interimResults); //  p5js -- activation de la reconnaissance et attribution des paramètres précédents
 
-function gotSpeech() { // js -- fonction gotSpeech
-  // console.log(speechRec); // pour afficher dans la console du navigateur
-  if (speechRec.resultValue) { //  p5js -- si il y a un resultat à la reconnaissance …
-    output.html(speechRec.resultString); //  p5js -- … j'affiche le texte de cette reconnaissance dans la div avec l'id "speech" (voir ligne 8 de ce code)
 
-    bot.reply("local-user", speechRec.resultString).then(function(reply) {
-      console.log("The bot says: " + reply);
-      if(reply == "ERR: No Reply Matched"){
-        myVoice.speak("Désolé, je ne comprends pas");
-      }else if(reply == "ha ha ha ha! c'est marrant."){
+  function gotSpeech() { // js -- fonction gotSpeech
+    if (speechRec.resultValue) { //  p5js -- si il y a un resultat à la reconnaissance …
+      output.html(speechRec.resultString); //  p5js -- … j'affiche le texte de cette reconnaissance dans la div avec l'id "speech" (voir ligne 8 de ce code)
 
-        myVoice.speak("vous vous appelez");
-        myVoice.speak("bill");
-      myVoice.stop();
-    }else if(reply != "ha ha ha ha! c'est marrant."){
-        myVoice.speak(reply);
-        myVoice.onEnd = theStart;
-      }
-    });
+
+      bot.reply("local-user", speechRec.resultString).then(function(reply) { // on active la reponse du bot rivescript à partir de la reconnaissance vocale ré
+        console.log("The bot says: " + reply);
+
+        if(reply == "---"){
+          console.log('isListening 3 : ' + isListening);
+          if (rec != undefined) { console.log('rec.state 3 : ' + rec.state); }
+
+          console.log('reply == "---"');
+          finDiscussion = true;
+          theEndDiscussion();
+        }else{
+          if(reply == "ERR: No Reply Matched"){
+            console.log('isListening 2 : ' + isListening);
+            if (rec != undefined) { console.log('rec.state 2 : ' + rec.state); }
+
+            myVoice.speak("Désolé, je ne comprends pas");
+            myVoice.onEnd = theStartSpeechRec;
+          }else{
+            console.log('isListening 4 : ' + isListening);
+            if (rec != undefined) { console.log('rec.state 4 : ' + rec.state); }
+            isListening = true;
+            myVoice.speak(reply);
+            myVoice.onEnd = theStartSpeechRec;
+          }
+        }
+      }); // fin bot reply
+    } // fin if (speechRec.resultValue)
+  } // fin gotSpeech()
+  if(finDiscussion == false){
+    speechRec.onStart = theStartSpeechRec;
+    speechRec.onEnd = theEndSpeechRec;
   }
 }
 
-// myVoice.onEnd = theStart;
-speechRec.onEnd = theEnd; //  p5js -- à la fin de la reconnaissance je lance la fonction theEnd
-speechRec.onStart = theStart; //  p5js -- au début de la reconnaissance je lance la fonction theEnd
+
 }
 
-function theStart() { // js -- fonction theStart
-
-  svg.style('fill', 'rgb(0,255,0)'); // p5js -- on change la couleur de l'icone microphone (vert)
+function theStartSpeechRec() { // js -- fonction theStartSpeechRec
   if (rec != undefined) {
-    if (rec.state == "inactive" ){
-      rec.start(); // js -- déclenchement de l'enregistrement de l'audio
+    if (rec.state == "inactive" && isListening == false ){ // condition : si enregistrement inactif ET isListening == false
+      svg.style('fill', 'rgb(0,255,0)'); // p5js -- le bouton devient vert
+      isListening = true;
+      rec.start(); // p5js -- on change la couleur de l'icone microphone (vert)
       speechRec.start(false, false); //  p5js -- activation de la reconnaissance et attribution des paramètres précédents
     }
   }
 }
 
-function theEnd() { // js -- fonction theEnd
+function theEndSpeechRec() { // js -- fonction theEndSpeechRec
+
   svg.style('fill', 'rgb(255,0,0)'); // p5js -- on change la couleur de l'icone microphone (rouge)
-  if (rec != undefined) {
-    if (rec.state != "inactive"){
-      rec.stop(); // js -- on arrête l'enregistrement audio    }
-    }
+  // if (rec != undefined) {
+  if (rec.state != "inactive"){
+    console.log('isListening 7 : ' + isListening);
+    isListening = false;
+    rec.stop(); // js -- on arrête l'enregistrement audio    }
+    if (rec != undefined) { console.log('rec.state 7 : ' + rec.state); }
   }
 }
 
+function theEndDiscussion() {
+  // finDiscussion = true;
+  // isListening = false;
+  myVoice.speak('c\'est la fin');
+  myVoice.onEnd = function (){console.log('c\'est la fin');};
+
+}
 
 // --------------------------------------------- //
 // Récupération de l'enregistrement audio +
