@@ -11,7 +11,7 @@ function setup() {
 
   bot = new RiveScript({utf8: true}); //activation du bot rivescript, avec reconnaissance des accents français
   // Load a list of files all at once
-  bot.loadFile("brain/knockknock.rive").then(botLoaded).catch(errorLoading);
+  bot.loadFile("brain/brain.rive").then(botLoaded).catch(errorLoading);
 
   //---- Voice Speech ---//
   myVoice = new p5.Speech();
@@ -25,10 +25,8 @@ function setup() {
 }
 
 function listen() { // js -- fonction listen (activée quand on clique sur l'icone micro)
-isListening = !isListening; // inverse l'état d'affichage du bouton
+isListening = !isListening; // js -- inverse l'état d'affichage du bouton
 finDiscussion = false;
-
-if (rec != undefined) { console.log('rec.state 1 : ' + rec.state); }
 if (isListening && finDiscussion==false){
   isListening = false;
   // --------------------------------------------- //
@@ -46,39 +44,28 @@ if (isListening && finDiscussion==false){
       output.html(speechRec.resultString); //  p5js -- … j'affiche le texte de cette reconnaissance dans la div avec l'id "speech" (voir ligne 8 de ce code)
 
 
-      bot.reply("local-user", speechRec.resultString).then(function(reply) { // on active la reponse du bot rivescript à partir de la reconnaissance vocale ré
-        console.log("The bot says: " + reply);
-
-        if(reply == "---"){
-          console.log('isListening 3 : ' + isListening);
-          if (rec != undefined) { console.log('rec.state 3 : ' + rec.state); }
-
-          console.log('reply == "---"');
-          finDiscussion = true;
-          theEndDiscussion();
+      bot.reply("local-user", speechRec.resultString).then(function(reply) { // on active la reponse du bot rivescript à partir de la reconnaissance vocale
+        if(reply == "---"){ // js -- si c'est la dernière réponse du brain rivescript
+        finDiscussion = true;
+        theEndDiscussion(); // js -- on active la focntion fin de discussion
+      }else{
+        if(reply == "ERR: No Reply Matched"){ // si pas de réponse correspondante dans le brain rivescript
+          myVoice.speak("Désolé, je ne comprends pas"); // la synthèse vocale dit "Désolé, je ne comprends pas"
+          myVoice.onEnd = theStartSpeechRec; // à la fin de la synthèse vocale on lance la fonction theStartSpeechRec
         }else{
-          if(reply == "ERR: No Reply Matched"){
-            console.log('isListening 2 : ' + isListening);
-            if (rec != undefined) { console.log('rec.state 2 : ' + rec.state); }
-            myVoice.speak("Désolé, je ne comprends pas"); // la synthèse vocale dit "Désolé, je ne comprends pas"
-            myVoice.onEnd = theStartSpeechRec; // à la fin de la synthèse vocale on lance la fonction theStartSpeechRec
-          }else{
-            console.log('isListening 4 : ' + isListening);
-            isListening = true;
-            myVoice.speak(reply); // la synthèse vocale dit la réponse du brain rivescript
-            myVoice.onEnd = theStartSpeechRec; // à la fin de la synthèse vocale on lance la fonction theStartSpeechRec
-          }
+          isListening = true;
+          myVoice.speak(reply); // la synthèse vocale dit la réponse du brain rivescript
+          myVoice.onEnd = theStartSpeechRec; // à la fin de la synthèse vocale on lance la fonction theStartSpeechRec
         }
-      }); // fin bot reply
-    } // fin if (speechRec.resultValue)
-  } // fin gotSpeech()
-  if(finDiscussion == false){
-    speechRec.onStart = theStartSpeechRec;
-    speechRec.onEnd = theEndSpeechRec;
-  }
+      }
+    }); // fin bot reply
+  } // fin if (speechRec.resultValue)
+} // fin gotSpeech()
+if(finDiscussion == false){
+  speechRec.onStart = theStartSpeechRec;
+  speechRec.onEnd = theEndSpeechRec;
 }
-
-
+}
 }
 
 function theStartSpeechRec() { // js -- fonction theStartSpeechRec
@@ -93,23 +80,30 @@ function theStartSpeechRec() { // js -- fonction theStartSpeechRec
 }
 
 function theEndSpeechRec() { // js -- fonction theEndSpeechRec
-
   svg.style('fill', 'rgb(255,0,0)'); // p5js -- on change la couleur de l'icone microphone (rouge)
   // if (rec != undefined) {
   if (rec.state != "inactive"){
-    console.log('isListening 7 : ' + isListening);
     isListening = false;
     rec.stop(); // js -- on arrête l'enregistrement audio    }
-    if (rec != undefined) { console.log('rec.state 7 : ' + rec.state); }
   }
 }
 
-function theEndDiscussion() {
-  // finDiscussion = true;
-  // isListening = false;
-  myVoice.speak('c\'est la fin');
-  myVoice.onEnd = function (){console.log('c\'est la fin');};
-
+function theEndDiscussion() { // js -- fonction theEndSpeechRec
+  var audioId2 = select("#2");
+  var audioId3 = select("#3");
+  myVoice.speak("c'est la fin");
+  myVoice.onEnd = function (){
+    myVoice.speak("votre prénom est");
+    myVoice.onEnd = function (){
+      audioId2.play();
+      audioId2.onended(function(){
+        myVoice.speak("vos nom et prénom sont");
+        myVoice.onEnd = function (){
+          audioId3.play();
+        };
+      });
+    };
+  };
 }
 
 // --------------------------------------------- //
