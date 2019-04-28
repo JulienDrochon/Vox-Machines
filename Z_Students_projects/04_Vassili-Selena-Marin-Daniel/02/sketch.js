@@ -1,5 +1,5 @@
 // creations des variables
-let output, speechRec, button, svg, rec, lecteursAudio, bot, myVoice, finDiscussion, isListening;
+let output, speechRec, button, svg, bot, myVoice, isListening;
 let audioChunks = []; // variable de type list
 
 function setup() {
@@ -13,8 +13,6 @@ function setup() {
 
   //---- Voice Speech ---//
   myVoice = new p5.Speech();
-
-  finDiscussion = false; // variable booleenne pour indiquer fin discussion
   isListening = false; // variable booleenne pour indiquer activation de la reconnaissance
 }
 
