@@ -9,6 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>01_basics</title>
+  <!-- styles css pour écran et print -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" media="screen" href="/css/screen.css">
+  <link rel="stylesheet" media="print" href="/css/print.css">
+
   <!-- inclusion des différentes biblitohèques js -->
   <script src="libraries/p5.js"></script>
   <script src="libraries/p5.dom.js"></script>
@@ -16,19 +21,10 @@
 
     <!-- <script src="libraries/jquery-3.2.1.min.js"></script> -->
     <script src="libraries/rivescript.js"></script>
-  <style>
-  /* style css pour enlever les bordure par défaut autour du bouton */
-  button {
-    background: none;
-    border:none;
-    outline : 0;
-    -moz-outline : 0;
-  }
-  </style>
 </head>
 
 <body>
-  <h3>Cliquez sur le bouton et dites : "bonjour"</h3>
+  <h3 id="indication">Cliquez sur le bouton et dites : "bonjour"</h3>
   <button onclick="listen();"><!-- quand on clique sur le bouton on lance la fonction listen présente dans le fichie sketch.js -->
     <!-- icone du microphone au format vectoriel svg -->
     <svg class='svgstyle' version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -41,8 +37,7 @@
     v8.7h42.3v-8.7h-16.8v-14.2c15.6-2.1,27.7-15.1,27.7-30.9v-14.5H-317.4z"/>
   </svg>
 </button>
-
-<div id="speech"></div> <!-- pour afficher le texte de la reconnaissance vocale -->
+<button type="button" id="imprimer" onclick="printer();">Imprimer</button>
 <script src="sketch.js"></script><!-- Important que le sketch soit lancé ici et non pas dans le <head> du HTML -->
 </body>
 

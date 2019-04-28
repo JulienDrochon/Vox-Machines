@@ -1,0 +1,30 @@
+// Chatbot's brain
+// voir le turoriel complet : https://www.rivescript.com/docs/tutorial
+! version = 2.0
+
+// This matches anything where the "previous" phrase was containing "bonjour"
++ [*] bonjour [*]
+- Quel type de note souhaitez-vous ? Citation, courses ?
+
+// This matches anything where the "previous" phrase was "Quel type de note souhaitez-vous ? Citation, course ?"
++ [*] course|courses [*]
+- Vous avez dit course ?
+
++ [*] citation|citations [*]
+- Vous avez dit citation ?
+
++ *
+% vous avez dit course
+- Dites-moi la liste
+
++ *
+% dites-moi la liste
+- course : <star1>
+
++ *
+% vous avez dit citation
+- Dites-moi la citation
+
++ *
+% dites-moi la citation
+- citation : <star1>

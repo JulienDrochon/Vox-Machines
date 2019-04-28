@@ -1,0 +1,7 @@
+  /* style css pour enlever les bordure par défaut autour du bouton */
+  button {
+    background: none;
+    border:none;
+    outline : 0;
+    -moz-outline : 0;
+  }

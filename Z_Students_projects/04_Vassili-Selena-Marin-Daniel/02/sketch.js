@@ -6,8 +6,6 @@ function setup() {
   noCanvas(); // p5js -- pas de canvas, on travaille directement dans le html (DOM)
   output = select("#speech"); //  p5js -- on associe la balise avec l'id 'speech' de index.html à la variable output
   svg = select('.svgstyle'); //  p5js -- on associe la balise avec la class 'svgstyle' de index.html à la variable svg
-  lecteursAudio = select('#lecteursAudio'); //  p5js -- on associe la balise avec l'id  lecteursAudio à la variable lecteursAudio
-
 
   bot = new RiveScript({utf8: true}); //activation du bot rivescript, avec reconnaissance des accents français
   // Load a list of files all at once
@@ -33,28 +31,30 @@ if (isListening && finDiscussion==false){
   let interimResults = false; // js -- paramètre de reconnaissance (voir : )
   speechRec.start(continuous, interimResults); //  p5js -- activation de la reconnaissance et attribution des paramètres précédents
 
-
-
   function gotSpeech() { // js -- fonction gotSpeech
     if (speechRec.resultValue) { //  p5js -- si il y a un resultat à la reconnaissance …
-      output.html(speechRec.resultString); //  p5js -- … j'affiche le texte de cette reconnaissance dans la div avec l'id "speech" (voir ligne 8 de ce code)
-
       bot.reply("local-user", speechRec.resultString).then(function(reply) { // on active la reponse du bot rivescript à partir de la reconnaissance vocale
-        if(reply == "---"){ // js -- si c'est la dernière réponse du brain rivescript
-        finDiscussion = true;
-        theEndDiscussion(); // js -- on active la focntion fin de discussion
-      }else{
-        if(reply == "ERR: No Reply Matched"){ // si pas de réponse correspondante dans le brain rivescript
-          myVoice.speak("Désolé, je ne comprends pas"); // la synthèse vocale dit "Désolé, je ne comprends pas"
-          myVoice.onEnd = theStartSpeechRec; // à la fin de la synthèse vocale on lance la fonction theStartSpeechRec
-        }else{
-          isListening = true;
-          myVoice.speak(reply); // la synthèse vocale dit la réponse du brain rivescript
-          myVoice.onEnd = theStartSpeechRec; // à la fin de la synthèse vocale on lance la fonction theStartSpeechRec
-        }
+        if(match(reply, 'course :')){ // js -- si c'est la dernière réponse du brain rivescript
+        var myStrArr = splitTokens(reply, ':');
+        createElement('div','<span class="courses">'+myStrArr[1]+'</span>')
       }
-    }); // fin bot reply
-  } // fin if (speechRec.resultValue)
+      else if(match(reply, 'citation :')){ // js -- si c'est la dernière réponse du brain rivescript
+      var myStrArr = splitTokens(reply, ':');
+      createElement('div','<span class="citation">'+myStrArr[1]+'</span>')
+    }
+    else{
+      if(reply == "ERR: No Reply Matched"){ // si pas de réponse correspondante dans le brain rivescript
+        myVoice.speak("Désolé, je ne comprends pas"); // la synthèse vocale dit "Désolé, je ne comprends pas"
+        myVoice.onEnd = theStartSpeechRec; // à la fin de la synthèse vocale on lance la fonction theStartSpeechRec
+      }else{
+        isListening = true;
+        console.log(reply);
+        myVoice.speak(reply); // la synthèse vocale dit la réponse du brain rivescript
+        myVoice.onEnd = theStartSpeechRec; // à la fin de la synthèse vocale on lance la fonction theStartSpeechRec
+      }
+    }
+  }); // fin bot reply
+} // fin if (speechRec.resultValue)
 } // fin gotSpeech()
 if(finDiscussion == false){
   speechRec.onStart = theStartSpeechRec;
@@ -64,28 +64,27 @@ if(finDiscussion == false){
 }
 
 function theStartSpeechRec() { // js -- fonction theStartSpeechRec
-      if ( isListening == false ){ // condition : si enregistrement inactif ET isListening == false
-        svg.style('fill', 'rgb(0,255,0)'); // p5js -- le bouton devient vert
-        isListening = true;
-        speechRec.start(false, false); //  p5js -- activation de la reconnaissance et attribution des paramètres précédents
-      }
-    }
-
-  function theEndSpeechRec() { // js -- fonction theEndSpeechRec
-    svg.style('fill', 'rgb(255,0,0)'); // p5js -- on change la couleur de l'icone microphone (rouge)
-    isListening = false;
+  if ( isListening == false ){ // condition : si enregistrement inactif ET isListening == false
+    svg.style('fill', 'rgb(0,255,0)'); // p5js -- le bouton devient vert
+    isListening = true;
+    speechRec.start(false, false); //  p5js -- activation de la reconnaissance et attribution des paramètres précédents
   }
+}
 
-  function theEndDiscussion() { // js -- fonction theEndSpeechRec
-    myVoice.speak("c'est la fin");
-    myVoice.onend = theEndSpeechRec();
-  }
+function theEndSpeechRec() { // js -- fonction theEndSpeechRec
+  svg.style('fill', 'rgb(255,0,0)'); // p5js -- on change la couleur de l'icone microphone (rouge)
+  isListening = false;
+}
 
-  function botLoaded() {
-    console.log("Bot has finished loading!");
-    bot.sortReplies();
-  }
+function botLoaded() {
+  console.log("Bot has finished loading!");
+  bot.sortReplies();
+}
 
-  function errorLoading(error) {
-    console.log("Error when loading rivescript files: " + error);
-  }
+function errorLoading(error) {
+  console.log("Error when loading rivescript files: " + error);
+}
+
+function printer() {
+  window.print();
+}
