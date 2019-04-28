@@ -60,15 +60,13 @@ if (isListening && finDiscussion==false){
           if(reply == "ERR: No Reply Matched"){
             console.log('isListening 2 : ' + isListening);
             if (rec != undefined) { console.log('rec.state 2 : ' + rec.state); }
-
-            myVoice.speak("Désolé, je ne comprends pas");
-            myVoice.onEnd = theStartSpeechRec;
+            myVoice.speak("Désolé, je ne comprends pas"); // la synthèse vocale dit "Désolé, je ne comprends pas"
+            myVoice.onEnd = theStartSpeechRec; // à la fin de la synthèse vocale on lance la fonction theStartSpeechRec
           }else{
             console.log('isListening 4 : ' + isListening);
-            if (rec != undefined) { console.log('rec.state 4 : ' + rec.state); }
             isListening = true;
-            myVoice.speak(reply);
-            myVoice.onEnd = theStartSpeechRec;
+            myVoice.speak(reply); // la synthèse vocale dit la réponse du brain rivescript
+            myVoice.onEnd = theStartSpeechRec; // à la fin de la synthèse vocale on lance la fonction theStartSpeechRec
           }
         }
       }); // fin bot reply
