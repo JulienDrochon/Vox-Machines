@@ -1,0 +1,21 @@
+// Chatbot's brain
+// voir le turoriel complet : https://www.rivescript.com/docs/tutorial
+
+! version = 2.0
+
++ [*] toc toc [*]
+- qui est-ce ?
+
+// This matches anything where the "previous" phrase was "qui est-ce"
++ *
+% qui est-ce
+- <star1> qui?
+
+// This matches anything where the "previous" phrase was "qui"
++ *
+% * qui
+- ---
+
+// This matches anything where the "previous" phrase was containing "bonjour"
++ [*]bonjour[*]
+- Essayez de dire "toc toc".
