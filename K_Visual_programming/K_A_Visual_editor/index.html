@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rete.js Visual programming  a messenger bot</title>
+
+
+  <link rel='stylesheet' href='http://cdn.muicss.com/mui-0.9.34/css/mui.min.css'>
+  <link rel='stylesheet' href='https://rawgit.com/alertifyjs/alertify.js/master/dist/css/alertify.css'>
+
+  <script src="js/p5.js"></script>
+  <script src="js/p5.dom.js"></script>
+  <script src="js/p5.speech.js"></script>
+
+
+</head>
+
+<body>
+
+
+  <div class="content">
+    <h2>Right click for adding blocks.</h2>
+
+    <button id="savebtn" type="button" name="button" onclick="downloadTXT('json.json')">Save</button>
+
+<input id="loadbtn" type='file' name='load' accept='.json' onchange='showFile()'>
+
+    <div id="editor-wrapper">
+      <div class="node-editor" id="editor"></div>
+    </div>
+    <div id="telegram">
+      <div class="messages" ref="messages">
+        <div class="message" v-for="message in messages" :class="{owner: users[message.user].owner}">
+          <div class="avatar"><img :src="users[message.user].avatar"/></div>
+          <div class="text-wrap">
+            <div class="text" v-html="formatMsg(message.text)"></div>
+          </div>
+        </div>
+      </div>
+      <button id='mic' onclick="listen();">
+        <svg class='svgstyle' version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        width="40px" height="40px" viewBox="-381 221.3 79 154" style="enable-background:new -381 221.3 79 154;" xml:space="preserve">
+        <path d="M-340.8,234L-340.8,234c10.4,0,18.8,8.9,18.8,19.9v51.6c0,11-8.4,19.9-18.8,19.9l0,0c-10.4,0-18.8-8.9-18.8-19.9v-51.7
+        C-359.6,242.9-351.2,234-340.8,234z"/>
+        <path d="M-340.8,234L-340.8,234c10.4,0,18.8,8.9,18.8,19.9v51.6c0,11-8.4,19.9-18.8,19.9l0,0c-10.4,0-18.8-8.9-18.8-19.9v-51.7
+        C-359.6,242.9-351.2,234-340.8,234z"/>
+        <path d="M-317.4,292.4V307c0,12.4-10.5,22.5-23.3,22.5s-23.3-10.1-23.3-22.5v-14.5h-8.7V307c0,15.8,12.1,28.9,27.7,30.9v14.2h-16.8
+        v8.7h42.3v-8.7h-16.8v-14.2c15.6-2.1,27.7-15.1,27.7-30.9v-14.5H-317.4z"/>
+      </svg>
+    </button>
+    <div class="form row s12">
+
+      <div class="mui-textfield mui-col-md-8">
+        <input class="validate" id="first_name" v-model="textfield"/>
+      </div>
+      <div class="mui-col-md-4">
+        <button id="send" class="mui-btn s12" @click="sendOwner(textfield); textfield=''">&rarr;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src='https://cdn.jsdelivr.net/npm/rete@1.2.0-rc.6/build/rete.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/alight@0.14.1/alight.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/rete-vue-render-plugin@0.3.3/build/vue-render-plugin.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/rete-connection-plugin@0.4.3/build/connection-plugin.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/rete-context-menu-plugin@0.3.6/build/context-menu-plugin.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/rete-task-plugin@0.1.7/build/task-plugin.min.js'></script>
+<script src='http://cdn.muicss.com/mui-0.9.34/js/mui.min.js'></script>
+<script src='https://rawgit.com/alertifyjs/alertify.js/master/dist/js/alertify.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/rete-area-plugin@0.2.0/build/area-plugin.min.js'></script>
+
+
+<link rel="stylesheet" href="css/style.css">
+
+<script  src="js/index.js"></script>
+
+</body>
+
+</html>

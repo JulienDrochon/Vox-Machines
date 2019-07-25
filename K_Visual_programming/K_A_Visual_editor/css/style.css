@@ -1,0 +1,189 @@
+@font-face {
+ font-family: "inputbot";
+ src: url("./fonts/InputSansCompressed-Light.ttf") format("truetype");
+}
+
+
+body, html {
+  font-family: inputbot;
+  margin: 0;
+  height: 100%;
+  background-color: #222;
+}
+
+.title{
+  font-family: inputbot !important;
+  background: #777;
+}
+.node.user-match, .node.bot{
+  font-family: inputbot;
+  color: red;
+  background: #999;
+  border-radius: 0px;
+  border:none;
+}
+.node.user-match:hover{
+  background: #666;
+}
+.output-title, .input-title{
+    font-family: inputbot !important;
+}
+.socket.input.string {
+  background-color:#aaa;
+}
+.control input, .input-control input {
+  width: 100%;
+  border-radius: 30px;
+  background-color: white;
+  padding: 2px 6px;
+  border: 1px solid #999;
+  font-size: 110%;
+  width: 170px;
+}
+
+.content {
+  display: flex;
+  height: 100%;
+}
+.content #editor-wrapper {
+  flex: 2;
+}
+/* .content #editor-wrapper #editor .socket.string {
+  background: #6f377e;
+} */
+.content #editor-wrapper #editor .socket.action {
+  background: white;
+  border-color: grey;
+  border-radius: 0px;
+  width: 15px;
+}
+.content #editor-wrapper #editor .node.message-event {
+  background: #767676;
+}
+.content #editor-wrapper #editor .input-control input {
+  width: 140px;
+}
+.content #telegram {
+  font-family: inputbot;
+  font-size: 0.9em;
+  margin: 15px;
+  flex: 1;
+  height: calc(100% - 2 * 15px);
+  border: 4px solid blue;
+  background-color: blue;
+  background-size: cover;
+}
+.content #telegram .messages {
+  height: calc(100% - 80px);
+  max-height: calc(100% - 80px);
+  overflow: auto;
+}
+.content #telegram .messages .message {
+  display: flex;
+  padding: 10px;
+}
+.content #telegram .messages .message.owner {
+  flex-direction: row-reverse;
+}
+.content #telegram .messages .message .avatar {
+  display: inline-block;
+  /* border-radius: 100%; */
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 40px;
+  margin-right :10px;
+  margin-left: 0px;
+  overflow: hidden;
+}
+.content #telegram .messages .message .avatar img {
+  height: 40px;
+  width: 40px;
+}
+.content #telegram .messages .message .text-wrap {
+  display: inline-block;
+}
+.content #telegram .messages .message .text-wrap .text {
+  padding: 5px;
+  background: rgba(255, 255, 255, 1);
+  color: blue;
+}
+.content #telegram .messages .message .text-wrap .text a {
+  color: #0000ff;
+  border-bottom: 2px solid blue;
+}
+.content #telegram .form {
+  border-top: 4px solid white;
+  padding-top: 15px;
+  background: blue;
+  height:50px;
+}
+#send{
+  background: none;
+  color: white;
+  width:30px;
+  border:2px solid white;
+}
+#first_name{
+  color:white;
+  border-bottom: 2px solid white;
+  width:100px;
+}
+h2{
+  position: absolute;
+  margin-left: 20px;
+  color: #666;
+  font-size: 0.8em;
+  float:left;
+  width: 300px;;
+}
+  button {
+    background: none;
+    border:none;
+    outline : 0;
+    -moz-outline : 0;
+  }
+button#mic{
+  width:60px;
+  height:40px;
+  background: none;
+  border:none;
+
+}
+.svgstyle{
+  fill: white;
+}
+button#savebtn{
+  font-family: inputbot;
+  background: #000;
+  position:fixed;
+  top:80px;
+  left:20px;
+  z-index:1000;
+  border:2px solid white;
+  color:white;
+}
+
+button#savebtn:hover, button#mic:hover{
+  cursor: pointer;
+  color:#444;
+  border-color: #444;
+}
+input#loadbtn{
+  font-family: inputbot;
+  background: NONE;
+  position:fixed;
+  top:50px;
+  left:20px;
+  z-index:1000;
+  /* border:2px solid white; */
+  color:white;
+}
+input[type=text] {
+  color:red;
+}
+input [type=submit]{
+  background: none
+}
+input#loadbtn[type=file]{
+  color:red;
+}

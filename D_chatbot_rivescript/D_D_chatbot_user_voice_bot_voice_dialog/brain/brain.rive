@@ -17,5 +17,5 @@
 - ---
 
 // This matches anything where the "previous" phrase was containing "bonjour"
-+ [*]bonjour[*]
++ [*] bonjour [*]
 - Essayez de dire "toc toc".

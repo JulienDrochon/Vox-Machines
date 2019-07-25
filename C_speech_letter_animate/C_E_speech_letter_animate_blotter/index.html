@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<script src="js/p5.js"></script>
+<script src="js/p5.dom.js"></script>
+<script src="js/p5.speech.js"></script>
+
+<body style='margin: 0px; background-color: #bbbbbb; overflow: hidden;'>
+<div id="output">
+
+</div>
+  <script>
+  renderer.setSize( window.innerWidth, window.innerHeight );
+  document.body.appendChild( renderer.domElement );
+
+
+  let speechRec;
+  let said="dites bonjour";
+
+  speechRec = new p5.SpeechRec('fr', gotSpeech);
+  // "Continuous recognition" (as opposed to one time only)
+  let continuous = true;
+  // If you want to try partial recognition (faster, less accurate)
+  let interimResults = false;
+  // This must come after setting the properties
+  speechRec.start(continuous, interimResults);
+
+  // DOM element to display results
+  //let output = select('#speech');
+
+  // Speech recognized event
+  function gotSpeech() {
+    // Something is there
+    // Get it as a string, you can also get JSON with more info
+    console.log(speechRec);
+    if (speechRec.resultValue) {
+      said = speechRec.resultString;
+
+
+      var text = new Blotter.Text(said, {
+        size : 27,
+        fill : "#171717",
+        paddingLeft : 40,
+        paddingRight : 40
+      });
+      var material = new Blotter.LiquidDistortMaterial();
+      material.uniforms.uSpeed.value = 0.25;
+      var blotter = new Blotter(material, {
+        texts : text
+      });
+      var elem = document.getElementById("output");
+      var scope = blotter.forText(text);
+      scope.appendTo(elem);
+    }
+  }
+</script>
+</body>
